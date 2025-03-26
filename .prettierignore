@@ -1,0 +1,26 @@
+# Ignore les fichiers de node_modules
+node_modules/
+
+# Ignore les fichiers de build
+dist/
+build/
+
+# Ignore les fichiers de configuration spécifiques
+*.config.js
+*.config.mjs
+*.config.ts
+
+# Ignore les fichiers de test
+tests/
+test/
+
+# Ignore les fichiers de type log
+*.log
+
+# Ignore les fichiers de type cache
+.cache/
+*.tmp
+
+# Ignore les fichiers de configuration de Prettier
+.prettierrc
+.prettierignore
