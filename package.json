@@ -1,42 +1,45 @@
 {
-  "name": "comptapp",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "dev:staging": "cross-env ENV=staging next dev",
-    "dev:prod": "cross-env ENV=production next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write .",
-    "prepare": "husky"
-  },
-  "dependencies": {
-    "next": "15.2.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "cross-env": "^7.0.3",
-    "eslint": "^9",
-    "eslint-config-next": "15.2.4",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.5",
-    "husky": "^8.0.0",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^3.5.3",
-    "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+	"name": "comptapp",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"dev:staging": "cross-env NEXT_ENV=staging next dev",
+		"dev:prod": "cross-env NEXT_ENV=production next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"format": "prettier --write .",
+		"prepare": "husky"
+	},
+	"dependencies": {
+		"radix-ui": "^1.1.3",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"tailwind-variants": "^1.0.0"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^19.8.0",
+		"@commitlint/config-conventional": "^19.8.0",
+		"@eslint/eslintrc": "^3",
+		"@iconify/react": "^5.2.0",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"cross-env": "^7.0.3",
+		"eslint": "^9.23.0",
+		"eslint-config-next": "^15.2.4",
+		"eslint-config-prettier": "^10.1.1",
+		"eslint-plugin-import": "^2.31.0",
+		"eslint-plugin-prettier": "^5.2.5",
+		"husky": "^8.0.0",
+		"next": "^15.2.4",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^3.5.3",
+		"prettier-plugin-organize-imports": "^4.1.0",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"tailwindcss": "^4",
+		"typescript": "^5"
+	}
 }

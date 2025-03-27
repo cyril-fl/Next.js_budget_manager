@@ -10,9 +10,9 @@ build/
 *.config.mjs
 *.config.ts
 
-# Ignore les fichiers de test
+# Ignore les fichiers de hello_word
 tests/
-test/
+src/app/api/hello_word/
 
 # Ignore les fichiers de type log
 *.log

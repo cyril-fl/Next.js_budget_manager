@@ -1,7 +1,7 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import prettier from "eslint-plugin-prettier";
+import prettier from "eslint-plugin-prettier"; // Assurez-vous que ce module est bien installé
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,7 +14,7 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     plugins: {
-      prettier, // Ajout du plugin Prettier
+      prettier, // Utilisation de l'objet plutôt que de la chaîne de caractères
     },
     rules: {
       "prettier/prettier": [
@@ -49,8 +49,9 @@ const eslintConfig = [
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/unified-signatures": "off",
 
-      "no-console": process.env.ENV === "production" ? "warn" : "off",
-      "no-debugger": process.env.ENV === "production" ? "warn" : "off",
+      "no-console": process.env.NEXT_ENV === "production" ? "warn" : "off",
+      "no-debugger": process.env.NEXT_ENV === "production" ? "warn" : "off",
+      'no-restricted-globals': 'off',
     },
   },
 ];
