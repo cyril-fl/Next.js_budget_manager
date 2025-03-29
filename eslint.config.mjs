@@ -1,7 +1,7 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import prettier from "eslint-plugin-prettier"; // Assurez-vous que ce module est bien installé
+import prettier from "eslint-plugin-prettier";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,7 +14,7 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     plugins: {
-      prettier, // Utilisation de l'objet plutôt que de la chaîne de caractères
+      prettier,
     },
     rules: {
       "prettier/prettier": [
@@ -23,23 +23,8 @@ const eslintConfig = [
           endOfLine: "auto",
         },
       ],
-      "import/order": [
-        "warn",
-        {
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-          ],
-          alphabetize: { order: "asc", caseInsensitive: true },
-          "newlines-between": "never",
-          distinctGroup: true,
-          warnOnUnassignedImports: false,
-        },
-      ],
+      'import/order': 'off',
+
     },
   },
   {

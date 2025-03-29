@@ -1,21 +1,18 @@
-import { useConsole } from '@/.debug/hooks/useConsole';
-import Input from '@/components/form/Input';
+'use client';
 
-export default async function Home() {
-	// eslint-disable-next-line react-hooks/rules-of-hooks
+import { useConsole } from '@/.debug/hooks/useConsole';
+
+export default function Home() {
 	const Console = useConsole();
 
 	Console.log('test du hokk personnalisé');
-
-	const response = await fetch('http://localhost:3000/api/hello_word', {
-		method: 'GET',
-	});
-	const res = await response.json();
-	return (
-		<div>
-			<Input label="A" icon="majesticons:academic-cap" trailing />
-			<Input label="B" icon="majesticons:academic-cap" trailing />
-			<Input label="C" icon="majesticons:academic-cap" leading />
-		</div>
-	);
+	function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+		console.log('click trigger from parent');
+	}
+	// const response = await fetch('http://localhost:3000/api/hello_word', {
+	// 	method: 'GET',
+	// });
+	//
+	// const res = await response.json();
+	return <div></div>;
 }

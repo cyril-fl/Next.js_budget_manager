@@ -1,0 +1,31 @@
+{
+  "page": {
+    "login":"Login"
+  },
+  "error": {
+    "000": "Something unexpected happened",
+    "404": "Oops... It looks like something got lost along the way.",
+    "500": "Internal server error",
+    "empty": "No {data} available",
+    "invalid:code": "The code is invalid, already used, or expired.",
+    "invalid:credentials": "Invalid email or password",
+    "invalid:date": "Invalid date",
+    "invalid:date_format": "Invalid date format",
+    "invalid:date_passed": "Date must be in the future",
+    "invalid:email": "Invalid email address",
+    "invalid:email_format": "Invalid email format",
+    "invalid:email_max_length": "Email must be at most {length} characters",
+    "invalid:email_min_length": "Email must be at least {length} characters",
+    "invalid:field_max_length": "This field must be at most {length} characters",
+    "invalid:field_min_length": "This field must be at least {length} characters",
+    "invalid:password": "Invalid password",
+    "invalid:password_attempt": "Incorrect password. Please try again.",
+    "invalid:password_chars": "Password contains invalid characters : {chars}",
+    "invalid:password_confirm": "Passwords do not match",
+    "invalid:password_format": "Invalid password format",
+    "invalid:phone_format": "Invalid phone number",
+    "invalid:user_account": "User account not found",
+    "required:field": "This field is required",
+    "unknown": "An error occurred"
+  }
+}

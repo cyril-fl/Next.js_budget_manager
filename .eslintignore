@@ -22,5 +22,5 @@ src/app/api/hello_word/
 *.tmp
 
 # Ignore les fichiers de configuration de Prettier
-.prettierrc
+.prettierrc.json
 .prettierignore

@@ -10,8 +10,8 @@
 	"bracketSpacing": true,
 	"embeddedLanguageFormatting": "auto",
 	"plugins": [
-		"prettier-plugin-tailwindcss",
-		"prettier-plugin-organize-imports"
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-tailwindcss"
 	],
 	"htmlWhitespaceSensitivity": "ignore",
 	"vueIndentScriptAndStyle": true

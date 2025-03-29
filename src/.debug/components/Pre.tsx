@@ -5,17 +5,17 @@ import { tv, VariantProps } from 'tailwind-variants';
 // UI
 const theme = tv({
 	slots: {
-		base: '  relative',
+		base: 'relative',
 		label: 'sticky  ',
 		content: '',
 	},
 	variants: {
 		color: {
 			default: {
-				base: 'bg-gray-100  dark:bg-gray-900 dark:text-white',
+				base: 'bg-gray-100  dark:bg-gray-900 text-gray-500 dark:text-white',
 				label:
 					'bg-gray-950/80  dark:bg-gray-50/80 text-white dark:text-black  w-fit',
-				content: 'text-white',
+				content: 'text-gray-500 dark:text-white',
 			},
 		},
 		size: {
@@ -35,7 +35,7 @@ const theme = tv({
 export type PreVariants = VariantProps<typeof theme>;
 interface PreProps {
 	children?: React.ReactNode;
-	data?: React.ReactNode;
+	data?: React.ReactNode | object;
 	label?: string;
 	color?: PreVariants['color'];
 	size?: PreVariants['size'];
@@ -57,19 +57,23 @@ export default function Pre(props: PreProps) {
 	// Methods
 
 	// Render
-	const Label = props.label ? (
+	const Label = props.label && (
 		<h2 className={ui.label({ class: props.ui?.label })}>{props.label}</h2>
-	) : null;
+	);
 
 	const Preview =
 		props.children || props.data
 			? (props.children ?? JSON.stringify(props.data, null, 2))
 			: null;
 
-	return !isProd ? (
-		<div className={ui.base({ class: [props.class, props.ui?.base] })}>
-			{Label}
-			<pre className={ui.content({ class: props.ui?.content })}>{Preview}</pre>
-		</div>
-	) : null;
+	return (
+		!isProd && (
+			<div className={ui.base({ class: [props.class, props.ui?.base] })}>
+				{Label}
+				<pre className={ui.content({ class: props.ui?.content })}>
+					{Preview}
+				</pre>
+			</div>
+		)
+	);
 }

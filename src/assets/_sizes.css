@@ -1,0 +1,30 @@
+/* Size */
+.size-screen {
+	width: 100dvw;
+	height: 100dvh;
+}
+.min-size-screen {
+	min-width: 100dvw;
+	min-height: 100dvh;
+}
+.max-size-screen {
+	max-width: 100dvw;
+	max-height: 100dvh;
+}
+.min-w-screen {
+	min-width: 100dvw;
+}
+.max-w-screen {
+	max-width: 100dvw;
+}
+
+/* Rounded */
+.rounded-xs {
+	border-radius: 0.125rem;
+}
+
+/* Type */
+.text-2xs {
+	font-size: 0.625rem;
+	line-height: 0.875rem;
+}

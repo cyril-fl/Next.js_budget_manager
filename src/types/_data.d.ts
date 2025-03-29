@@ -1,25 +1,25 @@
 const PAYMENT_STATUS = ['paid', 'pending', 'overdue'] as const;
 
-type PaymentStatus = (typeof PAYMENT_STATUS)[number];
+export type PaymentStatus = (typeof PAYMENT_STATUS)[number];
 
-interface SheetYear {
+export interface SheetYear {
 	year: number;
 	months: unknown[];
 }
 
-interface SheetMonth {
+export interface SheetMonth {
 	month: number;
 	income: FluxCat[];
 	expense: FluxCat[];
 }
 
-interface FluxCat {
+export interface FluxCat {
 	id: string;
 	category: string;
 	flux: Flux[];
 }
 
-interface Flux {
+export interface Flux {
 	id: string;
 	amount: number;
 	date_due?: string;
