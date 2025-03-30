@@ -4,7 +4,7 @@ export type PaymentStatus = (typeof PAYMENT_STATUS)[number];
 
 export interface SheetYear {
 	year: number;
-	months: unknown[];
+	months: SheetMonth[];
 }
 
 export interface SheetMonth {

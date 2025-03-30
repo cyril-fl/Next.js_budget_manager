@@ -1,18 +1,20 @@
-'use client';
+// Import
+import Pre from '@/.debug/components/Pre';
+import { SheetModel } from '@/model/Sheet';
 
-import { useConsole } from '@/.debug/hooks/useConsole';
+export default async function Home() {
+	const response = await fetch('http://localhost:3000/api/hello_word', {
+		method: 'GET',
+	});
 
-export default function Home() {
-	const Console = useConsole();
+	const res = await response.json();
 
-	Console.log('test du hokk personnalisé');
-	function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-		console.log('click trigger from parent');
-	}
-	// const response = await fetch('http://localhost:3000/api/hello_word', {
-	// 	method: 'GET',
-	// });
-	//
-	// const res = await response.json();
-	return <div></div>;
+	const sheet = new SheetModel(res.years);
+
+	return (
+		<div className={'flex'}>
+			<Pre label="sheet" data={sheet} />
+			<Pre label="data" data={res} />
+		</div>
+	);
 }
