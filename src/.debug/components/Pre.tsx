@@ -20,7 +20,7 @@ const theme = tv({
 		},
 		size: {
 			md: {
-				base: 'p-4 rounded-md w-screen max-w-screen-md',
+				base: 'p-4 rounded-md',
 				label: 'top-4 left-0 p-2 rounded-md',
 			},
 		},

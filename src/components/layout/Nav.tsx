@@ -1,18 +1,29 @@
-// Imports
-// Define
+import NavLink from '@/components/layout/nav/NavLink';
+import { utilsNavigation } from '@utils/utilsNavigation';
+import clsx from 'clsx';
 
-export default function nav() {
+interface NavProps {
+	gridClassName?: string;
+}
+
+export default function NavComponent(props: NavProps) {
 	// Data
+	const { pages } = utilsNavigation();
 
-	// Methods
+	// Methods'
 
 	// Render
 	return (
-		<nav className="ecbh col-span-2 row-start-1 row-end-5 bg-red-900">
-			<ul className="">
-				<li>Home</li>
-				<li>About</li>
-				<li>Contact</li>
+		<nav className={clsx(props.gridClassName, 'bg-amber-500 p-4')}>
+			<ul className="space-y-2">
+				{pages.map((item, index) => (
+					<NavLink
+						key={index}
+						label={item.label}
+						path={item.path}
+						icon={item.icon}
+					/>
+				))}
 			</ul>
 		</nav>
 	);

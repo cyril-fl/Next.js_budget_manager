@@ -1,9 +1,10 @@
 'use client';
 // Imports
-import { ButtonType, EmitClick } from '@core';
+import { ButtonType, EmitClick, EmitLink } from '@core';
 import { Icon, IconifyIcon } from '@iconify/react';
-import { emitsClick } from '@utils/emits';
+import { emitsClick, emitsLink } from '@utils/emits';
 import { utilsIcons } from '@utils/utilsIcons';
+import Link from 'next/link';
 import React, { JSX, useMemo } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
@@ -28,27 +29,27 @@ const theme = tv({
 			xs: {
 				label: 'text-xs font-normal space-x-1',
 				base: 'space-x-0.5 px-0.5 py-0.5 rounded-sm ring-1',
-				icon: 'text-xs',
+				icon: 'text-sm',
 			},
 			sm: {
 				label: 'text-xs font-normal space-x-1',
 				base: 'space-x-1 px-2 py-1 rounded-sm ring-1',
-				icon: 'text-sm',
+				icon: 'text-base',
 			},
 			md: {
 				label: 'text-sm font-medium space-x-1.5',
 				base: 'space-x-2 px-2 py-1.5 rounded-md ring-1',
-				icon: 'text-sm',
+				icon: 'text-base',
 			},
 			lg: {
 				label: 'text-lg font-medium space-x-1.5',
 				base: 'space-x-2 px-3 py-1.5 rounded-lg ring-1',
-				icon: 'text-lg',
+				icon: 'text-xl',
 			},
 			xl: {
 				label: 'text-xl font-medium space-x-1.5',
 				base: 'space-x-3 px-3 py-3 rounded-lg ring-1',
-				icon: 'text-xl',
+				icon: 'text-2xl',
 			},
 		},
 		variant: {
@@ -144,9 +145,10 @@ const theme = tv({
 export type ButtonVariants = VariantProps<typeof theme>;
 export interface ButtonProps extends ButtonEmit {
 	disabled?: boolean;
-	label?: React.ReactNode;
-	noLabel?: string | JSX.Element;
+	label?: string | JSX.Element;
+	noLabel?: boolean;
 	type?: ButtonType;
+	to?: string;
 	icon?: string;
 	leading?: boolean;
 	trailing?: boolean;
@@ -163,7 +165,7 @@ export interface ButtonProps extends ButtonEmit {
 	variant?: ButtonVariants['variant'];
 }
 interface ButtonEmit {
-	onClick?: EmitClick;
+	onClick?: EmitClick | EmitLink;
 }
 
 export default function Button(props: ButtonProps) {
@@ -175,7 +177,7 @@ export default function Button(props: ButtonProps) {
 
 	const iconName = useMemo((): string | IconifyIcon => {
 		if (props.isLoading) return icons.loading;
-		if (props.icon === icons.loading) return icons.loading;
+		if (props.icon) return props.icon;
 		return '';
 	}, [icons.loading, props.icon, props.isLoading]);
 
@@ -206,29 +208,37 @@ export default function Button(props: ButtonProps) {
 	);
 
 	// Methods
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-		emitsClick(e, props);
+	const handleClick = (
+		e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+	) => {
+		if (e.currentTarget instanceof HTMLButtonElement)
+			emitsClick(e as React.MouseEvent<HTMLButtonElement>, props);
+		if (e.currentTarget instanceof HTMLAnchorElement)
+			emitsLink(e as React.MouseEvent<HTMLAnchorElement>, props);
 	};
 
 	// Render
+	const ComponentTag = props.to ? Link : 'button';
+
 	const Label = props.label && !props.noLabel && (
 		<span className={ui.label({ className: props.ui?.label })}>
 			{props.label}
 		</span>
 	);
 
-	const IconElement = (props.icon || props.isLoading) && (
+	const IconElement = (
 		<div className={ui.icon({ className: props.ui?.icon })}>
 			<Icon icon={iconName} />
 		</div>
 	);
 	return (
-		<button
+		<ComponentTag
 			className={ui.base({
 				className: [props.className, props.ui?.base],
 			})}
 			disabled={props.disabled}
 			type={props.type}
+			href={props.to ?? ''}
 			onClick={handleClick}
 			onFocus={() => setIsFocus(true)}
 			onBlur={() => setIsFocus(false)}
@@ -238,6 +248,6 @@ export default function Button(props: ButtonProps) {
 			{props.leading && IconElement}
 			{Label}
 			{props.trailing && IconElement}
-		</button>
+		</ComponentTag>
 	);
 }

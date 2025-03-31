@@ -18,9 +18,9 @@ export default function Layout({
 	// Render
 	return (
 		<>
-			<Nav />
 			<Header className="col-span-full col-start-3 row-span-1 row-start-1 bg-amber-700" />
-			<main className="col-span-full col-start-3 row-span-full row-start-2 bg-amber-400">
+			<Nav gridClassName="col-span-1 row-start-1 row-end-5" />
+			<main className="col-span-full col-start-2 row-span-full row-start-2 bg-amber-400">
 				{children}
 			</main>
 			<Footer className="col-span-full col-start-3 row-span-1 row-start-5 bg-amber-200" />

@@ -41,3 +41,7 @@ export type Timeout = ReturnType<typeof setTimeout> | null;
 export type EmitClick = <T = unknown>(
 	e: React.MouseEvent<HTMLButtonElement>
 ) => T | void | Promise<T | void>;
+
+export type EmitLink = <T = unknown>(
+	e: React.MouseEvent<HTMLAnchorElement>
+) => T | void | Promise<T | void>;

@@ -13,6 +13,7 @@
 		"prepare": "husky"
 	},
 	"dependencies": {
+		"clsx": "^2.1.1",
 		"libphonenumber-js": "^1.12.6",
 		"next-intl": "^4.0.2",
 		"postcss": "^8.5.3",
