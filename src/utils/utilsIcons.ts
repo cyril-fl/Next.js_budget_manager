@@ -1,7 +1,8 @@
 // Imports
 // Define
 
-export function useIcons() {
+// noinspection JSUnusedGlobalSymbols
+export function utilsIcons() {
 	// Data
 	const buildInIcons = {
 		eyeOn: 'mynaui:eye',

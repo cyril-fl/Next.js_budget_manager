@@ -4,14 +4,13 @@ import { useConsole } from '@/.debug/hooks/useConsole';
 import Button from '@/components/global/Button';
 import Input from '@/components/global/Input';
 import InputPassword from '@/components/global/InputPassword';
-import { useApi } from '@/hooks/useApi';
 import { useForm } from '@/hooks/useForm';
-import { useValidate } from '@/hooks/useValidate';
+import { utilsValidate } from '@utils//utilsValidate';
 import { useState } from 'react';
 
 // Define
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const v = useValidate();
+
+const v = utilsValidate();
 export interface AuthFormTemplate {
 	email: string;
 	password: string;
@@ -33,7 +32,6 @@ const AuthFormRequired = {
 
 export default function AuthForm() {
 	// Data
-	const { get } = useApi();
 	const Console = useConsole();
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -49,12 +47,12 @@ export default function AuthForm() {
 		if (!isValidate) return;
 		setIsLoading(true);
 		try {
-			const res = await get('/auth/login', {
+			const res = await fetch('http://localhost:3000/api/auth/login', {
 				method: 'POST',
-				body: {
+				body: JSON.stringify({
 					email: form.email.value,
 					password: form.password.value,
-				},
+				}),
 			});
 
 			Console.log(res);

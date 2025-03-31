@@ -1,10 +1,10 @@
 'use client';
 // Imports
-import { useIcons } from '@/hooks/useIcons';
 import { FormField } from '@/types';
-import { emitsClick } from '@/utils/emits';
 import { FieldType } from '@core';
 import { Icon, IconifyIcon } from '@iconify/react';
+import { emitsClick } from '@utils/emits';
+import { utilsIcons } from '@utils/utilsIcons';
 import React, { useMemo } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
@@ -118,6 +118,7 @@ const theme = tv({
 });
 
 // Define
+type HtmlInputDefault = string | number | readonly string[] | undefined;
 export type InputVariants = VariantProps<typeof theme>;
 export interface InputProps<T extends object, K extends keyof T>
 	extends InputEmit {
@@ -157,7 +158,7 @@ export default function Input<T extends object, K extends keyof T>(
 	props: InputProps<T, K>
 ) {
 	// Data
-	const icons = useIcons();
+	const icons = utilsIcons();
 
 	const [isHovered, setIsHovered] = React.useState(props.isHovered);
 	const [isFocus, setIsFocus] = React.useState(props.isFocused);
@@ -241,7 +242,7 @@ export default function Input<T extends object, K extends keyof T>(
 					placeholder={props.placeholder}
 					required={props.required}
 					type={props.type}
-					defaultValue={props.model?.value as any}
+					defaultValue={props.model?.value as HtmlInputDefault}
 					className={ui.input({ className: props.ui?.input })}
 					onFocus={() => setIsFocus(true)}
 					onBlur={() => setIsFocus(false)}

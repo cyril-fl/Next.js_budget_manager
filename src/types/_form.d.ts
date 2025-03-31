@@ -1,4 +1,4 @@
-const FORM_ACTIONS_TYPES = ['CLEAR', 'RESET', 'SET_FIELD'] as const;
+import { FORM_ACTIONS_TYPES } from './constant';
 
 export type FormActionType = (typeof FORM_ACTIONS_TYPES)[number];
 export interface FormAction<T = unknown> {

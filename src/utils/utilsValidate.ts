@@ -1,13 +1,12 @@
-import { useLocal } from '@/hooks/useLocal';
 import type { Exclusive } from '@core';
+import { utilsLocal } from '@utils//utilsLocal';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { z } from 'zod';
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const { t } = useLocal(); // Placeholder for translation function
+const { t } = utilsLocal(); // Placeholder for translation function
 
 // noinspection JSUnusedGlobalSymbols
-export function useValidate() {
+export function utilsValidate() {
 	// Define
 
 	interface MinMaxOptions {

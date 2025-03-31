@@ -1,4 +1,4 @@
-const PAYMENT_STATUS = ['paid', 'pending', 'overdue'] as const;
+import { PAYMENT_STATUS } from './constant';
 
 export type PaymentStatus = (typeof PAYMENT_STATUS)[number];
 

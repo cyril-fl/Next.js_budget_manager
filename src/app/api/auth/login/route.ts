@@ -9,11 +9,6 @@ export async function POST(req: Request) {
 	const isValidEmail = email == 'cyril@hotmail.com';
 	const isValidPassword = password == 'password';
 
-	console.log('email', email);
-	console.log('password', password);
-	console.log('isValidEmail', isValidEmail);
-	console.log('isValidPassword', isValidPassword);
-
 	if (isValidEmail && isValidPassword) {
 		return NextResponse.json({
 			message: 'Login successful',

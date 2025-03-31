@@ -35,7 +35,7 @@ export class SheetMonthModel {
 		this.income = income.map((fluxCat) => new FluxCatModel(fluxCat));
 		this.expense = expense.map((fluxCat) => new FluxCatModel(fluxCat));
 	}
-	// 	todo Add income and expense categories crud
+	// 	todo Add incomes and expenses categories crud
 }
 
 export class FluxCatModel {

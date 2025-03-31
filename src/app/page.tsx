@@ -1,20 +1,13 @@
 // Import
+
 import Pre from '@/.debug/components/Pre';
-import { SheetModel } from '@/model/Sheet';
+import { utilsApi } from '@utils//utilsApi';
 
 export default async function Home() {
-	const response = await fetch('http://localhost:3000/api/hello_word', {
-		method: 'GET',
-	});
+	const { get } = utilsApi();
 
-	const res = await response.json();
+	const response = await get('months', {});
+	console.log('res', response);
 
-	const sheet = new SheetModel(res.years);
-
-	return (
-		<div className={'flex'}>
-			<Pre label="sheet" data={sheet} />
-			<Pre label="data" data={res} />
-		</div>
-	);
+	return <Pre label="data" data={response} />;
 }

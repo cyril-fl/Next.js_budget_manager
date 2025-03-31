@@ -3,8 +3,9 @@ import en from '../../locales/en.json';
 type LocalizedContent = {
 	[key: string]: string | LocalizedContent;
 };
-// TODO: Placeholder for translation function juste to keep messages in legacy
-export function useLocal() {
+// NOTE: Placeholder for translation function juste to keep messages in legacy
+// noinspection JSUnusedGlobalSymbols
+export function utilsLocal() {
 	const messages: { [locale: string]: LocalizedContent } = { en };
 
 	function getLocale(): string {

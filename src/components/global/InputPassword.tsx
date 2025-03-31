@@ -1,7 +1,7 @@
 'use client';
 // Imports
 import Input, { InputProps } from '@/components/global/Input';
-import { useIcons } from '@/hooks/useIcons';
+import { utilsIcons } from '@utils/utilsIcons';
 import React from 'react';
 
 // Define
@@ -10,7 +10,7 @@ export default function InputPassword<T extends object, K extends keyof T>(
 	props: InputProps<T, K>
 ) {
 	// Data
-	const icons = useIcons();
+	const icons = utilsIcons();
 	const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
 	// Methods

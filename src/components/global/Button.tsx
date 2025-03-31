@@ -1,9 +1,9 @@
 'use client';
 // Imports
-import { useIcons } from '@/hooks/useIcons';
-import { emitsClick } from '@/utils/emits';
 import { ButtonType, EmitClick } from '@core';
 import { Icon, IconifyIcon } from '@iconify/react';
+import { emitsClick } from '@utils/emits';
+import { utilsIcons } from '@utils/utilsIcons';
 import React, { JSX, useMemo } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
@@ -168,7 +168,7 @@ interface ButtonEmit {
 
 export default function Button(props: ButtonProps) {
 	// Data
-	const icons = useIcons();
+	const icons = utilsIcons();
 
 	const [isHovered, setIsHovered] = React.useState(props.isHovered);
 	const [isFocus, setIsFocus] = React.useState(props.isFocused);
