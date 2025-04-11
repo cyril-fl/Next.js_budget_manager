@@ -1,30 +1,28 @@
 // Imports
 // Define
-import Button from '@/components/global/Button';
-import { Icon } from '@iconify/react';
+import Button, { ButtonProps } from '@/components/global/Button';
 import { NavigationItem } from '@utils/utilsNavigation';
 
-interface NavLinkProps extends NavigationItem {}
+interface NavLinkProps extends NavigationItem {
+	size?: ButtonProps['size'];
+}
 
 export default function NavLink(props: NavLinkProps) {
 	// Data
 
 	// Methods
-	const IconElement = props.icon && (
-		// className={ui.icon({ className: props.ui?.icon })}
-		<Icon icon={props.icon} />
-	);
 	// Render
 	return (
 		<li>
 			<Button
-				size="xl"
+				size={props.size}
 				label={props.label}
 				to={props.path}
 				icon={props.icon}
 				leading
 				noLabel
 				rounded
+				squared
 			/>
 		</li>
 	);

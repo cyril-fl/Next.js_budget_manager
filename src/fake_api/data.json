@@ -4,7 +4,7 @@
             "year": 2020,
             "months": [
                 {
-                    "month": "01",
+                    "month": 0,
                     "income": [
                         {
                             "id": "income_157",
@@ -43,9 +43,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_907",
+                            "id": "outcome_907",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -62,7 +62,7 @@
                     ]
                 },
                 {
-                    "month": "02",
+                    "month": 1,
                     "income": [
                         {
                             "id": "income_216",
@@ -101,9 +101,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_995",
+                            "id": "outcome_995",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -118,7 +118,7 @@
                             ]
                         },
                         {
-                            "id": "expense_367",
+                            "id": "outcome_367",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -133,7 +133,7 @@
                             ]
                         },
                         {
-                            "id": "expense_620",
+                            "id": "outcome_620",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -148,7 +148,7 @@
                             ]
                         },
                         {
-                            "id": "expense_442",
+                            "id": "outcome_442",
                             "category": "rent",
                             "flux": [
                                 {
@@ -165,7 +165,7 @@
                     ]
                 },
                 {
-                    "month": "03",
+                    "month": 2,
                     "income": [
                         {
                             "id": "income_520",
@@ -192,9 +192,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_635",
+                            "id": "outcome_635",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -209,7 +209,7 @@
                             ]
                         },
                         {
-                            "id": "expense_815",
+                            "id": "outcome_815",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -226,7 +226,7 @@
                     ]
                 },
                 {
-                    "month": "04",
+                    "month": 3,
                     "income": [
                         {
                             "id": "income_880",
@@ -241,9 +241,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_945",
+                            "id": "outcome_945",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -258,7 +258,7 @@
                             ]
                         },
                         {
-                            "id": "expense_147",
+                            "id": "outcome_147",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -275,7 +275,7 @@
                     ]
                 },
                 {
-                    "month": "05",
+                    "month": 4,
                     "income": [
                         {
                             "id": "income_524",
@@ -302,9 +302,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_466",
+                            "id": "outcome_466",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -319,7 +319,7 @@
                             ]
                         },
                         {
-                            "id": "expense_849",
+                            "id": "outcome_849",
                             "category": "rent",
                             "flux": [
                                 {
@@ -334,7 +334,7 @@
                             ]
                         },
                         {
-                            "id": "expense_823",
+                            "id": "outcome_823",
                             "category": "rent",
                             "flux": [
                                 {
@@ -349,7 +349,7 @@
                             ]
                         },
                         {
-                            "id": "expense_146",
+                            "id": "outcome_146",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -366,7 +366,7 @@
                     ]
                 },
                 {
-                    "month": "06",
+                    "month": 5,
                     "income": [
                         {
                             "id": "income_488",
@@ -393,9 +393,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_501",
+                            "id": "outcome_501",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -410,7 +410,7 @@
                             ]
                         },
                         {
-                            "id": "expense_832",
+                            "id": "outcome_832",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -427,7 +427,7 @@
                     ]
                 },
                 {
-                    "month": "07",
+                    "month": 6,
                     "income": [
                         {
                             "id": "income_916",
@@ -454,9 +454,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_729",
+                            "id": "outcome_729",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -473,7 +473,7 @@
                     ]
                 },
                 {
-                    "month": "08",
+                    "month": 7,
                     "income": [
                         {
                             "id": "income_521",
@@ -512,9 +512,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_274",
+                            "id": "outcome_274",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -529,7 +529,7 @@
                             ]
                         },
                         {
-                            "id": "expense_108",
+                            "id": "outcome_108",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -546,7 +546,7 @@
                     ]
                 },
                 {
-                    "month": "09",
+                    "month": 8,
                     "income": [
                         {
                             "id": "income_221",
@@ -585,9 +585,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_468",
+                            "id": "outcome_468",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -602,7 +602,7 @@
                             ]
                         },
                         {
-                            "id": "expense_596",
+                            "id": "outcome_596",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -619,7 +619,7 @@
                     ]
                 },
                 {
-                    "month": "10",
+                    "month": 9,
                     "income": [
                         {
                             "id": "income_381",
@@ -646,9 +646,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_878",
+                            "id": "outcome_878",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -665,7 +665,7 @@
                     ]
                 },
                 {
-                    "month": "11",
+                    "month": 10,
                     "income": [
                         {
                             "id": "income_556",
@@ -704,9 +704,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_206",
+                            "id": "outcome_206",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -721,7 +721,7 @@
                             ]
                         },
                         {
-                            "id": "expense_571",
+                            "id": "outcome_571",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -736,7 +736,7 @@
                             ]
                         },
                         {
-                            "id": "expense_521",
+                            "id": "outcome_521",
                             "category": "transport",
                             "flux": [
                                 {
@@ -751,7 +751,7 @@
                             ]
                         },
                         {
-                            "id": "expense_675",
+                            "id": "outcome_675",
                             "category": "rent",
                             "flux": [
                                 {
@@ -768,7 +768,7 @@
                     ]
                 },
                 {
-                    "month": "12",
+                    "month": 11,
                     "income": [
                         {
                             "id": "income_265",
@@ -783,9 +783,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_122",
+                            "id": "outcome_122",
                             "category": "rent",
                             "flux": [
                                 {
@@ -800,7 +800,7 @@
                             ]
                         },
                         {
-                            "id": "expense_829",
+                            "id": "outcome_829",
                             "category": "transport",
                             "flux": [
                                 {
@@ -822,7 +822,7 @@
             "year": 2021,
             "months": [
                 {
-                    "month": "01",
+                    "month": 0,
                     "income": [
                         {
                             "id": "income_793",
@@ -849,9 +849,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_822",
+                            "id": "outcome_822",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -866,7 +866,7 @@
                             ]
                         },
                         {
-                            "id": "expense_616",
+                            "id": "outcome_616",
                             "category": "rent",
                             "flux": [
                                 {
@@ -881,7 +881,7 @@
                             ]
                         },
                         {
-                            "id": "expense_157",
+                            "id": "outcome_157",
                             "category": "rent",
                             "flux": [
                                 {
@@ -898,7 +898,7 @@
                     ]
                 },
                 {
-                    "month": "02",
+                    "month": 1,
                     "income": [
                         {
                             "id": "income_353",
@@ -937,9 +937,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_282",
+                            "id": "outcome_282",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -954,7 +954,7 @@
                             ]
                         },
                         {
-                            "id": "expense_802",
+                            "id": "outcome_802",
                             "category": "rent",
                             "flux": [
                                 {
@@ -969,7 +969,7 @@
                             ]
                         },
                         {
-                            "id": "expense_462",
+                            "id": "outcome_462",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -986,7 +986,7 @@
                     ]
                 },
                 {
-                    "month": "03",
+                    "month": 2,
                     "income": [
                         {
                             "id": "income_163",
@@ -1025,9 +1025,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_109",
+                            "id": "outcome_109",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -1042,7 +1042,7 @@
                             ]
                         },
                         {
-                            "id": "expense_106",
+                            "id": "outcome_106",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1057,7 +1057,7 @@
                             ]
                         },
                         {
-                            "id": "expense_825",
+                            "id": "outcome_825",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -1074,7 +1074,7 @@
                     ]
                 },
                 {
-                    "month": "04",
+                    "month": 3,
                     "income": [
                         {
                             "id": "income_607",
@@ -1101,9 +1101,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_419",
+                            "id": "outcome_419",
                             "category": "transport",
                             "flux": [
                                 {
@@ -1118,7 +1118,7 @@
                             ]
                         },
                         {
-                            "id": "expense_211",
+                            "id": "outcome_211",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1135,7 +1135,7 @@
                     ]
                 },
                 {
-                    "month": "05",
+                    "month": 4,
                     "income": [
                         {
                             "id": "income_485",
@@ -1150,9 +1150,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_323",
+                            "id": "outcome_323",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1167,7 +1167,7 @@
                             ]
                         },
                         {
-                            "id": "expense_712",
+                            "id": "outcome_712",
                             "category": "transport",
                             "flux": [
                                 {
@@ -1182,7 +1182,7 @@
                             ]
                         },
                         {
-                            "id": "expense_814",
+                            "id": "outcome_814",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1199,7 +1199,7 @@
                     ]
                 },
                 {
-                    "month": "06",
+                    "month": 5,
                     "income": [
                         {
                             "id": "income_138",
@@ -1226,9 +1226,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_222",
+                            "id": "outcome_222",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1243,7 +1243,7 @@
                             ]
                         },
                         {
-                            "id": "expense_490",
+                            "id": "outcome_490",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1258,7 +1258,7 @@
                             ]
                         },
                         {
-                            "id": "expense_434",
+                            "id": "outcome_434",
                             "category": "transport",
                             "flux": [
                                 {
@@ -1273,7 +1273,7 @@
                             ]
                         },
                         {
-                            "id": "expense_195",
+                            "id": "outcome_195",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -1290,7 +1290,7 @@
                     ]
                 },
                 {
-                    "month": "07",
+                    "month": 6,
                     "income": [
                         {
                             "id": "income_643",
@@ -1329,9 +1329,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_216",
+                            "id": "outcome_216",
                             "category": "transport",
                             "flux": [
                                 {
@@ -1346,7 +1346,7 @@
                             ]
                         },
                         {
-                            "id": "expense_577",
+                            "id": "outcome_577",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -1361,7 +1361,7 @@
                             ]
                         },
                         {
-                            "id": "expense_785",
+                            "id": "outcome_785",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -1378,7 +1378,7 @@
                     ]
                 },
                 {
-                    "month": "08",
+                    "month": 7,
                     "income": [
                         {
                             "id": "income_447",
@@ -1393,9 +1393,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_183",
+                            "id": "outcome_183",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1410,7 +1410,7 @@
                             ]
                         },
                         {
-                            "id": "expense_792",
+                            "id": "outcome_792",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1425,7 +1425,7 @@
                             ]
                         },
                         {
-                            "id": "expense_532",
+                            "id": "outcome_532",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -1442,7 +1442,7 @@
                     ]
                 },
                 {
-                    "month": "09",
+                    "month": 8,
                     "income": [
                         {
                             "id": "income_988",
@@ -1469,9 +1469,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_585",
+                            "id": "outcome_585",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -1486,7 +1486,7 @@
                             ]
                         },
                         {
-                            "id": "expense_977",
+                            "id": "outcome_977",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -1503,7 +1503,7 @@
                     ]
                 },
                 {
-                    "month": "10",
+                    "month": 9,
                     "income": [
                         {
                             "id": "income_362",
@@ -1518,9 +1518,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_908",
+                            "id": "outcome_908",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -1535,7 +1535,7 @@
                             ]
                         },
                         {
-                            "id": "expense_163",
+                            "id": "outcome_163",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1550,7 +1550,7 @@
                             ]
                         },
                         {
-                            "id": "expense_254",
+                            "id": "outcome_254",
                             "category": "transport",
                             "flux": [
                                 {
@@ -1565,7 +1565,7 @@
                             ]
                         },
                         {
-                            "id": "expense_960",
+                            "id": "outcome_960",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1582,7 +1582,7 @@
                     ]
                 },
                 {
-                    "month": "11",
+                    "month": 10,
                     "income": [
                         {
                             "id": "income_609",
@@ -1621,9 +1621,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_190",
+                            "id": "outcome_190",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1640,7 +1640,7 @@
                     ]
                 },
                 {
-                    "month": "12",
+                    "month": 11,
                     "income": [
                         {
                             "id": "income_791",
@@ -1655,9 +1655,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_990",
+                            "id": "outcome_990",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1672,7 +1672,7 @@
                             ]
                         },
                         {
-                            "id": "expense_250",
+                            "id": "outcome_250",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -1694,7 +1694,7 @@
             "year": 2022,
             "months": [
                 {
-                    "month": "01",
+                    "month": 0,
                     "income": [
                         {
                             "id": "income_964",
@@ -1733,9 +1733,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_580",
+                            "id": "outcome_580",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -1750,7 +1750,7 @@
                             ]
                         },
                         {
-                            "id": "expense_500",
+                            "id": "outcome_500",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1767,7 +1767,7 @@
                     ]
                 },
                 {
-                    "month": "02",
+                    "month": 1,
                     "income": [
                         {
                             "id": "income_809",
@@ -1806,9 +1806,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_650",
+                            "id": "outcome_650",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1823,7 +1823,7 @@
                             ]
                         },
                         {
-                            "id": "expense_637",
+                            "id": "outcome_637",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1838,7 +1838,7 @@
                             ]
                         },
                         {
-                            "id": "expense_134",
+                            "id": "outcome_134",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1853,7 +1853,7 @@
                             ]
                         },
                         {
-                            "id": "expense_109",
+                            "id": "outcome_109",
                             "category": "transport",
                             "flux": [
                                 {
@@ -1870,7 +1870,7 @@
                     ]
                 },
                 {
-                    "month": "03",
+                    "month": 2,
                     "income": [
                         {
                             "id": "income_794",
@@ -1909,9 +1909,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_128",
+                            "id": "outcome_128",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1926,7 +1926,7 @@
                             ]
                         },
                         {
-                            "id": "expense_332",
+                            "id": "outcome_332",
                             "category": "rent",
                             "flux": [
                                 {
@@ -1941,7 +1941,7 @@
                             ]
                         },
                         {
-                            "id": "expense_446",
+                            "id": "outcome_446",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -1956,7 +1956,7 @@
                             ]
                         },
                         {
-                            "id": "expense_210",
+                            "id": "outcome_210",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -1973,7 +1973,7 @@
                     ]
                 },
                 {
-                    "month": "04",
+                    "month": 3,
                     "income": [
                         {
                             "id": "income_658",
@@ -1988,9 +1988,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_805",
+                            "id": "outcome_805",
                             "category": "rent",
                             "flux": [
                                 {
@@ -2005,7 +2005,7 @@
                             ]
                         },
                         {
-                            "id": "expense_240",
+                            "id": "outcome_240",
                             "category": "rent",
                             "flux": [
                                 {
@@ -2022,7 +2022,7 @@
                     ]
                 },
                 {
-                    "month": "05",
+                    "month": 4,
                     "income": [
                         {
                             "id": "income_392",
@@ -2061,9 +2061,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_891",
+                            "id": "outcome_891",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -2078,7 +2078,7 @@
                             ]
                         },
                         {
-                            "id": "expense_728",
+                            "id": "outcome_728",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2095,7 +2095,7 @@
                     ]
                 },
                 {
-                    "month": "06",
+                    "month": 5,
                     "income": [
                         {
                             "id": "income_344",
@@ -2134,9 +2134,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_611",
+                            "id": "outcome_611",
                             "category": "rent",
                             "flux": [
                                 {
@@ -2153,7 +2153,7 @@
                     ]
                 },
                 {
-                    "month": "07",
+                    "month": 6,
                     "income": [
                         {
                             "id": "income_617",
@@ -2168,9 +2168,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_463",
+                            "id": "outcome_463",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2185,7 +2185,7 @@
                             ]
                         },
                         {
-                            "id": "expense_155",
+                            "id": "outcome_155",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2200,7 +2200,7 @@
                             ]
                         },
                         {
-                            "id": "expense_821",
+                            "id": "outcome_821",
                             "category": "rent",
                             "flux": [
                                 {
@@ -2215,7 +2215,7 @@
                             ]
                         },
                         {
-                            "id": "expense_897",
+                            "id": "outcome_897",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2232,7 +2232,7 @@
                     ]
                 },
                 {
-                    "month": "08",
+                    "month": 7,
                     "income": [
                         {
                             "id": "income_188",
@@ -2247,9 +2247,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_509",
+                            "id": "outcome_509",
                             "category": "rent",
                             "flux": [
                                 {
@@ -2264,7 +2264,7 @@
                             ]
                         },
                         {
-                            "id": "expense_748",
+                            "id": "outcome_748",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2279,7 +2279,7 @@
                             ]
                         },
                         {
-                            "id": "expense_668",
+                            "id": "outcome_668",
                             "category": "transport",
                             "flux": [
                                 {
@@ -2296,7 +2296,7 @@
                     ]
                 },
                 {
-                    "month": "09",
+                    "month": 8,
                     "income": [
                         {
                             "id": "income_628",
@@ -2311,9 +2311,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_322",
+                            "id": "outcome_322",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2328,7 +2328,7 @@
                             ]
                         },
                         {
-                            "id": "expense_520",
+                            "id": "outcome_520",
                             "category": "transport",
                             "flux": [
                                 {
@@ -2343,7 +2343,7 @@
                             ]
                         },
                         {
-                            "id": "expense_905",
+                            "id": "outcome_905",
                             "category": "rent",
                             "flux": [
                                 {
@@ -2360,7 +2360,7 @@
                     ]
                 },
                 {
-                    "month": "10",
+                    "month": 9,
                     "income": [
                         {
                             "id": "income_509",
@@ -2375,9 +2375,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_483",
+                            "id": "outcome_483",
                             "category": "transport",
                             "flux": [
                                 {
@@ -2392,7 +2392,7 @@
                             ]
                         },
                         {
-                            "id": "expense_240",
+                            "id": "outcome_240",
                             "category": "transport",
                             "flux": [
                                 {
@@ -2407,7 +2407,7 @@
                             ]
                         },
                         {
-                            "id": "expense_271",
+                            "id": "outcome_271",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2422,7 +2422,7 @@
                             ]
                         },
                         {
-                            "id": "expense_708",
+                            "id": "outcome_708",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2439,7 +2439,7 @@
                     ]
                 },
                 {
-                    "month": "11",
+                    "month": 10,
                     "income": [
                         {
                             "id": "income_730",
@@ -2454,9 +2454,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_127",
+                            "id": "outcome_127",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2471,7 +2471,7 @@
                             ]
                         },
                         {
-                            "id": "expense_341",
+                            "id": "outcome_341",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2488,7 +2488,7 @@
                     ]
                 },
                 {
-                    "month": "12",
+                    "month": 11,
                     "income": [
                         {
                             "id": "income_345",
@@ -2527,9 +2527,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_352",
+                            "id": "outcome_352",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2544,7 +2544,7 @@
                             ]
                         },
                         {
-                            "id": "expense_621",
+                            "id": "outcome_621",
                             "category": "rent",
                             "flux": [
                                 {
@@ -2566,7 +2566,7 @@
             "year": 2023,
             "months": [
                 {
-                    "month": "01",
+                    "month": 0,
                     "income": [
                         {
                             "id": "income_400",
@@ -2605,9 +2605,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_714",
+                            "id": "outcome_714",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2622,7 +2622,7 @@
                             ]
                         },
                         {
-                            "id": "expense_503",
+                            "id": "outcome_503",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2637,7 +2637,7 @@
                             ]
                         },
                         {
-                            "id": "expense_271",
+                            "id": "outcome_271",
                             "category": "transport",
                             "flux": [
                                 {
@@ -2652,7 +2652,7 @@
                             ]
                         },
                         {
-                            "id": "expense_894",
+                            "id": "outcome_894",
                             "category": "transport",
                             "flux": [
                                 {
@@ -2669,7 +2669,7 @@
                     ]
                 },
                 {
-                    "month": "02",
+                    "month": 1,
                     "income": [
                         {
                             "id": "income_474",
@@ -2708,9 +2708,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_907",
+                            "id": "outcome_907",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2725,7 +2725,7 @@
                             ]
                         },
                         {
-                            "id": "expense_728",
+                            "id": "outcome_728",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -2740,7 +2740,7 @@
                             ]
                         },
                         {
-                            "id": "expense_959",
+                            "id": "outcome_959",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -2755,7 +2755,7 @@
                             ]
                         },
                         {
-                            "id": "expense_921",
+                            "id": "outcome_921",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -2772,7 +2772,7 @@
                     ]
                 },
                 {
-                    "month": "03",
+                    "month": 2,
                     "income": [
                         {
                             "id": "income_875",
@@ -2799,9 +2799,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_914",
+                            "id": "outcome_914",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -2816,7 +2816,7 @@
                             ]
                         },
                         {
-                            "id": "expense_526",
+                            "id": "outcome_526",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2831,7 +2831,7 @@
                             ]
                         },
                         {
-                            "id": "expense_634",
+                            "id": "outcome_634",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -2846,7 +2846,7 @@
                             ]
                         },
                         {
-                            "id": "expense_573",
+                            "id": "outcome_573",
                             "category": "transport",
                             "flux": [
                                 {
@@ -2863,7 +2863,7 @@
                     ]
                 },
                 {
-                    "month": "04",
+                    "month": 3,
                     "income": [
                         {
                             "id": "income_462",
@@ -2902,9 +2902,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_283",
+                            "id": "outcome_283",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2921,7 +2921,7 @@
                     ]
                 },
                 {
-                    "month": "05",
+                    "month": 4,
                     "income": [
                         {
                             "id": "income_290",
@@ -2960,9 +2960,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_193",
+                            "id": "outcome_193",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -2979,7 +2979,7 @@
                     ]
                 },
                 {
-                    "month": "06",
+                    "month": 5,
                     "income": [
                         {
                             "id": "income_692",
@@ -3018,9 +3018,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_627",
+                            "id": "outcome_627",
                             "category": "rent",
                             "flux": [
                                 {
@@ -3035,7 +3035,7 @@
                             ]
                         },
                         {
-                            "id": "expense_727",
+                            "id": "outcome_727",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3050,7 +3050,7 @@
                             ]
                         },
                         {
-                            "id": "expense_657",
+                            "id": "outcome_657",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3065,7 +3065,7 @@
                             ]
                         },
                         {
-                            "id": "expense_109",
+                            "id": "outcome_109",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3082,7 +3082,7 @@
                     ]
                 },
                 {
-                    "month": "07",
+                    "month": 6,
                     "income": [
                         {
                             "id": "income_752",
@@ -3109,9 +3109,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_813",
+                            "id": "outcome_813",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3126,7 +3126,7 @@
                             ]
                         },
                         {
-                            "id": "expense_989",
+                            "id": "outcome_989",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3141,7 +3141,7 @@
                             ]
                         },
                         {
-                            "id": "expense_235",
+                            "id": "outcome_235",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -3158,7 +3158,7 @@
                     ]
                 },
                 {
-                    "month": "08",
+                    "month": 7,
                     "income": [
                         {
                             "id": "income_878",
@@ -3173,9 +3173,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_392",
+                            "id": "outcome_392",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3190,7 +3190,7 @@
                             ]
                         },
                         {
-                            "id": "expense_835",
+                            "id": "outcome_835",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3205,7 +3205,7 @@
                             ]
                         },
                         {
-                            "id": "expense_346",
+                            "id": "outcome_346",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3220,7 +3220,7 @@
                             ]
                         },
                         {
-                            "id": "expense_237",
+                            "id": "outcome_237",
                             "category": "rent",
                             "flux": [
                                 {
@@ -3237,7 +3237,7 @@
                     ]
                 },
                 {
-                    "month": "09",
+                    "month": 8,
                     "income": [
                         {
                             "id": "income_904",
@@ -3276,9 +3276,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_525",
+                            "id": "outcome_525",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3293,7 +3293,7 @@
                             ]
                         },
                         {
-                            "id": "expense_386",
+                            "id": "outcome_386",
                             "category": "rent",
                             "flux": [
                                 {
@@ -3308,7 +3308,7 @@
                             ]
                         },
                         {
-                            "id": "expense_630",
+                            "id": "outcome_630",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3323,7 +3323,7 @@
                             ]
                         },
                         {
-                            "id": "expense_474",
+                            "id": "outcome_474",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -3340,7 +3340,7 @@
                     ]
                 },
                 {
-                    "month": "10",
+                    "month": 9,
                     "income": [
                         {
                             "id": "income_198",
@@ -3355,9 +3355,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_587",
+                            "id": "outcome_587",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -3372,7 +3372,7 @@
                             ]
                         },
                         {
-                            "id": "expense_208",
+                            "id": "outcome_208",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3387,7 +3387,7 @@
                             ]
                         },
                         {
-                            "id": "expense_266",
+                            "id": "outcome_266",
                             "category": "rent",
                             "flux": [
                                 {
@@ -3402,7 +3402,7 @@
                             ]
                         },
                         {
-                            "id": "expense_953",
+                            "id": "outcome_953",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3419,7 +3419,7 @@
                     ]
                 },
                 {
-                    "month": "11",
+                    "month": 10,
                     "income": [
                         {
                             "id": "income_105",
@@ -3446,9 +3446,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_945",
+                            "id": "outcome_945",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -3465,7 +3465,7 @@
                     ]
                 },
                 {
-                    "month": "12",
+                    "month": 11,
                     "income": [
                         {
                             "id": "income_602",
@@ -3504,9 +3504,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_450",
+                            "id": "outcome_450",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3521,7 +3521,7 @@
                             ]
                         },
                         {
-                            "id": "expense_835",
+                            "id": "outcome_835",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -3536,7 +3536,7 @@
                             ]
                         },
                         {
-                            "id": "expense_535",
+                            "id": "outcome_535",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3558,7 +3558,7 @@
             "year": 2024,
             "months": [
                 {
-                    "month": "01",
+                    "month": 0,
                     "income": [
                         {
                             "id": "income_549",
@@ -3585,9 +3585,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_554",
+                            "id": "outcome_554",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3604,7 +3604,7 @@
                     ]
                 },
                 {
-                    "month": "02",
+                    "month": 1,
                     "income": [
                         {
                             "id": "income_950",
@@ -3643,9 +3643,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_992",
+                            "id": "outcome_992",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -3660,7 +3660,7 @@
                             ]
                         },
                         {
-                            "id": "expense_932",
+                            "id": "outcome_932",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3677,7 +3677,7 @@
                     ]
                 },
                 {
-                    "month": "03",
+                    "month": 2,
                     "income": [
                         {
                             "id": "income_572",
@@ -3692,9 +3692,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_457",
+                            "id": "outcome_457",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3711,7 +3711,7 @@
                     ]
                 },
                 {
-                    "month": "04",
+                    "month": 3,
                     "income": [
                         {
                             "id": "income_474",
@@ -3750,9 +3750,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_250",
+                            "id": "outcome_250",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3767,7 +3767,7 @@
                             ]
                         },
                         {
-                            "id": "expense_359",
+                            "id": "outcome_359",
                             "category": "rent",
                             "flux": [
                                 {
@@ -3784,7 +3784,7 @@
                     ]
                 },
                 {
-                    "month": "05",
+                    "month": 4,
                     "income": [
                         {
                             "id": "income_986",
@@ -3799,9 +3799,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_915",
+                            "id": "outcome_915",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -3816,7 +3816,7 @@
                             ]
                         },
                         {
-                            "id": "expense_286",
+                            "id": "outcome_286",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3833,7 +3833,7 @@
                     ]
                 },
                 {
-                    "month": "06",
+                    "month": 5,
                     "income": [
                         {
                             "id": "income_528",
@@ -3872,9 +3872,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_863",
+                            "id": "outcome_863",
                             "category": "transport",
                             "flux": [
                                 {
@@ -3891,7 +3891,7 @@
                     ]
                 },
                 {
-                    "month": "07",
+                    "month": 6,
                     "income": [
                         {
                             "id": "income_231",
@@ -3918,9 +3918,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_272",
+                            "id": "outcome_272",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3937,7 +3937,7 @@
                     ]
                 },
                 {
-                    "month": "08",
+                    "month": 7,
                     "income": [
                         {
                             "id": "income_713",
@@ -3964,9 +3964,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_819",
+                            "id": "outcome_819",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -3983,7 +3983,7 @@
                     ]
                 },
                 {
-                    "month": "09",
+                    "month": 8,
                     "income": [
                         {
                             "id": "income_290",
@@ -3998,9 +3998,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_559",
+                            "id": "outcome_559",
                             "category": "entertainment",
                             "flux": [
                                 {
@@ -4017,7 +4017,7 @@
                     ]
                 },
                 {
-                    "month": "10",
+                    "month": 9,
                     "income": [
                         {
                             "id": "income_732",
@@ -4044,9 +4044,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_358",
+                            "id": "outcome_358",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -4061,7 +4061,7 @@
                             ]
                         },
                         {
-                            "id": "expense_972",
+                            "id": "outcome_972",
                             "category": "rent",
                             "flux": [
                                 {
@@ -4076,7 +4076,7 @@
                             ]
                         },
                         {
-                            "id": "expense_943",
+                            "id": "outcome_943",
                             "category": "transport",
                             "flux": [
                                 {
@@ -4093,7 +4093,7 @@
                     ]
                 },
                 {
-                    "month": "11",
+                    "month": 10,
                     "income": [
                         {
                             "id": "income_744",
@@ -4108,9 +4108,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_736",
+                            "id": "outcome_736",
                             "category": "transport",
                             "flux": [
                                 {
@@ -4125,7 +4125,7 @@
                             ]
                         },
                         {
-                            "id": "expense_641",
+                            "id": "outcome_641",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -4142,7 +4142,7 @@
                     ]
                 },
                 {
-                    "month": "12",
+                    "month": 11,
                     "income": [
                         {
                             "id": "income_713",
@@ -4157,9 +4157,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_952",
+                            "id": "outcome_952",
                             "category": "transport",
                             "flux": [
                                 {
@@ -4174,7 +4174,7 @@
                             ]
                         },
                         {
-                            "id": "expense_287",
+                            "id": "outcome_287",
                             "category": "rent",
                             "flux": [
                                 {
@@ -4196,7 +4196,7 @@
             "year": 2025,
             "months": [
                 {
-                    "month": "01",
+                    "month": 0,
                     "income": [
                         {
                             "id": "income_988",
@@ -4211,9 +4211,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_818",
+                            "id": "outcome_818",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -4228,7 +4228,7 @@
                             ]
                         },
                         {
-                            "id": "expense_535",
+                            "id": "outcome_535",
                             "category": "rent",
                             "flux": [
                                 {
@@ -4243,7 +4243,7 @@
                             ]
                         },
                         {
-                            "id": "expense_517",
+                            "id": "outcome_517",
                             "category": "rent",
                             "flux": [
                                 {
@@ -4258,7 +4258,7 @@
                             ]
                         },
                         {
-                            "id": "expense_144",
+                            "id": "outcome_144",
                             "category": "transport",
                             "flux": [
                                 {
@@ -4275,7 +4275,7 @@
                     ]
                 },
                 {
-                    "month": "02",
+                    "month": 1,
                     "income": [
                         {
                             "id": "income_332",
@@ -4302,9 +4302,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_751",
+                            "id": "outcome_751",
                             "category": "utilities",
                             "flux": [
                                 {
@@ -4319,7 +4319,7 @@
                             ]
                         },
                         {
-                            "id": "expense_852",
+                            "id": "outcome_852",
                             "category": "groceries",
                             "flux": [
                                 {
@@ -4334,7 +4334,7 @@
                             ]
                         },
                         {
-                            "id": "expense_623",
+                            "id": "outcome_623",
                             "category": "rent",
                             "flux": [
                                 {
@@ -4351,7 +4351,7 @@
                     ]
                 },
                 {
-                    "month": "03",
+                    "month": 2,
                     "income": [
                         {
                             "id": "income_683",
@@ -4366,9 +4366,9 @@
                             ]
                         }
                     ],
-                    "expense": [
+                    "outcome": [
                         {
-                            "id": "expense_508",
+                            "id": "outcome_508",
                             "category": "transport",
                             "flux": [
                                 {
@@ -4383,7 +4383,7 @@
                             ]
                         },
                         {
-                            "id": "expense_525",
+                            "id": "outcome_525",
                             "category": "transport",
                             "flux": [
                                 {

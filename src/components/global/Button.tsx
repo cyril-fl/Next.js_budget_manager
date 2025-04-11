@@ -4,7 +4,7 @@ import { ButtonType, EmitClick, EmitLink } from '@core';
 import { Icon, IconifyIcon } from '@iconify/react';
 import { emitsClick, emitsLink } from '@utils/emits';
 import { utilsIcons } from '@utils/utilsIcons';
-import Link from 'next/link';
+import Link, { LinkProps } from 'next/link';
 import React, { JSX, useMemo } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
@@ -53,7 +53,7 @@ const theme = tv({
 			},
 		},
 		variant: {
-			ghost: '',
+			ghost: 'ring-transparent',
 			nude: '',
 			outline: '',
 			solid: '',
@@ -148,7 +148,7 @@ export interface ButtonProps extends ButtonEmit {
 	label?: string | JSX.Element;
 	noLabel?: boolean;
 	type?: ButtonType;
-	to?: string;
+	to?: string | LinkProps['href'];
 	icon?: string;
 	leading?: boolean;
 	trailing?: boolean;
@@ -238,7 +238,7 @@ export default function Button(props: ButtonProps) {
 			})}
 			disabled={props.disabled}
 			type={props.type}
-			href={props.to ?? ''}
+			href={props.to ?? '#'}
 			onClick={handleClick}
 			onFocus={() => setIsFocus(true)}
 			onBlur={() => setIsFocus(false)}

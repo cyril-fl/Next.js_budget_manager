@@ -10,11 +10,9 @@ import data from '../../../fake_api/data.json';
 		3) Fields - Ne rendre que les clé voulue
 		4) MaxRecord - Ne rendre que ce qu'il faut.
 */
-
 export async function GET(req: NextRequest) {
 	const searchParams = req.nextUrl.searchParams;
 	const params = Object.fromEntries(searchParams.entries());
-
 	const refinedData = utilsRefineData([...data.years], params);
 
 	const res: ApiResponse = {

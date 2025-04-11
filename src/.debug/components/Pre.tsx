@@ -5,7 +5,7 @@ import { tv, VariantProps } from 'tailwind-variants';
 // UI
 const theme = tv({
 	slots: {
-		base: 'relative',
+		base: 'relative overflow-scroll ',
 		label: 'sticky  ',
 		content: '',
 	},
@@ -20,7 +20,7 @@ const theme = tv({
 		},
 		size: {
 			md: {
-				base: 'p-4 rounded-md',
+				base: 'p-4 rounded-md max-h-[600px]',
 				label: 'top-4 left-0 p-2 rounded-md',
 			},
 		},

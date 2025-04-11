@@ -14,6 +14,7 @@ export function utilsIcons() {
 	const customIcons = {
 		calendar: 'mynaui:calendar',
 		dashboard: 'mynaui:home-solid',
+		plus: 'mynaui:plus-solid',
 		settings: 'mynaui:cog-four',
 	};
 	// Methods

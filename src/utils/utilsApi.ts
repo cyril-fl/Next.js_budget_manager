@@ -1,28 +1,33 @@
 // Imports
 import {
 	API_TABLE,
+	ApiComparisonOperator,
 	ApiField,
+	ApiFormula,
+	ApiFormulaArgument,
+	ApiFormulaFilter,
 	ApiOptions,
 	ApiResponse,
 	ApiSortParam,
 } from '@/types';
+import { utilsApiParams } from '@utils/utilsApiParams';
 
 export function utilsApi() {
 	// Data
 	const baseUrl = process.env.api_url;
 
 	// Methods
-	async function get(
+	async function get<T = unknown>(
 		target: ApiField,
 		option?: ApiOptions
-	): Promise<ApiResponse> {
+	): Promise<ApiResponse<T>> {
 		if (!API_TABLE.includes(target))
 			return {
 				success: false,
 				error: 'Table does not exist',
 			};
 
-		const params = utilsParams(option);
+		const params = utilsApiParams(option);
 		const _url = `${baseUrl}/${target}${params}`;
 
 		const res = await fetch(_url, {
@@ -35,48 +40,64 @@ export function utilsApi() {
 	return { get };
 }
 
-function utilsParams(params: ApiOptions | undefined) {
-	if (!params) return '';
+function evaluateFormula<T extends Record<string, unknown>>(
+	formula: ApiFormula,
+	item: T
+): boolean {
+	const { fn, args } = formula;
 
-	function encodeSortParams(sort: ApiSortParam | ApiSortParam[]) {
-		const sortArray = Array.isArray(sort) ? sort : [sort];
+	const evalArg = (arg: ApiFormulaArgument): boolean => {
+		if (Array.isArray(arg)) {
+			return arg.every((a) => evalArg(a));
+		} else {
+			if ('fn' in arg) {
+				return evaluateFormula(arg, item);
+			} else {
+				const { l, r, symbol } = arg;
+				const left = typeof l === 'string' ? item[l] : evaluateFormula(l, item);
 
-		return sortArray.reduce(
-			(acc, item, index) => {
-				acc[`sort[${index}][field]`] = item.field;
-				acc[`sort[${index}][direction]`] = item.direction || 'asc';
-				return acc;
-			},
-			{} as Record<string, string>
-		);
-	}
-
-	function encodeParams(obj: ApiOptions) {
-		return (Object.keys(obj) as (keyof ApiOptions)[])
-			.map((key) => {
-				const value = obj[key];
-				if (!value) return undefined;
-
-				switch (key) {
-					case 'sort':
-						const sortParams = encodeSortParams(
-							value as ApiSortParam | ApiSortParam[]
-						);
-						return Object.entries(sortParams)
-							.map(
-								([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`
-							)
-							.join('&');
-
+				switch (symbol) {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					case '=':
+						return left == r;
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					case '!=':
+						return left != r;
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					case '>':
+						return Number(left) > Number(r);
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					case '<':
+						return Number(left) < Number(r);
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					case '>=':
+						return Number(left) >= Number(r);
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					case '<=':
+						return Number(left) <= Number(r);
 					default:
-						return `${encodeURIComponent(key)}=${encodeURIComponent(value.toString())}`;
+						return false;
 				}
-			})
-			.filter(Boolean)
-			.join('&');
-	}
+			}
+		}
+	};
 
-	return `?${encodeParams(params)}`;
+	switch (fn) {
+		case 'AND':
+			return (Array.isArray(args) ? args : [args]).every(evalArg);
+		case 'OR':
+			return (Array.isArray(args) ? args : [args]).some(evalArg);
+		// case 'NOT':
+		// 	return !(Array.isArray(args) ? args : [args]).every(evalArg);
+		default:
+			return false;
+	}
 }
 
 export function utilsRefineData<T extends Record<string, unknown>>(
@@ -102,7 +123,43 @@ export function utilsRefineData<T extends Record<string, unknown>>(
 		return sortArray.filter((item) => item.field);
 	}
 
+	function handleFilterParams(
+		params: Record<string, string>
+	): ApiFormula | undefined {
+		if (!params.filter) return;
+
+		const decodedFilter = decodeURIComponent(params.filter);
+		const match = decodedFilter.match(/^(\w+)\((.+)\)$/);
+
+		if (!match) return;
+
+		const [, fnRaw, body] = match;
+		const fn = fnRaw as ApiFormulaFilter;
+
+		const args: ApiFormulaArgument = [
+			...body.matchAll(/\{(.+?)}\s*([=<>!]+)\s*'(.+?)'/g),
+		].map(([, l, symbol, r]) => ({
+			l,
+			r,
+			symbol: symbol as ApiComparisonOperator,
+		}));
+
+		return {
+			fn,
+			args,
+		};
+	}
+
 	// Data
+	function handleFilterData<T extends Record<string, unknown>>(
+		data: T[],
+		filterParams?: ApiFormula
+	): T[] {
+		if (!filterParams) return data;
+
+		return data.filter((item) => evaluateFormula(filterParams, item));
+	}
+
 	function handleSortData<T extends Record<string, unknown>>(
 		data: T[],
 		sortParams: ApiSortParam[]
@@ -156,13 +213,16 @@ export function utilsRefineData<T extends Record<string, unknown>>(
 	function handleProcessData(data: T[]) {
 		// Parse params
 		// TODO: Handle filter
-		const { maxRecords: maxRecordsParam, filter: _filterParam } = params;
-		const fieldsParam = params.fields ? params.fields.split(',') : [];
+		const { maxRecords: maxRecordsParam } = params;
+		const filterParams = handleFilterParams(params);
+		const fieldsParams = params.fields ? params.fields.split(',') : [];
 		const sortParams = handleSortParam(params);
 
 		// Refine
-		const sortedData = handleSortData(data, sortParams);
-		const filteredData = handleFilterFieldsData(sortedData, fieldsParam);
+		const filterData = handleFilterData(data, filterParams);
+		console.log('filterData', filterData);
+		const sortedData = handleSortData(filterData, sortParams);
+		const filteredData = handleFilterFieldsData(sortedData, fieldsParams);
 		const maxedData = filteredData.slice(
 			0,
 			+maxRecordsParam || filteredData.length

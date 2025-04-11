@@ -10,7 +10,7 @@ export interface SheetYear {
 export interface SheetMonth {
 	month: number;
 	income: FluxCat[];
-	expense: FluxCat[];
+	outcome: FluxCat[];
 }
 
 export interface FluxCat {
@@ -20,11 +20,16 @@ export interface FluxCat {
 }
 
 export interface Flux {
-	id: string;
 	amount: number;
+	category: string;
 	date_due?: string;
 	date_payment?: string;
 	date_reception?: string;
+	id: string;
+	month: number;
 	name: string;
+	parent_id: string;
 	status?: PaymentStatus;
+	type: 'income' | 'outcome';
+	year: number;
 }

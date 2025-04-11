@@ -1,10 +1,13 @@
 import { utilsIcons } from '@utils/utilsIcons';
+import { LinkProps } from 'next/link';
 
 export type NavigationItem = {
 	label: string;
-	path: string;
+	path: string | LinkProps['href'];
 	subPath?: NavigationItem[];
 	icon?: string;
+	query?: Record<string, string | number>;
+	search?: string;
 	// query?: Record<string, Ref<string | number> | string | number>;
 };
 
@@ -14,14 +17,20 @@ export function utilsNavigation() {
 	const icons = utilsIcons();
 
 	const description: NavigationItem[] = [
-		{
-			label: 'Dashboard',
-			path: 'dashboard',
-			icon: icons.dashboard,
-		},
+		// {
+		// 	label: 'Dashboard',
+		// 	path: {
+		// 		pathname: '/dashboard',
+		// 		query: { year: '2025' },
+		// 	},
+		// 	icon: icons.dashboard,
+		// },
 		{
 			label: 'Budget',
-			path: 'budget',
+			path: {
+				pathname: '/budget',
+				query: { year: '2025', month: '00' },
+			},
 			icon: icons.calendar,
 		},
 		{

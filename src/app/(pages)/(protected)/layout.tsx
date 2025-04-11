@@ -18,12 +18,12 @@ export default function Layout({
 	// Render
 	return (
 		<>
-			<Header className="col-span-full col-start-3 row-span-1 row-start-1 bg-amber-700" />
-			<Nav gridClassName="col-span-1 row-start-1 row-end-5" />
-			<main className="col-span-full col-start-2 row-span-full row-start-2 bg-amber-400">
+			<Nav gridClassName="" />
+			<main className="grow bg-amber-700/10">
+				<Header className="" />
 				{children}
+				<Footer className="" />
 			</main>
-			<Footer className="col-span-full col-start-3 row-span-1 row-start-5 bg-amber-200" />
 		</>
 	);
 }

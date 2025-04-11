@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
 	const rawData = data.years.flatMap((year) =>
 		year.months.flatMap((month) =>
-			(['income', 'expense'] as const).flatMap(
+			(['income', 'outcome'] as const).flatMap(
 				(type) =>
 					month[type]?.flatMap((entry) =>
 						entry.flux.map((fluxItem) => ({
