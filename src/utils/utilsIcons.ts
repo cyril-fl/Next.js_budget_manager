@@ -1,25 +1,23 @@
 // Imports
 // Define
 
-// noinspection JSUnusedGlobalSymbols
 export function utilsIcons() {
 	// Data
-	// Icon in bas component
+	// NOTE: Icon in base component
 	const buildInIcons = {
-		eyeOn: 'mynaui:eye',
-		eyeOff: 'mynaui:eye-slash',
-		loading: 'icomoon-free:spinner3',
+		eyeOn: 'ph:eye',
+		eyeOff: 'ph:eye-slash',
+		loading: 'ph:spinner-gap',
 	};
-	// Icon in custom project or custom component
-	const customIcons = {
-		calendar: 'mynaui:calendar',
-		dashboard: 'mynaui:home-solid',
-		plus: 'mynaui:plus-solid',
-		settings: 'mynaui:cog-four',
-	};
-	// Methods
 
-	// Lifecycle
+	// NOTE: Icon in custom project or custom component
+	// TODO add a way to get from a config file
+	const customIcons = {
+		calendar: 'ph:calendar-dots',
+		dashboard: 'ph:squares-four-bold',
+		plus: 'ph:plus',
+		settings: 'ph:gear-six',
+	};
 
 	return {
 		...buildInIcons,
