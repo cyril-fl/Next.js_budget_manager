@@ -54,13 +54,10 @@
 
 body {
 	/*background: var(--background);*/
-	background: var(--color-grayscale-100);
+	background: var(--color-grayscale-200);
 	/*color: var(--foreground);*/
 	font-family: Arial, Helvetica, sans-serif;
-	/*display: grid;*/
 	display: flex;
-	/*grid-template-columns:  repeat(12, 1fr);*/
-	/*grid-template-rows: auto 1fr auto;*/
 	min-height: 100vh;
 	padding: 8px;
 
@@ -79,4 +76,23 @@ body {
 .black-box {
 	background: var(--color-grayscale-950);
 	border-radius: 8px;
+}
+
+/* GRID */
+.grid-base {
+	display: grid;
+	grid-template-columns: repeat(18, 1fr);
+	grid-template-rows: auto 1fr auto;
+	gap: 8px;
+}
+.grid-16 {
+	display: grid;
+	grid-template-columns: repeat(16, 1fr);
+	gap: 8px;
+}
+
+.grid-18 {
+	display: grid;
+	grid-template-columns: repeat(18, 1fr);
+	gap: 8px;
 }

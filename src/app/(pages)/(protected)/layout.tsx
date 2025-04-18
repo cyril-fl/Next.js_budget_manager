@@ -1,8 +1,5 @@
 // Imports
 // Define
-
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
 import Nav from '@/components/layout/Nav';
 import React from 'react';
 
@@ -19,10 +16,11 @@ export default function Layout({
 	return (
 		<>
 			<Nav gridClassName="" />
-			<main className="grow bg-amber-700/10">
-				<Header className="" />
+			<main className="grid-base grow">
+				{/*TODO Supprimer le header de la et ne le mettre que dans les page concerner pour gerer au mieux le menu contextuerl */}
+				{/*<Header className="" />*/}
 				{children}
-				<Footer className="" />
+				{/*<Footer className="" />*/}
 			</main>
 		</>
 	);

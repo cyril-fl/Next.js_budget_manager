@@ -3,12 +3,9 @@ import { LinkProps } from 'next/link';
 
 export type NavigationItem = {
 	label: string;
-	path: string | LinkProps['href'];
-	subPath?: NavigationItem[];
+	pathname: string | LinkProps['href'];
+	children?: NavigationItem[];
 	icon?: string;
-	query?: Record<string, string | number>;
-	search?: string;
-	// query?: Record<string, Ref<string | number> | string | number>;
 };
 
 // noinspection JSUnusedGlobalSymbols
@@ -17,47 +14,61 @@ export function utilsNavigation() {
 	const icons = utilsIcons();
 
 	const description: NavigationItem[] = [
-		// {
-		// 	label: 'Dashboard',
-		// 	path: {
-		// 		pathname: '/dashboard',
-		// 		query: { year: '2025' },
-		// 	},
-		// 	icon: icons.dashboard,
-		// },
+		{
+			label: 'Dashboard',
+			pathname: {
+				pathname: '/dashboard',
+				// TODO modifier ca
+				query: { year: '2025' },
+			},
+			icon: icons.dashboard,
+		},
+		{
+			label: 'Savings accounts',
+			pathname: '/savings',
+			icon: icons.savings,
+		},
+		{
+			label: 'Template',
+			pathname: '/templates',
+			icon: icons.template,
+		},
 		{
 			label: 'Budget',
-			path: {
+			pathname: {
 				pathname: '/budget',
+				// TODO modifier ca
 				query: { year: '2025', month: '00' },
 			},
 			icon: icons.calendar,
 		},
 		{
 			label: 'Settings',
-			path: 'settings',
+			pathname: 'settings',
 			icon: icons.settings,
 		},
 	];
 
-	// const findPageByPath = (
-	// 	pathArray: string[],
-	// 	pagesList: NavigationItem[],
-	// 	pagesListIndex = 0
-	// ): NavigationItem | undefined => {
-	// 	const page = pagesList.find(
-	// 		({ path }) => path === pathArray[pagesListIndex]
-	// 	);
-	//
-	// 	return page?.subPath && pathArray.length > pagesListIndex + 1
-	// 		? findPageByPath(pathArray, page.subPath, pagesListIndex + 1)
-	// 		: page;
-	// };
+	const findPageByPath = (
+		target: string | string[],
+		items: NavigationItem[],
+		depth = 0
+	): NavigationItem | undefined => {
+		const segments = Array.isArray(target) ? target : [target];
+		const currentSegment = segments[depth];
+		const currentItem = items.find(
+			({ pathname }) => pathname === currentSegment
+		);
+
+		const hasMoreSegments = segments.length > depth + 1;
+
+		return currentItem?.children && hasMoreSegments
+			? findPageByPath(segments, currentItem.children, depth + 1)
+			: currentItem;
+	};
 
 	return {
 		pages: description,
-		// path: pathArray,
-		// current: currentPage,
-		// isParent,
+		findPageByPath,
 	};
 }

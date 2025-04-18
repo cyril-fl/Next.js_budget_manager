@@ -1,0 +1,60 @@
+import ViewStyleButton from '@/components/action/ViewStyleButton';
+import Button from '@/components/global/Button';
+import HeadMenuToolbar from '@/components/layout/submenu/HeadMenuToolbar';
+import ListSavings from '@/components/list/ListSavings';
+import { utilsIcons } from '@utils/utilsIcons';
+
+export default function SavingsPage() {
+	// Data
+	const icons = utilsIcons();
+
+	const emptyData: any[] = [];
+	const savingsData = [
+		{
+			id: 1,
+			name: 'Savings account 1',
+			balance: 1000,
+			createdAt: '2023-01-01',
+			updatedAt: '2023-01-02',
+			history: [],
+		},
+		{
+			id: 2,
+			name: 'Savings account 2',
+			balance: 2000,
+			createdAt: '2023-01-03',
+			updatedAt: '2023-01-04',
+			history: [],
+		},
+	];
+
+	const data: any[] = savingsData;
+
+	// Methods
+
+	// Render
+	return (
+		<section className="box col-span-full row-span-full row-start-1">
+			<HeadMenuToolbar
+				title="Saving"
+				slots={{
+					right: (
+						<>
+							<ViewStyleButton target="savings" />
+							<Button
+								label="Add"
+								icon={icons.plus}
+								to="/savings/add"
+								size="sm"
+								noLabel
+								leading
+								squared
+							/>
+						</>
+					),
+				}}
+			/>
+			<ListSavings data={data} />
+		</section>
+	);
+}

@@ -1,12 +1,14 @@
-export default function DashboardPage() {
+import HeadMenuToolbar from '@/components/layout/submenu/HeadMenuToolbar';
+
+export default function SettingsPage() {
 	// Data
 
 	// Methods
 
 	// Render
 	return (
-		<section className="flex grow flex-col items-center justify-center p-4">
-			<h1>Setting</h1>
+		<section className="box col-span-full row-span-full row-start-1">
+			<HeadMenuToolbar title="Setting" />
 		</section>
 	);
 }

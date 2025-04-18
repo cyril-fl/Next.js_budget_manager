@@ -9,7 +9,7 @@ import React, { useMemo } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
 // UI
-const theme = tv({
+export const theme = tv({
 	slots: {
 		wrapper: '',
 		label: '',
@@ -109,10 +109,35 @@ const theme = tv({
 			focus: true,
 			className: 'ring-gray-800/80',
 		},
+		{
+			variant: 'solid',
+			color: 'primary',
+			className: {
+				label: 'text-grayscale-500 dark:text-grayscale-200',
+				base: 'bg-grayscale-100 dark:bg-grayscale-900 text-grayscale-500 dark:text-white ring-transparent',
+				errors: 'text-red-500',
+			},
+		},
+		{
+			color: 'primary',
+			hover: true,
+			className: 'ring-grayscale-400',
+		},
+		{
+			color: 'primary',
+			focus: true,
+			className: 'ring-grayscale-900',
+		},
+		{
+			color: 'primary',
+			hover: true,
+			focus: true,
+			className: 'ring-grayscale-900',
+		},
 	],
 	defaultVariants: {
 		variant: 'solid',
-		color: 'neutral',
+		color: 'primary',
 		size: 'md',
 	},
 });
@@ -202,6 +227,10 @@ export default function Input<T extends object, K extends keyof T>(
 		props.trailing && emitsClick(e, { onClick: props.onTrailingClick });
 	};
 
+	const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+		props.model?.set(e.target.value as T[K]);
+	};
+
 	// Render
 	const Label = props.label && !props.noLabel && (
 		<label htmlFor={id} className={ui.label({ className: props.ui?.label })}>
@@ -229,7 +258,6 @@ export default function Input<T extends object, K extends keyof T>(
 	return (
 		<div className={ui.wrapper({ className: props.ui?.wrapper })}>
 			{Label}
-			<div className="text-x"></div>
 			<div
 				className={ui.base({ className: [props.className, props.ui?.base] })}
 				onMouseEnter={() => setIsHovered(true)}
@@ -246,7 +274,7 @@ export default function Input<T extends object, K extends keyof T>(
 					className={ui.input({ className: props.ui?.input })}
 					onFocus={() => setIsFocus(true)}
 					onBlur={() => setIsFocus(false)}
-					onChange={(e) => props.model?.set(e.target.value as T[K])}
+					onInput={handleInput}
 				/>
 				{props.trailing && IconElement}
 			</div>

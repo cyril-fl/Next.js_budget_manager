@@ -8,15 +8,21 @@ export function utilsIcons() {
 		eyeOn: 'ph:eye',
 		eyeOff: 'ph:eye-slash',
 		loading: 'ph:spinner-gap',
+		off: 'ph:circle',
+		on: 'ph:line-vertical-bold',
 	};
 
-	// NOTE: Icon in custom project or custom component
 	// TODO add a way to get from a config file
+	// NOTE: Icon in custom project or custom component
 	const customIcons = {
 		calendar: 'ph:calendar-dots',
 		dashboard: 'ph:squares-four-bold',
+		list: 'ph:list-bullets',
+		grid: 'ph:grid-four',
 		plus: 'ph:plus',
+		savings: 'ph:bank',
 		settings: 'ph:gear-six',
+		template: 'ph:cards',
 	};
 
 	return {

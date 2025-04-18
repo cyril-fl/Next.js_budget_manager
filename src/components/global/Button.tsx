@@ -86,16 +86,16 @@ const theme = tv({
 			color: 'neutral',
 			className: {
 				base: `
-					bg-gray-100 text-gray-500 ring-transparent
-					active:bg-gray-50 active:text-gray-300
-					disabled:cursor-default disabled:bg-gray-200 disabled:text-gray-50 disabled:active:bg-gray-200 dark:bg-gray-900
-					dark:text-white dark:active:bg-gray-700`,
+					bg-grayscale-100 text-grayscale-500 ring-transparent
+					active:bg-grayscale-50 active:text-grayscale-300
+					disabled:cursor-default disabled:bg-grayscale-200 disabled:text-grayscale-50 disabled:active:bg-grayscale-200 dark:bg-grayscale-900
+					dark:text-white dark:active:bg-grayscale-700`,
 			},
 		},
 		{
 			color: 'neutral',
 			hover: true,
-			className: 'bg-gray-300 text-gray-500 dark:bg-gray-800',
+			className: 'bg-grayscale-300 text-grayscale-500 dark:bg-grayscale-800',
 		},
 		{
 			color: 'neutral',
@@ -107,6 +107,65 @@ const theme = tv({
 			hover: true,
 			focus: true,
 			className: '',
+		},
+		{
+			variant: 'solid',
+			color: 'primary',
+			className: {
+				base: `
+					ring-transparent
+					active:bg-grayscale-50 active:text-grayscale-300
+					disabled:cursor-default disabled:bg-grayscale-200 disabled:text-grayscale-50 disabled:active:bg-grayscale-200 bg-grayscale-900
+					text-white dark:active:bg-grayscale-700`,
+			},
+		},
+		{
+			color: 'primary',
+			hover: true,
+			className: 'bg-grayscale-800',
+		},
+		{
+			color: 'primary',
+			focus: true,
+			className: '',
+		},
+		{
+			color: 'primary',
+			hover: true,
+			focus: true,
+			className: '',
+		},
+		{
+			color: 'secondary',
+			variant: 'ghost',
+			hover: true,
+			className: 'ring-grayscale-200',
+		},
+		{
+			color: 'secondary',
+			variant: 'ghost',
+			focus: true,
+			className: '',
+		},
+		{
+			color: 'secondary',
+			variant: 'ghost',
+			hover: true,
+			focus: true,
+			className: '',
+		},
+		{
+			color: 'secondary',
+			variant: 'ghost',
+			className: {
+				// TODO: Add dark / disabled
+				base: `
+					text-grayscale-50
+					active:bg-grayscale-200
+					active:text-grayscale-950
+					active:ring-grayscale-200
+					`,
+			},
 		},
 		{
 			squared: true,
