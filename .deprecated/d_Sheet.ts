@@ -1,4 +1,4 @@
-import { Flux, FluxCat, PaymentStatus, SheetYear } from '@/types';
+import { Flux, FluxCat, PaymentStatus, SheetYear } from '../../types';
 
 export class SheetModel {
 	readonly years: SheetYearModel[];
