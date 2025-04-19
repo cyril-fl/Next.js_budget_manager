@@ -6,9 +6,11 @@ export abstract class FinancialOperation {
 	protected totalOutcome: number = 0;
 
 	get getTotalIncome() {
+		this.updateTotalIncome();
 		return this.totalIncome;
 	}
 	get getTotalOutcome() {
+		this.updateTotalOutcome();
 		return this.totalOutcome;
 	}
 

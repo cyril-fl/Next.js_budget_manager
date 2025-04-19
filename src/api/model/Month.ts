@@ -9,7 +9,6 @@ import {
 // Class
 export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 	readonly id: string;
-	readonly reportYear: number;
 	readonly reportMonth: number;
 	readonly incomes: CategoryRecord<Partial<IncomeTransactionRecord>>[] = [];
 	readonly outcomes: CategoryRecord<Partial<OutcomeTransactionRecord>>[] = [];
@@ -21,9 +20,7 @@ export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 		outcomes: CategoryRecord<Partial<OutcomeTransactionRecord>>[] = []
 	) {
 		super();
-
 		this.id = `m-${reportYear}-${reportMonth}`;
-		this.reportYear = reportYear;
 		this.reportMonth = reportMonth;
 		this.incomes = incomes;
 		this.outcomes = outcomes;
@@ -37,33 +34,35 @@ export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 	add(record: IncomeTransactionRecord | OutcomeTransactionRecord) {
 		const { category, type } = record.value;
 
-		if (type === 'income')
-			this.addIncome(record as IncomeTransactionRecord, category);
-		if (type === 'outcome')
-			this.addOutcome(record as OutcomeTransactionRecord, category);
+		if (type === 'income') this.addIncome(record as IncomeTransactionRecord);
+		if (type === 'outcome') this.addOutcome(record as OutcomeTransactionRecord);
 
 		this.updateTotalIncome();
 		this.updateTotalOutcome();
 	}
-	addIncome(record: Partial<IncomeTransactionRecord>, category: string) {
+	addIncome(record: IncomeTransactionRecord) {
+		const { category, type, reportYear, reportMonth, ...rest } = record.value;
+
 		let group = this.incomes.find((g) => g.category === category);
 
 		if (!group) {
 			group = new CategoryRecord(category, []);
-			this.incomes.push(group as never);
+			this.incomes.push(group);
 		}
 
-		group.add(record);
+		group.add(rest);
 	}
-	addOutcome(record: Partial<OutcomeTransactionRecord>, category: string) {
+	addOutcome(record: OutcomeTransactionRecord) {
+		const { category, type, reportYear, reportMonth, ...rest } = record.value;
+
 		let group = this.outcomes.find((g) => g.category === category);
 
 		if (!group) {
 			group = new CategoryRecord(category, []);
-			this.outcomes.push(group as never);
+			this.outcomes.push(group);
 		}
 
-		group.add(record);
+		group.add(rest);
 	}
 	// R
 	// U

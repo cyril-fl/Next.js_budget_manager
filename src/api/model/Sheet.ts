@@ -1,9 +1,6 @@
 // Import
 import { ModelFactory } from '../factory/ModelFactory';
-import {
-	MonthlyTransactionRecord,
-	MonthlyTransactionSimplifiedRecord,
-} from './Month';
+import { MonthlyTransactionRecord } from './Month';
 import {
 	IncomeTransactionRecord,
 	OutcomeTransactionRecord,
@@ -47,8 +44,8 @@ export class SheetDataModel {
 		}, []);
 	}
 	get years(): YearlyTransactionRecord[] {
-		return this.months.reduce<YearlyTransactionRecord[]>((acc, monthData) => {
-			const { reportYear } = monthData;
+		return this.records.reduce<YearlyTransactionRecord[]>((acc, record) => {
+			const { reportYear } = record;
 
 			let yearData = acc.find((y) => y.reportYear === reportYear);
 
@@ -57,18 +54,7 @@ export class SheetDataModel {
 				acc.push(yearData);
 			}
 
-			const simplifiedData: MonthlyTransactionSimplifiedRecord =
-				ModelFactory.createMonthlyTransactionRecord(
-					monthData.reportYear,
-					monthData.reportMonth,
-					monthData.incomes,
-					monthData.outcomes,
-					{
-						simplified: true,
-					}
-				);
-
-			yearData.add(simplifiedData);
+			yearData.add(record);
 			return acc;
 		}, []);
 	}

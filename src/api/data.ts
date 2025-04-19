@@ -5,7 +5,7 @@ import { SheetDataModel } from './model/Sheet';
 
 // TODO recuperer les data d'une DB
 const records = ModelFactory.createTransactionRecord(
-	rawData as Array<IncomeTransaction | OutcomeTransaction>
+	rawData as unknown as Array<IncomeTransaction | OutcomeTransaction>
 );
 const sheet = new SheetDataModel(records);
 

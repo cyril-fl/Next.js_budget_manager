@@ -10,12 +10,12 @@ export default async function TestPages() {
 	// Methods
 	const { get } = utilsApi();
 
-	const response = await get<Array<Record<string, unknown>>>('transactions', {
+	const response = await get<Array<Record<string, unknown>>>('years', {
 		filter: {
 			fn: 'AND',
 			args: {
 				l: 'reportYear',
-				r: 2023,
+				r: 2025,
 			},
 		},
 	});

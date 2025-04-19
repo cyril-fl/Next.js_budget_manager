@@ -1,5 +1,9 @@
 import { FinancialOperation } from '@api/model/FinancialOperation';
 import { MonthlyTransactionSimplifiedRecord } from '@api/model/Month';
+import {
+	IncomeTransactionRecord,
+	OutcomeTransactionRecord,
+} from '@api/model/Transaction';
 
 export class YearlyTransactionRecord extends FinancialOperation {
 	readonly id: string;
@@ -17,8 +21,22 @@ export class YearlyTransactionRecord extends FinancialOperation {
 
 	// Method
 	// C
-	add(month: MonthlyTransactionSimplifiedRecord) {
-		this.months.push(month);
+	add(transaction: IncomeTransactionRecord | OutcomeTransactionRecord) {
+		if (transaction.reportYear !== this.reportYear) return;
+
+		let currentMonth = this.months.find(
+			(m) => m.reportMonth === transaction.reportMonth
+		);
+
+		if (!currentMonth) {
+			currentMonth = new MonthlyTransactionSimplifiedRecord(
+				transaction.reportYear,
+				transaction.reportMonth
+			);
+			this.months.push(currentMonth);
+		}
+
+		currentMonth.add(transaction);
 
 		this.updateTotalIncome();
 		this.updateTotalOutcome();
