@@ -1,6 +1,7 @@
 import {
 	API_FORMULA_FILTER,
-	API_FORMULA_OPERATOR,
+	API_FORMULA_OPERATOR_NAME,
+	API_FORMULA_OPERATOR_SYMBOL,
 	API_OPTIONS_KEYS,
 	API_TABLE,
 } from '@/types/constant';
@@ -8,7 +9,10 @@ import {
 export type ApiField = (typeof API_TABLE)[number];
 export type ApiOptionsKeys = (typeof API_OPTIONS_KEYS)[number];
 export type ApiFormulaFilter = (typeof API_FORMULA_FILTER)[number];
-export type ApiComparisonOperator = (typeof API_FORMULA_OPERATOR)[number];
+export type ApiComparisonOperatorName =
+	(typeof API_FORMULA_OPERATOR_NAME)[number];
+export type ApiComparisonOperatorSymbol =
+	(typeof API_FORMULA_OPERATOR_SYMBOL)[number];
 
 export type ApiOptions = {
 	fields?: Array<string>;
@@ -34,8 +38,14 @@ export type ApiFormulaArgument =
 export type ApiFormulaComparison = {
 	l: ApiFormula | string;
 	r?: string | number;
-	symbol?: ApiComparisonOperator;
+	symbol?: XOR<ApiComparisonOperatorSymbol, ApiComparisonOperatorName>;
 };
+
+// export type ApiFormulaComparison = {
+// 	l: ApiFormula | string;
+// 	r?: string | number;
+// 	symbol?: ApiComparisonOperatorName;
+// };
 
 export type ApiFormula = {
 	fn: ApiFormulaFilter;
@@ -46,3 +56,5 @@ export type ApiSortParam = {
 	field: string;
 	direction?: 'asc' | 'desc';
 };
+
+export type Param = Record<string, string | undefined>;

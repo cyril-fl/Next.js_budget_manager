@@ -1,0 +1,74 @@
+[
+  {
+    "id": "flux_1",
+    "label": "outcome_1",
+    "category": "Santé",
+    "amount": 50.00,
+    "month": 1,
+    "year": 2025,
+    "type": "outcome",
+    "status": "paid",
+    "date_due": "2025-01-15T23:00:00.000Z",
+    "date_payment": "2025-01-14T23:00:00.000Z"
+  },
+  {
+    "id": "flux_2",
+    "label": "outcome_1",
+    "category": "Salaire",
+    "amount": 1200.50,
+    "month": 2,
+    "year": 2025,
+    "type": "outcome",
+    "status": "paid",
+    "date_due": "2025-06-01T23:00:00.000Z",
+    "date_payment": "2025-02-01T23:00:00.000Z"
+  },
+  {
+    "id": "flux_3",
+    "label": "outcome_2",
+    "category": "Loyer",
+    "amount": 750.00,
+    "month": 3,
+    "year": 2025,
+    "type": "outcome",
+    "status": "pending",
+    "date_due": "2025-03-05T23:00:00.000Z",
+    "date_payment": "2025-03-03T23:00:00.000Z"
+  },
+  {
+    "id": "flux_4",
+    "label": "outcome_2",
+    "category": "Freelance",
+    "amount": 300.00,
+    "month": 4,
+    "year": 2025,
+    "type": "outcome",
+    "status": "pending",
+    "date_due": "2025-01-15T23:00:00.000Z",
+    "date_payment": "2025-04-13T23:00:00.000Z"
+  },
+  {
+    "id": "flux_5",
+    "label": "outcome_3",
+    "category": "Transport",
+    "amount": 100.00,
+    "month": 5,
+    "year": 2025,
+    "type": "outcome",
+    "status": "pending",
+    "date_due": "2025-03-05T23:00:00.000Z",
+    "date_payment": "2025-05-08T23:00:00.000Z"
+  },
+  {
+    "id": "flux_6",
+    "label": "outcome_3",
+    "category": "Investissement",
+    "amount": 500.00,
+    "month": 6,
+    "year": 2025,
+    "type": "outcome",
+    "status": "paid",
+    "date_due": "2025-06-01T23:00:00.000Z",
+    "date_payment": "2025-06-01T23:00:00.000Z"
+  }
+]

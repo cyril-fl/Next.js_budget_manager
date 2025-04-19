@@ -22,6 +22,7 @@ export function utilsIcons() {
 		plus: 'ph:plus',
 		savings: 'ph:bank',
 		settings: 'ph:gear-six',
+		test: 'ph:test-tube',
 		template: 'ph:cards',
 	};
 

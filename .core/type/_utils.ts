@@ -31,8 +31,44 @@ export type Exclusive<T, Keys extends keyof T = keyof T> = {
 	[K in Keys]: Required<Pick<T, K>> & { [P in Exclude<Keys, K>]?: never };
 }[Keys];
 
-// Utils
+/**
+ * Exclut de T toutes les propriétés qui sont aussi dans U.
+ * Utilisé pour empêcher la coexistence de propriétés communes dans les types XOR.
+ *
+ * @template T Le premier type.
+ * @template U Le second type, dont les clés sont retirées de T.
+ *
+ * @example
+ * type A = { a: string; b: number };
+ * type B = { b: number; c: boolean };
+ * type Result = Without<A, B>; // => { a?: never }
+ */
 
+type Without<T, U> = {
+	[P in Exclude<keyof T, keyof U>]?: never;
+};
+
+/**
+ * Crée une union exclusive (XOR) entre deux types T et U.
+ * Assure que seules les propriétés de T ou de U peuvent exister, mais pas les deux à la fois.
+ *
+ * @template T Le premier type d'entrée.
+ * @template U Le second type d'entrée.
+ *
+ * @example
+ * type A = { type: 'a'; value: number };
+ * type B = { type: 'b'; label: string };
+ * type Result = XOR<A, B>;
+ *
+ * const test1: Result = { type: 'a', value: 42 }; // ✅
+ * const test2: Result = { type: 'b', label: 'ok' }; // ✅
+ * const test3: Result = { type: 'a', value: 42, label: 'wrong' }; // ❌ Erreur
+ */
+type XOR<T, U> = T | U extends object
+	? (Without<T, U> & U) | (Without<U, T> & T)
+	: T | U;
+
+// Utils
 export type Callback = <T = unknown>(...args: any[]) => T | void;
 
 export type Timeout = ReturnType<typeof setTimeout> | null;

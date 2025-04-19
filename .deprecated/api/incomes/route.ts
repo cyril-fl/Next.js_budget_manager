@@ -1,7 +1,7 @@
 import { ApiResponse } from '@/types';
-import { utilsRefineData } from '@utils/utilsApi';
+import { utilsRefineData } from '@utils/d_utilsApi';
 import { NextRequest, NextResponse } from 'next/server';
-import data from '../../../fake_api/data.json';
+import data from '../../../mockup/data.json';
 
 export async function GET(req: NextRequest) {
 	const searchParams = req.nextUrl.searchParams;

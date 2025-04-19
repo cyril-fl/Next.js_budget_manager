@@ -1,8 +1,8 @@
 'use client';
 
 import Button from '@/components/global/Button';
-import { SheetYear } from '@/types';
-import { utilsApi } from '@utils/utilsApi';
+// import { SheetYear } from '@/types';
+import { utilsApi } from '@utils/d_utilsApi';
 import { utilsIcons } from '@utils/utilsIcons';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -14,13 +14,13 @@ function SelectYearNavMenu() {
 	const year = searchParams.get('year');
 	const month = searchParams.get('month');
 
-	const [data, setData] = useState<SheetYear[]>([]); // Typage des données
+	const [data, setData] = useState<any[]>([]); // Typage des données
 
 	useEffect(() => {
 		const { get } = utilsApi();
 
 		async function fetchData() {
-			const response = await get<Array<SheetYear>>('years', {
+			const response = await get<Array<any>>('years', {
 				fields: ['year'],
 			});
 			if (response.data) {

@@ -49,6 +49,14 @@ export function utilsNavigation() {
 		},
 	];
 
+	if (!isProd) {
+		description.unshift({
+			label: 'Test',
+			pathname: '/test',
+			icon: icons.test,
+		});
+	}
+
 	const findPageByPath = (
 		target: string | string[],
 		items: NavigationItem[],

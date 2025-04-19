@@ -1,10 +1,10 @@
 export const API_TABLE = [
 	'auth',
-	'expenses',
+	// 'expenses',
 	'flux',
-	'incomes',
-	'months',
-	'years',
+	// 'incomes',
+	// 'months',
+	// 'years',
 ] as const;
 
 export const API_OPTIONS_KEYS = [
@@ -17,15 +17,15 @@ export const API_OPTIONS_KEYS = [
 
 export const API_FORMULA_FILTER = [
 	'AND',
-	'ARRAYJOIN',
-	'FIND',
-	'LEFT',
-	'LOWER',
+	// 'ARRAYJOIN',
+	// 'FIND',
+	// 'LEFT',
+	// 'LOWER',
 	'OR',
-	'REGEX_EXTRACT',
+	// 'REGEX_EXTRACT',
 ] as const;
 
-export const API_FORMULA_OPERATOR = [
+export const API_FORMULA_OPERATOR_NAME = [
 	'eq',
 	'ne',
 	'sne',
@@ -33,6 +33,15 @@ export const API_FORMULA_OPERATOR = [
 	'lt',
 	'gte',
 	'lte',
+] as const;
+
+export const API_FORMULA_OPERATOR_SYMBOL = [
+	'=',
+	'!=',
+	'>',
+	'<',
+	'>=',
+	'<=',
 ] as const;
 
 export const ComparisonSymbol = {
