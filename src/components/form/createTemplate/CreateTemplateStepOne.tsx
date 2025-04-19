@@ -9,6 +9,7 @@ import { useState } from 'react';
 interface CreateTemplateTablerProps {
 	title?: string;
 	noTitle?: boolean;
+	category?: string[];
 }
 
 export default function CreateTemplateStepOne(
@@ -28,19 +29,21 @@ export default function CreateTemplateStepOne(
 		<div className="space-y-2">
 			{Title}
 			<div>
+				{/*TODO proposer une liste de catégories par defaut, via les props*/}
 				<h3 className="text-lf font-boldb flex items-center gap-2">
 					<NumberIcon value={1} size="2xl" style="bold" circle />
 					<span>Catégories</span>
 				</h3>
 				<ul className="flex flex-wrap gap-2">
-					{['Salaire', 'Aide', 'Bonus'].map((tag, i) => (
-						<li
-							key={i}
-							className="bg-primary-100 text-primary-700 rounded-full px-3 py-1 text-sm"
-						>
-							{tag}
-						</li>
-					))}
+					{props?.category?.length &&
+						props.category.map((tag, i) => (
+							<li
+								key={i}
+								className="bg-primary-100 text-primary-700 rounded-full px-3 py-1 text-sm"
+							>
+								{tag}
+							</li>
+						))}
 					<li>
 						<Button
 							label="Add"

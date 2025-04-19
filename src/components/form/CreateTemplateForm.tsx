@@ -13,8 +13,16 @@ export default function CreateTemplateForm() {
 	const [currentStep, setStep] = useState(0);
 
 	const steps = [
-		<CreateTemplateStepOne key="step1" title="Entrée" />,
-		<CreateTemplateStepOne key="step2" title="Sortie" />,
+		<CreateTemplateStepOne
+			key="step1"
+			title="Entrée"
+			category={['Salaire', 'Aide', 'Bonus']}
+		/>,
+		<CreateTemplateStepOne
+			key="step2"
+			title="Sortie"
+			category={['Loyer', 'Courses', 'Essence']}
+		/>,
 		<CreateTemplateStepTwo key="step3" />,
 		<CreateTemplateStepThree key="step4" />,
 	];
