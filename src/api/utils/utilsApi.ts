@@ -20,6 +20,9 @@ export function utilsApi() {
 		try {
 			const res = await fetch(_url, {
 				method: 'GET',
+				//  TODO: Mettre ca dans Options de API
+				next: { revalidate: 10 },
+				// cache: 'force-cache',
 			});
 			return await res.json();
 		} catch (error) {

@@ -11,6 +11,8 @@ export async function GET(req: NextRequest) {
 	const params = Object.fromEntries(searchParams.entries());
 	const refinedData = refineData<any>(data.years, params);
 
+	console.log('refinedData', refinedData);
+
 	const res: ApiResponse = {
 		data: refinedData,
 		success: true,

@@ -1,4 +1,4 @@
-import { ApiResponse, Flux } from '@/types';
+import { ApiResponse } from '@/types';
 import { apiDecodeParams } from '@api/utils/apiDecodeParams';
 import { NextRequest, NextResponse } from 'next/server';
 import data from '../../../api/data';
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
 	const searchParams = req.nextUrl.searchParams;
 	const params = Object.fromEntries(searchParams.entries());
-	const refinedData = refineData<Flux>(data.transactions, params);
+	const refinedData = refineData(data.transactions, params);
 
 	const res: ApiResponse = {
 		data: refinedData,

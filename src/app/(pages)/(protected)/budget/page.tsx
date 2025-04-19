@@ -5,15 +5,13 @@ import { YearDataModel } from '@types';
 import utilsDate from '@utils/utilsDate';
 
 type Props = {
-	searchParams: { month?: number; year?: number };
+	searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function DashboardPage(props: Props) {
-	// Data
-	// TODO:   Mettre dans un State comme redux
-	const searchParams = await props.searchParams;
-	const year = await Number(searchParams?.year ?? 1994);
-	const month = await Number(searchParams?.month ?? 0);
+export default async function Page({ searchParams }: Props) {
+	const params = await searchParams;
+	const year = Number(params?.year ?? '1994');
+	const month = Number(params?.month ?? '0');
 
 	const { get } = utilsApi();
 	const { formatMonth } = utilsDate();
@@ -27,34 +25,19 @@ export default async function DashboardPage(props: Props) {
 			},
 		},
 	});
-	const { data: fluxData } = await get<Array<any>>('transactions', {
-		filter: {
-			fn: 'AND',
-			args: [
-				{
-					l: 'year',
-					r: year,
-				},
-				{
-					l: 'month',
-					r: month,
-				},
-			],
-		},
-	});
+
+	// const { data: fluxData } = await get<Array<any>>('transactions', {
+	// 	filter: {
+	// 		fn: 'AND',
+	// 		args: [
+	// 			{ l: 'year', r: year },
+	// 			{ l: 'month', r: month },
+	// 		],
+	// 	},
+	// });
 
 	const [sheet] = sheetData || [];
 
-	console.log('sheetData', sheetData);
-	// const incomes = (fluxData ?? []).filter(
-	// 	(item: any) => item.type === 'income'
-	// );
-	// const outcomes = (fluxData ?? []).filter(
-	// 	(item: any) => item.type === 'outcome'
-	// );
-
-	// Methods
-	// Render
 	return (
 		<section className="grow bg-amber-100">
 			<h1 className="text-2xl font-bold">{year}</h1>
@@ -78,9 +61,6 @@ export default async function DashboardPage(props: Props) {
 					</li>
 				))}
 			</ul>
-
-			{/*<FluxTabler title="Incomes" list={incomes} />*/}
-			{/*<FluxTabler title="Outcomes" list={outcomes} />*/}
 		</section>
 	);
 }

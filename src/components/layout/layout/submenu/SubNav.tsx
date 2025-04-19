@@ -2,10 +2,9 @@
 
 import Button from '@/components/global/Button';
 // import { SheetYear } from '@/types';
-import { utilsApi } from '@utils/d_utilsApi';
 import { utilsIcons } from '@utils/utilsIcons';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 function SelectYearNavMenu() {
 	const icons = utilsIcons();
@@ -16,20 +15,20 @@ function SelectYearNavMenu() {
 
 	const [data, setData] = useState<any[]>([]); // Typage des données
 
-	useEffect(() => {
-		const { get } = utilsApi();
-
-		async function fetchData() {
-			const response = await get<Array<any>>('years', {
-				fields: ['year'],
-			});
-			if (response.data) {
-				setData(response.data);
-			}
-		}
-
-		fetchData();
-	}, []);
+	// useEffect(() => {
+	// 	const { get } = utilsApi();
+	//
+	// 	async function fetchData() {
+	// 		const response = await get<Array<any>>('years', {
+	// 			fields: ['year'],
+	// 		});
+	// 		if (response.data) {
+	// 			setData(response.data);
+	// 		}
+	// 	}
+	//
+	// 	fetchData();
+	// }, []);
 
 	return (
 		<ul className="w-full space-y-2">

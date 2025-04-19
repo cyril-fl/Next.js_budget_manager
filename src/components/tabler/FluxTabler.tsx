@@ -45,7 +45,7 @@ export default function FluxTabler(props: IncomesTablerProps) {
 						<ul className="">
 							{items.map((item, index) => (
 								<li key={index} className={'text-sm text-gray-600'}>
-									{item.name} – {item.amount} €
+									{item.label} – {item.amount} €
 								</li>
 							))}
 						</ul>
