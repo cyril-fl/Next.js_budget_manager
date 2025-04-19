@@ -1,25 +1,20 @@
 import { ApiResponse } from '@/types';
-import { utilsRefineData } from '@utils/d_utilsApi';
+import { apiDecodeParams } from '@api/utils/apiDecodeParams';
 import { NextRequest, NextResponse } from 'next/server';
-import data from '../../../mockup/data.json';
+import data from '../../../api/data';
 
+// TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
+	const { refineData } = apiDecodeParams();
+
 	const searchParams = req.nextUrl.searchParams;
 	const params = Object.fromEntries(searchParams.entries());
-
-	const rawData = data.years.flatMap((year) => {
-		return year.months.map((month) => ({
-			year: year.year,
-			...month,
-		}));
-	});
-
-	const refinedData = utilsRefineData(rawData, params);
+	const refinedData = refineData<any>(data.years, params);
 
 	const res: ApiResponse = {
-		message: 'Month',
-		success: true,
 		data: refinedData,
+		success: true,
+		message: 'Flux data retrieved successfully',
 	};
 	return NextResponse.json(res, { status: 200 });
 }

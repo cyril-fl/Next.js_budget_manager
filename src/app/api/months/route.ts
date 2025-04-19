@@ -1,7 +1,7 @@
 import { ApiResponse } from '@/types';
-import { apiDecodeParams } from '@api/apiDecodeParams';
+import { apiDecodeParams } from '@api/utils/apiDecodeParams';
 import { NextRequest, NextResponse } from 'next/server';
-import data from '../../../.lib/data';
+import data from '../../../api/data';
 
 // TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
 	const res: ApiResponse = {
 		data: refinedData,
 		success: true,
-		message: 'Flux data retrieved successfully',
+		message: 'Month data retrieved successfully',
 	};
 	return NextResponse.json(res, { status: 200 });
 }

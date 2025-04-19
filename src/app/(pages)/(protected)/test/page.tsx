@@ -1,6 +1,6 @@
 // Imports
 import Pre from '@/.debug/components/Pre';
-import { utilsApi } from '@api/utilsApi';
+import { utilsApi } from '@api/utils/utilsApi';
 
 // Define
 
@@ -10,10 +10,15 @@ export default async function TestPages() {
 	// Methods
 	const { get } = utilsApi();
 
-	const response = await get<Array<Record<string, unknown>>>(
-		'transactions',
-		{}
-	);
+	const response = await get<Array<Record<string, unknown>>>('transactions', {
+		filter: {
+			fn: 'AND',
+			args: {
+				l: 'reportYear',
+				r: 2023,
+			},
+		},
+	});
 
 	// Render
 	return (

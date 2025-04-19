@@ -1,7 +1,7 @@
 import { ApiResponse, Flux } from '@/types';
-import { apiDecodeParams } from '@api/apiDecodeParams';
+import { apiDecodeParams } from '@api/utils/apiDecodeParams';
 import { NextRequest, NextResponse } from 'next/server';
-import data from '../../../.lib/data';
+import data from '../../../api/data';
 
 // TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {

@@ -1,6 +1,6 @@
 // Imports
-import { apiEncodeParams } from '@api/apiEncodeParams';
 import { ApiField, ApiOptions, ApiResponse } from '@types';
+import { apiEncodeParams } from './apiEncodeParams';
 
 // Define
 

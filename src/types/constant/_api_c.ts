@@ -4,7 +4,7 @@ export const API_TABLE = [
 	// 'incomes',
 	'months',
 	'transactions',
-	// 'years',
+	'years',
 ] as const;
 
 export const API_OPTIONS_KEYS = [
