@@ -29,7 +29,6 @@ export default function CreateTemplateStepOne(
 		<div className="space-y-2">
 			{Title}
 			<div>
-				{/*TODO proposer une liste de catégories par defaut, via les props*/}
 				<h3 className="text-lf font-boldb flex items-center gap-2">
 					<NumberIcon value={1} size="2xl" style="bold" circle />
 					<span>Catégories</span>

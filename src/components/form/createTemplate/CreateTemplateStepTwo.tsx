@@ -44,7 +44,6 @@ export default function CreateTemplateStepTwo() {
 				hasIcon
 			/>
 			{/*<div>*/}
-			{/*	/!*TODO Double select avec les mois et les années ? Date foedl de radix vue	*!/*/}
 			{/*TODO ne gerer ce cas qu''au moment de creer la premiere fiche*/}
 			{/*	<h2>Mois</h2>*/}
 			{/*	<InputDate granularity="mm-yyyy" placeholder />*/}

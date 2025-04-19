@@ -16,12 +16,7 @@ export default function Layout({
 	return (
 		<>
 			<Nav gridClassName="" />
-			<main className="grid-base grow">
-				{/*TODO Supprimer le header de la et ne le mettre que dans les page concerner pour gerer au mieux le menu contextuerl */}
-				{/*<Header className="" />*/}
-				{children}
-				{/*<Footer className="" />*/}
-			</main>
+			<main className="grid-base grow">{children}</main>
 		</>
 	);
 }
