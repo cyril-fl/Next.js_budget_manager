@@ -2,6 +2,8 @@
 
 ## 📌 Structure de l'API
 
+## ⚠️Mettrez a jour et en anglais
+
 ### 1️⃣ Gestion des Années
 - `GET /years` → Récupérer toutes les années
 - `POST /years` → Ajouter une nouvelle année

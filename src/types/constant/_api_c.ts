@@ -1,9 +1,9 @@
 export const API_TABLE = [
 	'auth',
 	// 'expenses',
-	'flux',
 	// 'incomes',
-	// 'months',
+	'months',
+	'transactions',
 	// 'years',
 ] as const;
 

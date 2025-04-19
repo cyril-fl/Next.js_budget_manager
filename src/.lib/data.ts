@@ -1,4 +1,7 @@
-import { IncomeFluxDataModel, OutcomeFluxDataModel } from '@/.lib/model/Flux';
+import {
+	IncomeTransactionModel,
+	OutcomeTransactionModel,
+} from '@/.lib/model/Flux';
 import { Month, PaymentStatus, ReceiptStatus } from '@types';
 // import rawData from '../api/mockup/data.json';
 import rawData from '../api/mockup/data.json';
@@ -20,13 +23,13 @@ const records = rawData
 
 		switch (r.type) {
 			case 'income':
-				return new IncomeFluxDataModel(
+				return new IncomeTransactionModel(
 					...common,
 					r.status as ReceiptStatus,
 					r.date_reception ? new Date(r.date_reception) : undefined
 				);
 			case 'outcome':
-				return new OutcomeFluxDataModel(
+				return new OutcomeTransactionModel(
 					...common,
 					r.status as PaymentStatus,
 					r.date_due ? new Date(r.date_due) : undefined,
@@ -36,7 +39,7 @@ const records = rawData
 				return null;
 		}
 	})
-	.filter(Boolean) as Array<IncomeFluxDataModel | OutcomeFluxDataModel>;
+	.filter(Boolean) as Array<IncomeTransactionModel | OutcomeTransactionModel>;
 
 const sheet = new SheetDataModel(records);
 

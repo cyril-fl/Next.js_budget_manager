@@ -1,4 +1,4 @@
-import { ApiResponse, Flux } from '@/types';
+import { ApiResponse } from '@/types';
 import { apiDecodeParams } from '@api/apiDecodeParams';
 import { NextRequest, NextResponse } from 'next/server';
 import data from '../../../.lib/data';
@@ -9,8 +9,7 @@ export async function GET(req: NextRequest) {
 
 	const searchParams = req.nextUrl.searchParams;
 	const params = Object.fromEntries(searchParams.entries());
-	const refinedData = refineData<Flux>(data.records, params);
-	// console.log('refinedData', refinedData);
+	const refinedData = refineData<any>(data.months, params);
 
 	const res: ApiResponse = {
 		data: refinedData,

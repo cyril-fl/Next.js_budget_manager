@@ -10,19 +10,10 @@ export default async function TestPages() {
 	// Methods
 	const { get } = utilsApi();
 
-	const response = await get<Array<Record<string, unknown>>>('flux', {
-		// fields: ['date_due', 'date_payment'],
-		// maxRecords: 1,
-		sort: [
-			{
-				field: 'status',
-			},
-			{
-				field: 'id',
-				direction: 'desc',
-			},
-		],
-	});
+	const response = await get<Array<Record<string, unknown>>>(
+		'transactions',
+		{}
+	);
 
 	// Render
 	return (

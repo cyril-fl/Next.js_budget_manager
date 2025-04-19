@@ -1,6 +1,6 @@
 import { Month, PaymentStatus, ReceiptStatus } from '../../types';
 
-abstract class BaseFluxDataModel {
+abstract class BaseTransactionModel {
 	readonly id: string;
 	readonly label: string;
 	readonly category: string;
@@ -25,7 +25,7 @@ abstract class BaseFluxDataModel {
 	}
 }
 
-export class OutcomeFluxDataModel extends BaseFluxDataModel {
+export class OutcomeTransactionModel extends BaseTransactionModel {
 	readonly type = 'outcome' as const;
 	readonly status?: PaymentStatus;
 	date_due?: Date;
@@ -49,7 +49,7 @@ export class OutcomeFluxDataModel extends BaseFluxDataModel {
 	}
 }
 
-export class IncomeFluxDataModel extends BaseFluxDataModel {
+export class IncomeTransactionModel extends BaseTransactionModel {
 	readonly type = 'income' as const;
 	readonly status?: ReceiptStatus;
 	date_reception?: Date;

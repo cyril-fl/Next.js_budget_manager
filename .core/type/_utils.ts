@@ -44,7 +44,7 @@ export type Exclusive<T, Keys extends keyof T = keyof T> = {
  * type Result = Without<A, B>; // => { a?: never }
  */
 
-type Without<T, U> = {
+export type Without<T, U> = {
 	[P in Exclude<keyof T, keyof U>]?: never;
 };
 
@@ -64,7 +64,7 @@ type Without<T, U> = {
  * const test2: Result = { type: 'b', label: 'ok' }; // ✅
  * const test3: Result = { type: 'a', value: 42, label: 'wrong' }; // ❌ Erreur
  */
-type XOR<T, U> = T | U extends object
+export type XOR<T, U> = T | U extends object
 	? (Without<T, U> & U) | (Without<U, T> & T)
 	: T | U;
 

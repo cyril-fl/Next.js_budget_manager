@@ -1,9 +1,12 @@
-import { IncomeFluxDataModel, OutcomeFluxDataModel } from './Flux';
+import { MonthTransactionModel } from '@/.lib/model/Month';
+import { IncomeTransactionModel, OutcomeTransactionModel } from './Flux';
 
 export class SheetDataModel {
-	readonly records: Array<OutcomeFluxDataModel | IncomeFluxDataModel>;
+	private records: Array<OutcomeTransactionModel | IncomeTransactionModel>;
 
-	constructor(flux: Array<OutcomeFluxDataModel | IncomeFluxDataModel> = []) {
+	constructor(
+		flux: Array<OutcomeTransactionModel | IncomeTransactionModel> = []
+	) {
 		this.records = flux;
 	}
 
@@ -14,6 +17,24 @@ export class SheetDataModel {
 	- Push existing flux
 	 */
 	// R
+	get transactions() {
+		return this.records;
+	}
+	get months(): MonthTransactionModel[] {
+		return this.records.reduce<MonthTransactionModel[]>((acc, record) => {
+			const { reportYear: year, reportMonth: month } = record;
+
+			let monthData = acc.find((g) => g.year === year && g.month === month);
+
+			if (!monthData) {
+				monthData = new MonthTransactionModel(year, month);
+				acc.push(monthData);
+			}
+
+			monthData.add(record);
+			return acc;
+		}, []);
+	}
 	/*
 	- Get flux by id
 	- Get flux by category
