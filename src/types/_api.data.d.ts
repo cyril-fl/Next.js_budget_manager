@@ -22,6 +22,14 @@ export interface OutcomeTransaction extends BaseTransaction {
 	date_payment?: Date;
 }
 
+export interface UnknownTransaction extends BaseTransaction {
+	type: 'income' | 'outcome';
+	status?: ReceiptStatus | PaymentStatus;
+	date_reception?: Date;
+	date_due?: Date;
+	date_payment?: Date;
+}
+
 interface TransactionCategory<T> {
 	total: number;
 	category: string;

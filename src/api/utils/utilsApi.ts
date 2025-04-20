@@ -21,7 +21,7 @@ export function utilsApi() {
 			const res = await fetch(_url, {
 				method: 'GET',
 				//  TODO: Mettre ca dans Options de API
-				next: { revalidate: 10 },
+				next: { revalidate: 60 },
 				// cache: 'force-cache',
 			});
 			return await res.json();

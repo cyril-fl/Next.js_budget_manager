@@ -29,7 +29,11 @@ export class SheetDataModel {
 		return this.records.reduce<MonthlyTransactionRecord[]>((acc, record) => {
 			const { reportYear, reportMonth } = record;
 
-			let monthData = acc.find((g) => g.id === record.id);
+			let monthData = acc.find(
+				(g) =>
+					g.reportMonth === record.reportMonth &&
+					g.reportYear === record.reportYear
+			);
 
 			if (!monthData) {
 				monthData = ModelFactory.createMonthlyTransactionRecord(
@@ -44,19 +48,27 @@ export class SheetDataModel {
 		}, []);
 	}
 	get years(): YearlyTransactionRecord[] {
-		return this.records.reduce<YearlyTransactionRecord[]>((acc, record) => {
-			const { reportYear } = record;
+		const data = this.records.reduce<YearlyTransactionRecord[]>(
+			(acc, record) => {
+				const { reportYear } = record;
 
-			let yearData = acc.find((y) => y.reportYear === reportYear);
+				let yearData = acc.find((y) => y.reportYear === reportYear);
 
-			if (!yearData) {
-				yearData = new YearlyTransactionRecord(reportYear);
-				acc.push(yearData);
-			}
+				if (!yearData) {
+					yearData = new YearlyTransactionRecord(reportYear);
+					acc.push(yearData);
+				}
 
-			yearData.add(record);
-			return acc;
-		}, []);
+				yearData.add(record);
+
+				return acc;
+			},
+			[]
+		);
+		data.forEach((y) => {
+			y.months.sort((a, b) => a.reportMonth - b.reportMonth);
+		});
+		return data;
 	}
 	// U
 	// D

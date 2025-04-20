@@ -1,7 +1,7 @@
 import Pre from '@/.debug/components/Pre';
 import Button from '@/components/global/Button';
 import { utilsApi } from '@api/utils/utilsApi';
-import { YearDataModel } from '@types';
+import { UnknownTransaction, YearDataModel } from '@types';
 import utilsDate from '@utils/utilsDate';
 
 type Props = {
@@ -26,22 +26,23 @@ export default async function Page({ searchParams }: Props) {
 		},
 	});
 
-	// const { data: fluxData } = await get<Array<any>>('transactions', {
-	// 	filter: {
-	// 		fn: 'AND',
-	// 		args: [
-	// 			{ l: 'year', r: year },
-	// 			{ l: 'month', r: month },
-	// 		],
-	// 	},
-	// });
+	// TODO probleme ici quand je cherche un Month,Il ne sont pas fuse !
+	const { data: fluxData } = await get<Array<UnknownTransaction>>('months', {
+		filter: {
+			fn: 'AND',
+			args: [
+				{ l: 'reportYear', r: year },
+				{ l: 'reportMonth', r: month },
+			],
+		},
+	});
 
 	const [sheet] = sheetData || [];
 
 	return (
 		<section className="grow bg-amber-100">
 			<h1 className="text-2xl font-bold">{year}</h1>
-			<Pre data={sheetData} />
+			<Pre data={fluxData} />
 			<ul className="bg-grayscale-200 space-x-2 rounded-lg p-1">
 				{sheet.months.map((m, index) => (
 					<li key={index} className="inline">
