@@ -3,16 +3,14 @@ import {
 	API_FORMULA_OPERATOR_NAME,
 	API_FORMULA_OPERATOR_SYMBOL,
 	API_OPTIONS_KEYS,
-	API_TABLE,
+	API_TABLE_LABEL,
 } from '@/types/constant';
 
-export type ApiField = (typeof API_TABLE)[number];
+export type ApiTableLabel = (typeof API_TABLE_LABEL)[number];
 export type ApiOptionsKeys = (typeof API_OPTIONS_KEYS)[number];
-export type ApiFormulaFilter = (typeof API_FORMULA_FILTER)[number];
-export type ApiComparisonOperatorName =
-	(typeof API_FORMULA_OPERATOR_NAME)[number];
-export type ApiComparisonOperatorSymbol =
-	(typeof API_FORMULA_OPERATOR_SYMBOL)[number];
+export type ApiFormulaName = (typeof API_FORMULA_FILTER)[number];
+export type ApiNamedOperator = (typeof API_FORMULA_OPERATOR_NAME)[number];
+export type ApiSymbolOperator = (typeof API_FORMULA_OPERATOR_SYMBOL)[number];
 
 export type ApiOptions = {
 	fields?: Array<string>;
@@ -21,7 +19,7 @@ export type ApiOptions = {
 	filter?: ApiFormula | string;
 	offset?: string;
 	sort?: ApiSortParam | ApiSortParam[];
-};
+} & NextCache;
 
 export type ApiResponse<T = unknown> = {
 	success: boolean;
@@ -30,31 +28,42 @@ export type ApiResponse<T = unknown> = {
 	message?: string;
 };
 
-export type ApiFormulaArgument =
-	| ApiFormulaComparison
-	| ApiFormula
-	| Array<ApiFormulaComparison | ApiFormula>;
+type RawFormula<T> = {
+	fn: ApiFormulaName;
+	args: RawArgument<T>;
+};
 
-export type ApiFormulaComparison = {
-	l: ApiFormula | string;
+type RawArgument<T> =
+	| RawComparison<T>
+	| RawFormula<T>
+	| Array<RawComparison<T> | RawFormula<T>>;
+
+type RawComparison<T> = {
+	l: RawFormula<T> | string;
 	r?: string | number;
-	symbol?: XOR<ApiComparisonOperatorSymbol, ApiComparisonOperatorName>;
+	symbol?: T;
 };
 
-// export type ApiFormulaComparison = {
-// 	l: ApiFormula | string;
-// 	r?: string | number;
-// 	symbol?: ApiComparisonOperatorName;
-// };
+export type ApiFormula = RawFormula<ApiNamedOperator>;
+export type ApiArgument = RawArgument<ApiNamedOperator>;
+export type ApiComparison = RawComparison<ApiNamedOperator>;
 
-export type ApiFormula = {
-	fn: ApiFormulaFilter;
-	args: ApiFormulaArgument;
-};
+export type ApiConvertedFormula = RawFormula<ApiSymbolOperator>;
+export type ApiConvertedArgument = RawArgument<ApiSymbolOperator>;
+export type ApiConvertedComparison = RawComparison<ApiSymbolOperator>;
 
 export type ApiSortParam = {
 	field: string;
 	direction?: 'asc' | 'desc';
 };
 
+// Autre
 export type Param = Record<string, string | undefined>;
+
+interface NextCache {
+	nextCache?: {
+		revalidate?: number | false;
+		cache?: 'default' | 'force-cache' | 'no-store';
+		tags?: string[];
+	};
+}

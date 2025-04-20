@@ -1,10 +1,10 @@
 // Import
 import {
-	ApiComparisonOperatorSymbol,
-	ApiFormula,
-	ApiFormulaArgument,
-	ApiFormulaFilter,
+	ApiConvertedArgument,
+	ApiConvertedFormula,
+	ApiFormulaName,
 	ApiSortParam,
+	ApiSymbolOperator,
 	Param,
 } from '@types';
 
@@ -21,7 +21,7 @@ export function utilsDecodeParams() {
 		return fieldsArray;
 	}
 
-	function handleFilterParams(params: Param): ApiFormula | undefined {
+	function handleFilterParams(params: Param): ApiConvertedFormula | undefined {
 		const filter = params.filter;
 		if (!filter) return;
 
@@ -31,14 +31,14 @@ export function utilsDecodeParams() {
 		if (!match) return;
 
 		const [, fnRaw, body] = match;
-		const fn = fnRaw as ApiFormulaFilter;
+		const fn = fnRaw as ApiFormulaName;
 
-		const args: ApiFormulaArgument = [
+		const args: ApiConvertedArgument = [
 			...body.matchAll(/\{(.+?)}\s*([=<>!]+)\s*'(.+?)'/g),
 		].map(([, l, symbol, r]) => ({
 			l,
 			r,
-			symbol: symbol as ApiComparisonOperatorSymbol,
+			symbol: symbol as ApiSymbolOperator,
 		}));
 
 		return {

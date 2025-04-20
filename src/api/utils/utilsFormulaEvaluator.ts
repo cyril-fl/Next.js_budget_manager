@@ -1,15 +1,37 @@
 // Import
 import {
-	ApiComparisonOperatorSymbol,
-	ApiFormula,
-	ApiFormulaArgument,
+	ApiConvertedArgument,
+	ApiConvertedFormula,
+	ApiSymbolOperator,
 } from '@types';
 
 // Define
 
 export function utilsFormulaEvaluator() {
-	function evaluateComparisonOperator(
-		symbol: ApiComparisonOperatorSymbol,
+	// Data
+	const operatorMap = {
+		AND: fnAnd,
+		OR: fnOr,
+	} as const;
+
+	// Methods
+	function fnAnd<T extends object>(
+		list: ApiConvertedArgument[],
+		item: T
+	): boolean {
+		return list.every((arg) => evaluateArgs(item, arg));
+	}
+
+	function fnOr<T extends object>(
+		list: ApiConvertedArgument[],
+		item: T
+	): boolean {
+		return list.some((arg) => evaluateArgs(item, arg));
+	}
+
+	// Evaluate
+	function evaluateOperator(
+		symbol: ApiSymbolOperator,
 		left: unknown,
 		right: unknown
 	): boolean {
@@ -33,7 +55,7 @@ export function utilsFormulaEvaluator() {
 
 	function evaluateArgs<T extends object>(
 		item: T,
-		arg: ApiFormulaArgument
+		arg: ApiConvertedArgument
 	): boolean {
 		if (Array.isArray(arg)) {
 			return arg.every((a) => evaluateArgs(item, a));
@@ -46,24 +68,39 @@ export function utilsFormulaEvaluator() {
 		const { l, r, symbol } = arg;
 		const left =
 			typeof l === 'string' ? item[l as keyof T] : evaluateFormula(l, item);
-		return evaluateComparisonOperator(symbol!, left, r);
+
+		return evaluateOperator(symbol!, left, r);
 	}
 
+	// function evaluateFormulaD<T extends object>(
+	// 	formula: ApiConvertedFormula,
+	// 	item: T
+	// ): boolean {
+	// 	const { fn, args } = formula;
+	// 	const list = Array.isArray(args) ? args : [args];
+	//
+	// 	switch (fn) {
+	// 		case 'AND':
+	// 			return fnAnd(list, item);
+	// 		case 'OR':
+	// 			return fnOr(list, item);
+	// 		default:
+	// 			return false;
+	// 	}
+	// }
+
 	function evaluateFormula<T extends object>(
-		formula: ApiFormula,
+		formula: ApiConvertedFormula,
 		item: T
 	): boolean {
 		const { fn, args } = formula;
-		const list = Array.isArray(args) ? args : [args];
+		const normalizedArgs = Array.isArray(args) ? args : [args];
 
-		switch (fn) {
-			case 'AND':
-				return list.every((arg) => evaluateArgs(item, arg));
-			case 'OR':
-				return list.some((arg) => evaluateArgs(item, arg));
-			default:
-				return false;
-		}
+		const logicFn = operatorMap[fn as keyof typeof operatorMap] as
+			| ((args: ApiConvertedArgument[], item: T) => boolean)
+			| undefined;
+
+		return logicFn ? logicFn(normalizedArgs, item) : false;
 	}
 
 	return {

@@ -1,10 +1,11 @@
-export const API_TABLE = [
+export const API_TABLE_LABEL = [
 	'auth',
 	// 'expenses',
 	// 'incomes',
 	'months',
 	'transactions',
 	'years',
+	'yearlyResume',
 ] as const;
 
 export const API_OPTIONS_KEYS = [

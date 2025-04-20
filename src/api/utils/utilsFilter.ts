@@ -2,11 +2,11 @@
 import { useConsole } from '@/.debug/hooks/useConsole';
 import {
 	API_FORMULA_FILTER,
-	ApiComparisonOperatorName,
+	ApiArgument,
+	ApiComparison,
 	ApiFormula,
-	ApiFormulaArgument,
-	ApiFormulaComparison,
-	ApiFormulaFilter,
+	ApiFormulaName,
+	ApiNamedOperator,
 	ComparisonSymbol,
 } from '@types';
 
@@ -19,8 +19,8 @@ export function utilsFilterParams() {
 
 	// Methods
 	function handleDefaultOperator(
-		fn: ApiFormulaFilter
-	): ApiComparisonOperatorName | undefined {
+		fn: ApiFormulaName
+	): ApiNamedOperator | undefined {
 		switch (fn) {
 			case 'AND':
 			case 'OR':
@@ -30,9 +30,7 @@ export function utilsFilterParams() {
 		}
 	}
 
-	function parseArgument(
-		value: ApiFormulaArgument
-	): ApiFormulaComparison | ApiFormulaComparison[] {
+	function parseArgument(value: ApiArgument): ApiComparison | ApiComparison[] {
 		const isArray = Array.isArray(value);
 		const args = isArray ? value : [value];
 
@@ -45,7 +43,7 @@ export function utilsFilterParams() {
 		};
 
 		const transformArgs = args
-			.map((a): ApiFormulaComparison | undefined => {
+			.map((a): ApiComparison | undefined => {
 				if ('fn' in a) return { l: encodeFilterParams(a) || '' };
 
 				if (typeof a === 'string') return { l: a };
@@ -64,14 +62,14 @@ export function utilsFilterParams() {
 						r: transformRight(a.r),
 					};
 			})
-			.filter((a): a is ApiFormulaComparison => Boolean(a));
+			.filter((a): a is ApiComparison => Boolean(a));
 		return isArray ? transformArgs : transformArgs[0];
 	}
 
 	function buildBase(
-		fn: ApiFormulaFilter,
-		args: ApiFormulaComparison | ApiFormulaComparison[],
-		defaultOp?: ApiComparisonOperatorName
+		fn: ApiFormulaName,
+		args: ApiComparison | ApiComparison[],
+		defaultOp?: ApiNamedOperator
 	) {
 		args = Array.isArray(args) ? args : [args];
 
@@ -81,7 +79,7 @@ export function utilsFilterParams() {
 				if (!symbol && !defaultOp) return [l, r];
 				if (symbol || defaultOp)
 					return [
-						`${l} ${ComparisonSymbol[(symbol as ApiComparisonOperatorName) || defaultOp]} ${r}`,
+						`${l} ${ComparisonSymbol[(symbol as ApiNamedOperator) || defaultOp]} ${r}`,
 					];
 			})
 			.filter(Boolean)

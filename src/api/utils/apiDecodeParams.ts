@@ -2,7 +2,7 @@
 import { utilsDecodeParams } from '@api/utils/utilsDecode';
 import { utilsFormulaEvaluator } from '@api/utils/utilsFormulaEvaluator';
 import { utilsPrimitiveType } from '@api/utils/utilsPrimitiveType';
-import { ApiFormula, ApiSortParam, Param } from '@types';
+import { ApiConvertedFormula, ApiSortParam, Param } from '@types';
 
 // Define
 
@@ -16,7 +16,7 @@ export function apiDecodeParams() {
 	// Methods
 	function handleFilterData<T extends object>(
 		data: T[],
-		filterParams?: ApiFormula
+		filterParams?: ApiConvertedFormula
 	): T[] {
 		if (!filterParams) return data;
 
