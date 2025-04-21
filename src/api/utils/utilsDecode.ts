@@ -1,5 +1,6 @@
 // Import
 import {
+	API_FORMULA_OPERATOR_SYMBOL,
 	ApiConvertedArgument,
 	ApiConvertedFormula,
 	ApiFormulaName,
@@ -11,6 +12,7 @@ import {
 // Define
 
 export function utilsDecodeParams() {
+	// Methods
 	function handleFieldsParams(params: Param) {
 		const fields = params.fields;
 		if (!fields) return [];
@@ -27,23 +29,11 @@ export function utilsDecodeParams() {
 
 		const decodedFilter = decodeURIComponent(filter);
 		const match = decodedFilter.match(/^(\w+)\((.+)\)$/);
-
 		if (!match) return;
 
-		const [, fnRaw, body] = match;
-		const fn = fnRaw as ApiFormulaName;
-
-		const args: ApiConvertedArgument = [
-			...body.matchAll(/\{(.+?)}\s*([=<>!]+)\s*'(.+?)'/g),
-		].map(([, l, symbol, r]) => ({
-			l,
-			r,
-			symbol: symbol as ApiSymbolOperator,
-		}));
-
 		return {
-			fn,
-			args,
+			fn: match[1] as ApiFormulaName,
+			args: parseFormula(match[2]),
 		};
 	}
 
@@ -73,6 +63,61 @@ export function utilsDecodeParams() {
 		});
 
 		return sortArray.filter((item) => item.field);
+	}
+
+	// Helper
+	function parseFormula(body: string) {
+		const args: ApiConvertedArgument = [];
+
+		const argsAdd = (
+			l: string,
+			r?: string | number | boolean,
+			symbol?: string
+		) => {
+			args.push({
+				l,
+				r,
+				symbol: symbol ? (symbol as ApiSymbolOperator) : undefined,
+			});
+		};
+
+		const sanitizeLeft = (l: string) => l.replace(/{|}/g, '');
+		const sanitizeRight = (r: string) => r.replace(/^'|'$/g, '');
+
+		const parseSeparated = () => {
+			const parts = body.split(',').map((part) => part.trim());
+			for (let i = 0; i < parts.length; i += 2) {
+				const left = sanitizeLeft(parts[i]);
+				const right = sanitizeRight(parts[i + 1] || '');
+				if (left) argsAdd(left, right);
+			}
+		};
+
+		const parseWithOperator = () => {
+			const match = body.match(/\{(.+?)}\s*(=|!=|>|<|>=|<=)?\s*'(.+?)'/);
+			if (!match) return;
+			const [, l, symbol, r] = match;
+			argsAdd(sanitizeLeft(l), sanitizeRight(r), symbol);
+		};
+
+		const parseSimple = () => {
+			const match = body.match(/\{(.+?)}/);
+			if (!match) return;
+			argsAdd(sanitizeLeft(match[1]));
+		};
+
+		if (body.includes(',')) {
+			parseSeparated();
+			return args;
+		}
+
+		if (API_FORMULA_OPERATOR_SYMBOL.some((op) => body.includes(op))) {
+			parseWithOperator();
+			return args;
+		}
+
+		parseSimple();
+		return args;
 	}
 
 	return {

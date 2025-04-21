@@ -1,8 +1,8 @@
 // Imports
 import { utilsDecodeParams } from '@api/utils/utilsDecode';
-import { utilsFormulaEvaluator } from '@api/utils/utilsFormulaEvaluator';
+import { utilsFormula } from '@api/utils/utilsFormula';
 import { utilsPrimitiveType } from '@api/utils/utilsPrimitiveType';
-import { ApiConvertedFormula, ApiSortParam, Param } from '@types';
+import { ApiSortParam, Param } from '@types';
 
 // Define
 
@@ -10,18 +10,11 @@ export function apiDecodeParams() {
 	// Data
 	const { decodeFields, decodeFilter, decodeMaxRecords, decodeSort } =
 		utilsDecodeParams();
-	const { evaluateFormula } = utilsFormulaEvaluator();
+	// const { evaluateFormula, transformFormula } = utilsFormulaEvaluator();
+	const { applyFormula: handleFilterData } = utilsFormula();
 	const { getComparableValue } = utilsPrimitiveType();
 
 	// Methods
-	function handleFilterData<T extends object>(
-		data: T[],
-		filterParams?: ApiConvertedFormula
-	): T[] {
-		if (!filterParams) return data;
-
-		return data.filter((item) => evaluateFormula(filterParams, item));
-	}
 
 	function handleSortData<T extends object>(
 		data: T[],
@@ -75,6 +68,8 @@ export function apiDecodeParams() {
 		const sortParams = decodeSort(params);
 		const fieldsParams = decodeFields(params);
 		const maxRecordsParam = decodeMaxRecords(params);
+
+		console.log('filterParams', filterParams);
 
 		const filteredData = handleFilterData(data, filterParams);
 		const sortedData = handleSortData(filteredData, sortParams);

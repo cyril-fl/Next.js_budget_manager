@@ -2,6 +2,7 @@
 import { useConsole } from '@/.debug/hooks/useConsole';
 import {
 	API_FORMULA_FILTER,
+	API_FORMULA_NAME,
 	ApiArgument,
 	ApiComparison,
 	ApiFormula,
@@ -18,6 +19,7 @@ export function utilsFilterParams() {
 	const Console = useConsole();
 
 	// Methods
+	// TODO: mettre en config
 	function handleDefaultOperator(
 		fn: ApiFormulaName
 	): ApiNamedOperator | undefined {
@@ -38,7 +40,7 @@ export function utilsFilterParams() {
 			if (API_FORMULA_FILTER.some((f) => _.startsWith(f))) return _;
 			return `{${_}}`;
 		};
-		const transformRight = (_?: string | number) => {
+		const transformRight = (_?: string | number | boolean) => {
 			if (_ !== undefined) return `'${_}'`;
 		};
 
@@ -89,7 +91,7 @@ export function utilsFilterParams() {
 	}
 
 	function encodeFilterParams(filter: ApiFormula) {
-		if (!API_FORMULA_FILTER.includes(filter.fn)) {
+		if (![...API_FORMULA_NAME].includes(filter.fn)) {
 			Console.error(`Unsupported formula: ${filter.fn}`);
 			return '';
 		}

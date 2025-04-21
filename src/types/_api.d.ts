@@ -1,14 +1,20 @@
 import {
 	API_FORMULA_FILTER,
+	API_FORMULA_NAME,
 	API_FORMULA_OPERATOR_NAME,
 	API_FORMULA_OPERATOR_SYMBOL,
+	API_FORMULA_TRANSFORMATION,
 	API_OPTIONS_KEYS,
 	API_TABLE_LABEL,
 } from '@/types/constant';
 
 export type ApiTableLabel = (typeof API_TABLE_LABEL)[number];
 export type ApiOptionsKeys = (typeof API_OPTIONS_KEYS)[number];
-export type ApiFormulaName = (typeof API_FORMULA_FILTER)[number];
+
+export type ApiFormulaFilter = (typeof API_FORMULA_FILTER)[number];
+export type ApiFormulaTransform = (typeof API_FORMULA_TRANSFORMATION)[number];
+export type ApiFormulaName = (typeof API_FORMULA_NAME)[number];
+
 export type ApiNamedOperator = (typeof API_FORMULA_OPERATOR_NAME)[number];
 export type ApiSymbolOperator = (typeof API_FORMULA_OPERATOR_SYMBOL)[number];
 
@@ -40,7 +46,7 @@ type RawArgument<T> =
 
 type RawComparison<T> = {
 	l: RawFormula<T> | string;
-	r?: string | number;
+	r?: string | number | boolean;
 	symbol?: T;
 };
 
