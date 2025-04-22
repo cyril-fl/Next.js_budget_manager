@@ -1,18 +1,21 @@
 // Imports
-import { utilsFormulaArray } from '@/lib/useApi/utils/utils/formula/utilsFormulaArray';
-import { utilsFormulaFilter } from '@/lib/useApi/utils/utils/formula/utilsFormulaFilter';
-import { utilsFormulaTransform } from '@/lib/useApi/utils/utils/formula/utilsFormulaTransform';
 import {
 	ApiConvertedFormula,
 	ApiFormulaArray,
 	ApiFormulaFilter,
 	ApiFormulaTransform,
-	API_FORMULA_ARRAY as fnArray,
-	API_FORMULA_FILTER as fnFilter,
-	API_FORMULA_TRANSFORMATION as fnTransform,
-} from '@types';
+	fnArray,
+	fnFilter,
+	fnTransform,
+} from '../../../types';
+import {
+	utilsFormulaArray,
+	utilsFormulaFilter,
+	utilsFormulaTransform,
+} from '../formula';
 
 // Define
+
 export type FnRedirection = (
 	formula: ApiConvertedFormula,
 	item: object | object[]

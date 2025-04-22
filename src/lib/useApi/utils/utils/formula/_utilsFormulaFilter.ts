@@ -1,6 +1,6 @@
 // Imports
-import { utilsOperator } from '@/lib/useApi/utils/utils/formula/utilsOperator';
-import { ApiConvertedArgument, ApiConvertedFormula } from '@types';
+import { ApiConvertedArgument, ApiConvertedFormula } from '../../../types';
+import { utilsOperator } from './_utilsOperator';
 
 // Define
 

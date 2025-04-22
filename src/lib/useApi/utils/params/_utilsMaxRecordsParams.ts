@@ -1,7 +1,7 @@
 // Imports
-// Define
+import { ApiParam } from '../../types';
 
-import { Param } from '@types';
+// Define
 
 export function utilsMaxRecordsParams() {
 	// Data
@@ -9,7 +9,7 @@ export function utilsMaxRecordsParams() {
 	// Methods
 	function encodeMaxRecordsParams() {}
 
-	function decodeMaxRecordsParams(params: Param) {
+	function decodeMaxRecordsParams(params: ApiParam) {
 		const maxRecords = params.maxRecords;
 		if (!maxRecords) return;
 

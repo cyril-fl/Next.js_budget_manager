@@ -1,6 +1,6 @@
 // Import
-import { utilsPrimitiveType } from '@/lib/useApi/utils/utils/utilsPrimitiveType';
-import { ApiSortParam, Param } from '@types';
+import { utilsPrimitiveType } from '@/lib/useApi/utils/utils/_utilsPrimitiveType';
+import { ApiParam, ApiSortParam } from '../../types';
 
 // Define
 
@@ -22,7 +22,7 @@ export function utilsSortParams() {
 		);
 	}
 
-	function decodeSortParams(params: Param) {
+	function decodeSortParams(params: ApiParam) {
 		const sortArray: ApiSortParam[] | undefined = [];
 
 		Object.keys(params).forEach((key) => {
@@ -52,8 +52,6 @@ export function utilsSortParams() {
 				const rawA = a[field as keyof T];
 				const rawB = b[field as keyof T];
 
-				console.log('rawA', rawA);
-				console.log('rawB', rawB);
 				const valA = getComparableValue(rawA);
 				const valB = getComparableValue(rawB);
 

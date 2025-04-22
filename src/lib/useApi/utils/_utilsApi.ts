@@ -1,6 +1,6 @@
 // Imports
-import { ApiOptions, ApiResponse, ApiTableLabel } from '@types';
-import { utilsEncodeParams } from './utilsEncodeParams';
+import { ApiOptions, ApiPathLabel, ApiResponse } from '../types';
+import { utilsEncodeParams } from './_utilsEncodeParams';
 
 // Define
 
@@ -9,7 +9,7 @@ export function utilsApi() {
 	// TODO gerer la config de l'api
 	const baseUrl = process.env.api_url;
 	// TODO: mettre en config
-	const tablePath: Record<ApiTableLabel, string> = {
+	const tablePath: Record<ApiPathLabel, string> = {
 		auth: 'auth',
 		months: 'months',
 		transactions: 'transactions',
@@ -19,7 +19,7 @@ export function utilsApi() {
 
 	// Methods
 	async function get<T = unknown>(
-		target: ApiTableLabel,
+		target: ApiPathLabel,
 		option?: ApiOptions
 	): Promise<ApiResponse<T>> {
 		const params = utilsEncodeParams(option);
@@ -46,8 +46,8 @@ export function utilsApi() {
 	// async function suppress<T = unknown>(target: ApiField) {}
 
 	// Helpers
-	function getTable(target: ApiTableLabel | string): string {
-		return tablePath[target as ApiTableLabel] ?? target;
+	function getTable(target: ApiPathLabel | string): string {
+		return tablePath[target as ApiPathLabel] ?? target;
 	}
 
 	return { get };

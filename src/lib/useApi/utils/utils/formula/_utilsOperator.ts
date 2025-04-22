@@ -1,7 +1,7 @@
 // Imports
-// Define
+import { ApiSymbolOperator } from '../../../types';
 
-import { ApiSymbolOperator } from '@types';
+// Define
 
 export function utilsOperator() {
 	const operatorFunctions: Record<
@@ -9,7 +9,9 @@ export function utilsOperator() {
 		(a: any, b: any) => boolean
 	> = {
 		'=': (a, b) => a == b,
+		'==': (a, b) => a === b,
 		'!=': (a, b) => a != b,
+		'!==': (a, b) => a !== b,
 		'>': (a, b) => a > b,
 		'<': (a, b) => a < b,
 		'>=': (a, b) => a >= b,

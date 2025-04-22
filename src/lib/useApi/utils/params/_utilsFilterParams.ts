@@ -1,29 +1,34 @@
 // Import
 import { useConsole } from '@/.debug/hooks/useConsole';
-import { utilsRedirection } from '@/lib/useApi/utils/utils/formula/utilsCommon';
-import { utilsFormulaArray } from '@/lib/useApi/utils/utils/formula/utilsFormulaArray';
-import { utilsFormulaFilter } from '@/lib/useApi/utils/utils/formula/utilsFormulaFilter';
-import { utilsFormulaTransform } from '@/lib/useApi/utils/utils/formula/utilsFormulaTransform';
-import { utilsParseFormula } from '@/lib/useApi/utils/utils/formula/utilsParse';
+import { config } from '../../config/';
 import {
-	API_FORMULA_NAME,
 	ApiArgument,
 	ApiComparison,
+	ApiComparisonSymbol,
 	ApiConvertedFormula,
 	ApiFormula,
 	ApiFormulaFilter,
 	ApiFormulaName,
 	ApiFormulaTransform,
 	ApiNamedOperator,
-	ComparisonSymbol,
-	API_FORMULA_ARRAY as fnArray,
-	API_FORMULA_FILTER as fnFilter,
-	API_FORMULA_TRANSFORMATION as fnTransform,
-	Param,
-} from '@types';
+	ApiParam,
+} from '../../types';
+import {
+	utilsFormulaArray,
+	utilsFormulaFilter,
+	utilsFormulaTransform,
+	utilsParseFormula,
+	utilsRedirection,
+} from '../utils/formula';
 
 // Define
 
+const API_FORMULA_NAME = config.formula.name;
+const fnTransform = config.formula.transform;
+const fnFilter = config.formula.filter;
+const fnArray = config.formula.array;
+
+// Methods
 export function utilsFilterParams() {
 	// Data
 	// eslint-disable-next-line react-hooks/rules-of-hooks
@@ -99,7 +104,7 @@ export function utilsFilterParams() {
 				if (!symbol && !defaultOp) return [l, r];
 				if (symbol || defaultOp)
 					return [
-						`${l} ${ComparisonSymbol[(symbol as ApiNamedOperator) || defaultOp]} ${r}`,
+						`${l} ${ApiComparisonSymbol[(symbol as ApiNamedOperator) || defaultOp]} ${r}`,
 					];
 			})
 			.filter(Boolean)
@@ -120,7 +125,9 @@ export function utilsFilterParams() {
 		return handleBaseBuild(filter.fn, parsedArgs, defaultOp);
 	}
 
-	function decodeFilterParams(params: Param): ApiConvertedFormula | undefined {
+	function decodeFilterParams(
+		params: ApiParam
+	): ApiConvertedFormula | undefined {
 		const filter = params.filter;
 		if (!filter) return;
 

@@ -1,15 +1,17 @@
 // Imports
-import { utilsFieldsParams } from '@/lib/useApi/utils/params/utilsFieldsParams';
-import { utilsFilterParams } from '@/lib/useApi/utils/params/utilsFilterParams';
-import { utilsMaxRecordsParams } from '@/lib/useApi/utils/params/utilsMaxRecordsParams';
-import { utilsSortParams } from '@/lib/useApi/utils/params/utilsSortParams';
-import { Param } from '@types';
+import { ApiParam } from '..//types';
+import {
+	utilsFieldsParams,
+	utilsFilterParams,
+	utilsMaxRecordsParams,
+	utilsSortParams,
+} from './params/';
 
 // Define
 
 export function utilsRefineData<T extends object = object>(
 	data: T[],
-	params: Param
+	params: ApiParam
 ) {
 	// Data
 	const { applyFilter, decodeFilter } = utilsFilterParams();

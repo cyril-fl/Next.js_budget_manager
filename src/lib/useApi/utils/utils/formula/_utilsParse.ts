@@ -1,15 +1,15 @@
 // Imports
 import {
+	ApiComparisonSymbol,
 	ApiConvertedComparison,
 	ApiConvertedFormula,
 	ApiFormulaName,
 	ApiSymbolOperator,
-	API_FORMULA_NAME as formulaNames,
-	API_FORMULA_OPERATOR_SYMBOL as operatorSymbol,
-} from '@types';
+	fnName,
+} from '../../../types';
 
 // Define
-type ConvertedArgument = Array<ApiConvertedComparison | ApiConvertedFormula>;
+// type ConvertedArgument = Array<ApiConvertedComparison | ApiConvertedFormula>;
 
 export function utilsParseFormula() {
 	//  Data
@@ -18,7 +18,7 @@ export function utilsParseFormula() {
 
 	// Methods
 	function isFormula(value: string): boolean {
-		return formulaNames.some((fn) => value.startsWith(fn + '('));
+		return fnName.some((fn) => value.startsWith(fn + '('));
 	}
 
 	function handleSmartSplit(value: string): string[] {
@@ -106,8 +106,8 @@ export function utilsParseClause() {
 	}
 
 	function handleParse(clauses: string): ApiConvertedComparison | undefined {
-		const isClauseContainsOperator = operatorSymbol.some((op) =>
-			clauses.includes(op)
+		const isClauseContainsOperator = Object.values(ApiComparisonSymbol).some(
+			(op) => clauses.includes(op)
 		);
 
 		if (!isClauseContainsOperator) {

@@ -4,6 +4,7 @@ import Button from '@/components/global/Button';
 export default async function DashboardPage() {
 	// Data
 	const emptyTable: any[] = [];
+	// TODO Ceci c'est ma route index
 	const fullTable: any[] = [
 		{
 			year: 2021,
@@ -191,7 +192,7 @@ export default async function DashboardPage() {
 		},
 	];
 
-	const testData: any[] = emptyTable;
+	const testData: any[] = fullTable;
 	// Methods
 
 	// Render

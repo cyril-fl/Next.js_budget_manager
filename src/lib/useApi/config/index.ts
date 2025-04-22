@@ -1,12 +1,18 @@
-import type { Config } from './config';
+import { Config, defaultConfig } from './_default';
+import { staticConfig } from './_static';
 
-// TODO implementer plus
-let moduleConfig: Partial<Config> = {};
+let currentConfig: Config = { ...defaultConfig };
 
-export function defineModuleConfig(config: Config) {
-	moduleConfig = { ...moduleConfig, ...config };
+export function defineModuleConfig(config: Partial<Config>) {
+	currentConfig = { ...currentConfig, ...config };
 }
 
-export function getModuleConfig(): Partial<Config> {
-	return moduleConfig;
+export function getModuleConfig() {
+	return currentConfig;
 }
+
+export const config = {
+	...getModuleConfig(),
+	...defaultConfig,
+	...staticConfig,
+} as const;

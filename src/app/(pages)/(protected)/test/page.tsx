@@ -1,6 +1,6 @@
 // Imports
 import Pre from '@/.debug/components/Pre';
-import { utilsApi } from '@/lib/useApi/utils/utilsApi';
+import { utilsApi } from '@/lib/useApi';
 
 // Define
 

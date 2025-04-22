@@ -1,7 +1,7 @@
 // Imports
-// Define
+import { ApiConvertedArgument, ApiConvertedFormula } from '../../../types';
 
-import { ApiConvertedArgument, ApiConvertedFormula } from '@types';
+// Define
 
 export function utilsFormulaTransform(redirect: any) {
 	// Data

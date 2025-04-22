@@ -1,6 +1,7 @@
 // Imports
+import { ApiParam } from '../../types';
+
 // Define
-import { Param } from '@types';
 
 export function utilsFieldsParams() {
 	// Data
@@ -8,7 +9,7 @@ export function utilsFieldsParams() {
 	// Methods
 	function encodeFieldsParams() {}
 
-	function decodeFieldsParams(params: Param) {
+	function decodeFieldsParams(params: ApiParam) {
 		const fields = params.fields;
 		if (!fields) return [];
 

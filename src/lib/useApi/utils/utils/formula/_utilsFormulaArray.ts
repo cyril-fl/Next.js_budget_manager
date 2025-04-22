@@ -1,7 +1,4 @@
 // Imports
-// Define
-
-import { FnRedirection } from '@/lib/useApi/utils/utils/formula/utilsCommon';
 import {
 	ApiConvertedArgument,
 	ApiConvertedComparison,
@@ -9,10 +6,13 @@ import {
 	ApiFormulaArray,
 	ApiFormulaFilter,
 	ApiFormulaTransform,
-	API_FORMULA_ARRAY as fnArray,
-	API_FORMULA_FILTER as fnFilter,
-	API_FORMULA_TRANSFORMATION as fnTransform,
-} from '@types';
+	fnArray,
+	fnFilter,
+	fnTransform,
+} from '../../../types';
+import { FnRedirection } from './_utilsCommon';
+
+// Define
 
 export function utilsFormulaArray(handleRedirection: FnRedirection) {
 	// Data

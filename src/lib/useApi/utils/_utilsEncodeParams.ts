@@ -1,7 +1,6 @@
 // Imports
-import { utilsFilterParams } from '@/lib/useApi/utils/params/utilsFilterParams';
-import { utilsSortParams } from '@/lib/useApi/utils/params/utilsSortParams';
-import { ApiFormula, ApiOptions, ApiSortParam } from '@types';
+import { ApiFormula, ApiOptions, ApiSortParam } from '../types';
+import { utilsFilterParams, utilsSortParams } from './params';
 
 // Define
 
