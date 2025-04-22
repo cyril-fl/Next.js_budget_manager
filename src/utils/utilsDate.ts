@@ -19,7 +19,6 @@ export default function utilsDate() {
 		const monthNumber = Number(month);
 		if (monthNumber > 12) return '';
 
-		// TODO modifier le format de month dans les data
 		const date = new Date(yearNumber, monthNumber);
 
 		return date.toLocaleString(options?.locale ?? 'default', options);

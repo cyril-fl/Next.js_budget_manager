@@ -8,8 +8,7 @@ import {
 import { YearlyTransactionRecord } from '@/models/Year';
 
 // Class
-// TODO RENOMMER
-export class SheetDataModel {
+export class SheetController {
 	private readonly records: Array<
 		OutcomeTransactionRecord | IncomeTransactionRecord
 	>;

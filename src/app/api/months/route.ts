@@ -1,6 +1,5 @@
-import { utilsRefineData } from '@/lib/useApi/utils/_utilsDecodeParams';
+import { ApiResponse, utilsRefineData } from '@/lib/useApi';
 import data from '@/lib/useData/data';
-import { ApiResponse } from '@/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: mettre des header et un cors ect

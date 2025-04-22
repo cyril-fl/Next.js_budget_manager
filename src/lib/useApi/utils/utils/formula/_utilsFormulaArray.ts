@@ -21,23 +21,6 @@ export function utilsFormulaArray(handleRedirection: FnRedirection) {
 	};
 
 	// Methods
-	/* TODO:
-						gerer des arguments de type
-							- {l: "reportYear", r: undefined, symbol: undefined}
-							- {l: "type", r: undefined, symbol: undefined}
-						Mais aussi des arguments de type
-							- {l: "reportYear", r: undefined, symbol: undefined}
-							-{ fn: "AND", args: [{l: "type", r: "income"}, ...] }
-							...
-						 {l: "reportYear", r: undefined, symbol: undefined}
-						 	- champ a retourner dans dans mon objet :
-						 	ITEM : { reportYear : '' records: [] }
-						 	...
-						{ fn: "AND", args: [{l: "type", r: "income"}, ...] }
-						- donnes a retourner dans mon objet .. comment ?
-						...
-						doit retourne un objet de type { key1 : 'any'  key2: any ... records: [] }
-		 */
 	function handleArguments<T extends object, I>(
 		items: T[],
 		conditions: ApiConvertedArgument[],

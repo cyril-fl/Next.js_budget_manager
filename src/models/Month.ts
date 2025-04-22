@@ -35,7 +35,6 @@ export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 		const { category, type, reportMonth } = record.value;
 		if (reportMonth !== this.reportMonth) return;
 
-		// TODO s'inspiere de Year Add
 		if (type === 'income') this.addIncome(record as IncomeTransactionRecord);
 		if (type === 'outcome') this.addOutcome(record as OutcomeTransactionRecord);
 

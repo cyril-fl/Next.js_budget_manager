@@ -1,4 +1,4 @@
-import { SheetDataModel } from '@/controllers/Sheet';
+import { SheetController } from '@/controllers/Sheet';
 import { ModelFactory } from '@/factories/ModelFactory';
 import { IncomeTransaction, OutcomeTransaction } from '@types';
 import rawData from './mockup/data.json';
@@ -7,6 +7,6 @@ import rawData from './mockup/data.json';
 const records = ModelFactory.createTransactionRecord(
 	rawData as unknown as Array<IncomeTransaction | OutcomeTransaction>
 );
-const sheet = new SheetDataModel(records);
+const sheet = new SheetController(records);
 
 export default sheet;

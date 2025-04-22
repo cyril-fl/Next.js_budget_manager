@@ -53,7 +53,6 @@ export default async function Page({ searchParams }: Props) {
 				},
 			],
 		},
-		// TODO probleme sur le Sort avec 0 1 10 11 2 3 4 5 6 7 8 9
 		sort: [
 			{
 				field: 'reportYear',
@@ -64,14 +63,10 @@ export default async function Page({ searchParams }: Props) {
 		],
 	});
 
-	// TODO probleme ici quand je cherche un Month,Il ne sont pas fuse !
 	const { data: fluxData } = await get<Array<UnknownTransaction>>('months', {
 		filter: {
 			fn: 'AND',
-			args: [
-				{ l: 'reportYear', r: year },
-				{ l: 'reportMonth', r: month },
-			],
+			args: [{ l: 'reportMonth', r: month }],
 		},
 	});
 
