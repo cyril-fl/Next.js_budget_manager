@@ -34,7 +34,7 @@ export default function SavingsPage() {
 
 	// Render
 	return (
-		<section className="box col-span-full row-span-full row-start-1">
+		<>
 			<HeadMenuToolbar
 				title="Saving"
 				slots={{
@@ -55,6 +55,6 @@ export default function SavingsPage() {
 				}}
 			/>
 			<ListSavings data={data} />
-		</section>
+		</>
 	);
 }

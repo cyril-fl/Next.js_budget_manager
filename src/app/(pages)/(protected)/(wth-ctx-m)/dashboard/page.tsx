@@ -1,5 +1,6 @@
 import FolderPreviewCard from '@/components/cards/FolderPreviewCard';
 import Button from '@/components/global/Button';
+import HeadMenuToolbar from '@/components/layout/submenu/HeadMenuToolbar';
 
 export default async function DashboardPage() {
 	// Data
@@ -206,10 +207,11 @@ export default async function DashboardPage() {
 		);
 	}
 	return (
-		<section className="grid-16 col-span-full row-span-full">
+		<>
+			<HeadMenuToolbar title="Setting" />
 			{testData.map((item) => (
 				<FolderPreviewCard item={item} key={item.year} />
 			))}
-		</section>
+		</>
 	);
 }

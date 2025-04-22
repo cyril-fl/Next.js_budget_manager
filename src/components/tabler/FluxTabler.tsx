@@ -1,11 +1,10 @@
 'use client';
 
-import { Flux } from '@/types';
 import { useMemo } from 'react';
 
 type IncomesTablerProps = {
 	title?: string;
-	list?: Flux[];
+	list?: any[];
 };
 
 export default function FluxTabler(props: IncomesTablerProps) {
@@ -21,7 +20,7 @@ export default function FluxTabler(props: IncomesTablerProps) {
 	const groupedByCategory = useMemo(() => {
 		if (!props.list) return {};
 
-		return props.list.reduce<Record<string, Flux[]>>((acc, item) => {
+		return props.list.reduce<Record<string, any[]>>((acc, item) => {
 			if (!acc[item.category]) {
 				acc[item.category] = [];
 			}

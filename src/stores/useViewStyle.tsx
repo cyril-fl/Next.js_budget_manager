@@ -23,7 +23,6 @@ export const useViewStyle = create<ViewStyleState>()(
 			},
 			setViewStyle: (key, style) =>
 				set((state) => {
-					console.log('setViewStyle', key, style);
 					return {
 						viewStyle: {
 							...state.viewStyle,

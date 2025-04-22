@@ -1,12 +1,9 @@
-'use client';
-
 import Button from '@/components/global/Button';
-// import { SheetYear } from '@/types';
 import { utilsIcons } from '@utils/utilsIcons';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 
-function SelectYearNavMenu() {
+export function SelectYearNavMenu() {
 	const icons = utilsIcons();
 	const searchParams = useSearchParams();
 
@@ -61,21 +58,4 @@ function SelectYearNavMenu() {
 			</li>
 		</ul>
 	);
-}
-
-export default function SubNavMenu() {
-	// Data
-	const pathname = usePathname(); // "/budget"
-	const lastSegment = pathname.split('/').filter(Boolean).pop(); // "budget"
-
-	const Menu = useMemo(() => {
-		switch (lastSegment) {
-			case 'budget':
-				return <SelectYearNavMenu />;
-			default:
-				return null;
-		}
-	}, [lastSegment]);
-
-	return <div className="">{Menu}</div>;
 }

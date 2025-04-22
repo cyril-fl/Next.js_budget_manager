@@ -24,6 +24,15 @@ export function utilsNavigation() {
 			icon: icons.dashboard,
 		},
 		{
+			label: 'Overview',
+			pathname: {
+				pathname: '/overview',
+				// TODO modifier ca
+				query: { year: '2025', month: '00' },
+			},
+			icon: icons.calendar,
+		},
+		{
 			label: 'Savings accounts',
 			pathname: '/savings',
 			icon: icons.savings,
@@ -33,15 +42,7 @@ export function utilsNavigation() {
 			pathname: '/templates',
 			icon: icons.template,
 		},
-		{
-			label: 'Budget',
-			pathname: {
-				pathname: '/budget',
-				// TODO modifier ca
-				query: { year: '2025', month: '00' },
-			},
-			icon: icons.calendar,
-		},
+
 		{
 			label: 'Settings',
 			pathname: 'settings',

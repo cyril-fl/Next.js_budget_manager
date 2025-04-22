@@ -73,7 +73,7 @@ export default async function Page({ searchParams }: Props) {
 	const [sheet] = sheetData || [];
 
 	return (
-		<section className="grow bg-amber-100">
+		<>
 			<h1 className="text-2xl font-bold">{year}</h1>
 			{/*<Pre label={String(sheetData?.length)} data={sheetData} />*/}
 			<Pre data={fluxData} />
@@ -96,6 +96,6 @@ export default async function Page({ searchParams }: Props) {
 					</li>
 				))}
 			</ul>
-		</section>
+		</>
 	);
 }

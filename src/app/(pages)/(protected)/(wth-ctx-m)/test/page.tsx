@@ -11,35 +11,19 @@ export default async function TestPages() {
 	const { get } = utilsApi();
 
 	const response = await get<Array<Record<string, unknown>>>('transactions', {
+		fields: ['reportYear', 'reportMonth'],
 		filter: {
-			// fn: 'AND',
-			// args: [
-			// 	{
-			// 		l: 'type',
-			// 		r: 'income',
-			// 	},
-			// 	{
 			fn: 'GROUP_BY',
 			args: [
 				{
 					l: 'reportYear',
 				},
 				{
-					l: 'type',
-				},
-				{
-					fn: 'AND',
-					args: [
-						{
-							l: 'type',
-							r: 'income',
-						},
-					],
+					l: 'reportMonth',
 				},
 			],
 		},
-		// ],
-		// },
+		sort: [{ field: 'reportYear' }, { field: 'reportMonth' }],
 	});
 
 	// Render

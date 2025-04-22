@@ -26,7 +26,7 @@ export default function SavingsPage() {
 
 	// Render
 	return (
-		<section className="box col-span-full row-span-full row-start-1">
+		<>
 			<HeadMenuToolbar
 				title="Template"
 				slots={{
@@ -53,6 +53,6 @@ export default function SavingsPage() {
 			</p>
 
 			<ListTemplates data={data} />
-		</section>
+		</>
 	);
 }
