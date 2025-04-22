@@ -1,6 +1,7 @@
 // Import
 
 // Class
+// TODO retravailler cette integration vis a vis de category
 export abstract class FinancialOperation {
 	protected totalIncome: number = 0;
 	protected totalOutcome: number = 0;

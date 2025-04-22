@@ -1,7 +1,7 @@
-import { ModelFactory } from '@api/factory/ModelFactory';
+import { SheetDataModel } from '@/controllers/Sheet';
+import { ModelFactory } from '@/factories/ModelFactory';
 import { IncomeTransaction, OutcomeTransaction } from '@types';
-import rawData from '../api/mockup/data.json';
-import { SheetDataModel } from './model/Sheet';
+import rawData from './mockup/data.json';
 
 // TODO recuperer les data d'une DB
 const records = ModelFactory.createTransactionRecord(

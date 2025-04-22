@@ -3,10 +3,10 @@
 
 import { ApiConvertedArgument, ApiConvertedFormula } from '@types';
 
-export function utilsFormulaArray() {
+export function utilsFormulaTransform(redirect: any) {
 	// Data
 	const FunctionMap = {
-		GROUP_BY: fnGroupBy,
+		VOID: fnVoid,
 	};
 
 	// Methods
@@ -14,30 +14,22 @@ export function utilsFormulaArray() {
 	function handleFormula<T extends object>(
 		formula: ApiConvertedFormula,
 		item: T
-	): T[] | object[] {
+	): T | object {
 		console.log('transformFormula', formula, item);
 		const { fn, args } = formula;
 		const normalizedArgs = Array.isArray(args) ? args : [args];
-		const normalizedItem = Array.isArray(item) ? item : [item];
 
 		const logicFn = FunctionMap[fn as keyof typeof FunctionMap] as
-			| ((args: ApiConvertedArgument[], item: T[]) => T[])
+			| ((args: ApiConvertedArgument[], item: T) => T)
 			| undefined;
 
-		return logicFn ? logicFn(normalizedArgs, normalizedItem) : normalizedItem;
+		return logicFn ? logicFn(normalizedArgs, item) : item;
 	}
 
 	// --- function ---
-	function fnGroupBy<T extends object>(
-		list: ApiConvertedArgument[],
-		item: T[]
-	) {
-		console.log('GroupBy list', list);
-		// console.log('GroupBy item', item);
-
+	function fnVoid<T extends object>(list: ApiConvertedArgument[], item: T) {
 		return item;
 	}
-	return {
-		handleFormula,
-	};
+
+	return { handleFormula };
 }

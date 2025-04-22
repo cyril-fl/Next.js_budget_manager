@@ -1,3 +1,12 @@
+import { CategoryRecord } from '@/models/Category';
+import {
+	MonthlyTransactionRecord,
+	MonthlyTransactionSimplifiedRecord,
+} from '@/models/Month';
+import {
+	IncomeTransactionRecord,
+	OutcomeTransactionRecord,
+} from '@/models/Transaction';
 import {
 	IncomeTransaction,
 	Month,
@@ -5,19 +14,12 @@ import {
 	PaymentStatus,
 	ReceiptStatus,
 } from '@types';
-import { CategoryRecord } from '../model/Category';
-import {
-	MonthlyTransactionRecord,
-	MonthlyTransactionSimplifiedRecord,
-} from '../model/Month';
-import {
-	IncomeTransactionRecord,
-	OutcomeTransactionRecord,
-} from '../model/Transaction';
 
 export class ModelFactory {
 	// Static Methods
-	static createMonthlyTransactionRecord(
+	static createMonthlyTransactionRecord<
+		T extends MonthlyTransactionRecord | MonthlyTransactionSimplifiedRecord,
+	>(
 		reportYear: number,
 		reportMonth: number,
 		incomes: CategoryRecord<Partial<IncomeTransactionRecord>>[] = [],
@@ -25,12 +27,12 @@ export class ModelFactory {
 		option?: {
 			simplified?: boolean;
 		}
-	): MonthlyTransactionRecord | MonthlyTransactionSimplifiedRecord {
+	): T {
 		const object = option?.simplified
 			? MonthlyTransactionSimplifiedRecord
 			: MonthlyTransactionRecord;
 
-		return new object(reportYear, reportMonth, incomes, outcomes);
+		return new object(reportYear, reportMonth, incomes, outcomes) as T;
 	}
 
 	static createTransactionRecord(

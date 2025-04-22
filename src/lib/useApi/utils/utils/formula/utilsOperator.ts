@@ -3,7 +3,7 @@
 
 import { ApiSymbolOperator } from '@types';
 
-export function utilsFormulaOperator() {
+export function utilsOperator() {
 	const operatorFunctions: Record<
 		ApiSymbolOperator,
 		(a: any, b: any) => boolean

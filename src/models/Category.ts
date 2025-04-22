@@ -1,7 +1,7 @@
 import {
 	IncomeTransactionRecord,
 	OutcomeTransactionRecord,
-} from '@api/model/Transaction';
+} from '@/models/Transaction';
 
 export class CategoryRecord<
 	T extends Partial<IncomeTransactionRecord | OutcomeTransactionRecord>,

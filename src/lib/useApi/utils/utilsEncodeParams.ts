@@ -1,11 +1,11 @@
 // Imports
-import { utilsFilterParams } from '@api/utils/utilsFilter';
-import { utilsSortParams } from '@api/utils/utilsSort';
+import { utilsFilterParams } from '@/lib/useApi/utils/params/utilsFilterParams';
+import { utilsSortParams } from '@/lib/useApi/utils/params/utilsSortParams';
 import { ApiFormula, ApiOptions, ApiSortParam } from '@types';
 
 // Define
 
-export function apiEncodeParams(params: ApiOptions | undefined) {
+export function utilsEncodeParams(params: ApiOptions | undefined) {
 	if (!params) return '';
 
 	// Data
@@ -19,6 +19,7 @@ export function apiEncodeParams(params: ApiOptions | undefined) {
 				const value = obj[key];
 				if (!value) return;
 
+				// TODO: refactor ici avec un map ?
 				switch (key) {
 					case 'sort':
 						const sortParams = encodeSort(

@@ -1,16 +1,14 @@
+import { utilsRefineData } from '@/lib/useApi/utils/utilsDecodeParams';
+import data from '@/lib/useData/data';
 import { ApiResponse } from '@/types';
-import { apiDecodeParams } from '@api/utils/apiDecodeParams';
 import { NextRequest, NextResponse } from 'next/server';
-import data from '../../../api/data';
 
 // TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
-	const { refineData } = apiDecodeParams();
-
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = refineData<any>(data.months, params);
+		const refinedData = utilsRefineData(data.months, params);
 
 		const res: ApiResponse = {
 			data: refinedData,
@@ -19,10 +17,13 @@ export async function GET(req: NextRequest) {
 		};
 
 		return NextResponse.json(res, { status: 200 });
-	} catch (error: any) {
+	} catch (error: unknown) {
 		const res: ApiResponse = {
 			success: false,
-			message: error?.message || 'Internal Server Error',
+			message:
+				error && typeof error === 'object' && 'message' in error
+					? String((error as { message: unknown }).message)
+					: 'Internal Server Error',
 		};
 
 		return NextResponse.json(res, { status: 500 });

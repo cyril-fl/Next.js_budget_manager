@@ -48,10 +48,9 @@ export function utilsPrimitiveType() {
 		const toStringResult = tryToString(val);
 		if (toStringResult !== undefined) return toStringResult;
 
-		return String(val); // fallback
+		return String(val);
 	}
 
-	// Lifecycle
-
+	// Return
 	return { getComparableValue };
 }

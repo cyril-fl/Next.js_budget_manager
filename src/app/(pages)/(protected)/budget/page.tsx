@@ -1,6 +1,6 @@
 import Pre from '@/.debug/components/Pre';
 import Button from '@/components/global/Button';
-import { utilsApi } from '@api/utils/utilsApi';
+import { utilsApi } from '@/lib/useApi/utils/utilsApi';
 import { UnknownTransaction, YearDataModel } from '@types';
 import utilsDate from '@utils/utilsDate';
 
@@ -28,13 +28,13 @@ export default async function Page({ searchParams }: Props) {
 
 	// TODO probleme ici quand je cherche un Month,Il ne sont pas fuse !
 	const { data: fluxData } = await get<Array<UnknownTransaction>>('months', {
-		filter: {
-			fn: 'AND',
-			args: [
-				{ l: 'reportYear', r: year },
-				{ l: 'reportMonth', r: month },
-			],
-		},
+		// filter: {
+		// 	fn: 'AND',
+		// 	args: [
+		// 		{ l: 'reportYear', r: year },
+		// 		{ l: 'reportMonth', r: month },
+		// 	],
+		// },
 	});
 
 	const [sheet] = sheetData || [];

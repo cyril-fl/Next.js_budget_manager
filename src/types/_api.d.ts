@@ -1,4 +1,5 @@
 import {
+	API_FORMULA_ARRAY,
 	API_FORMULA_FILTER,
 	API_FORMULA_NAME,
 	API_FORMULA_OPERATOR_NAME,
@@ -13,6 +14,7 @@ export type ApiOptionsKeys = (typeof API_OPTIONS_KEYS)[number];
 
 export type ApiFormulaFilter = (typeof API_FORMULA_FILTER)[number];
 export type ApiFormulaTransform = (typeof API_FORMULA_TRANSFORMATION)[number];
+export type ApiFormulaArray = (typeof API_FORMULA_ARRAY)[number];
 export type ApiFormulaName = (typeof API_FORMULA_NAME)[number];
 
 export type ApiNamedOperator = (typeof API_FORMULA_OPERATOR_NAME)[number];

@@ -1,11 +1,12 @@
 // Imports
 import { ApiOptions, ApiResponse, ApiTableLabel } from '@types';
-import { apiEncodeParams } from './apiEncodeParams';
+import { utilsEncodeParams } from './utilsEncodeParams';
 
 // Define
 
 export function utilsApi() {
 	// Data
+	// TODO gerer la config de l'api
 	const baseUrl = process.env.api_url;
 	// TODO: mettre en config
 	const tablePath: Record<ApiTableLabel, string> = {
@@ -21,7 +22,7 @@ export function utilsApi() {
 		target: ApiTableLabel,
 		option?: ApiOptions
 	): Promise<ApiResponse<T>> {
-		const params = apiEncodeParams(option);
+		const params = utilsEncodeParams(option);
 		const _url = `${baseUrl}/${getTable(target)}${params}`;
 
 		try {
