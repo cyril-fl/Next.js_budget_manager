@@ -52,6 +52,8 @@ export function utilsSortParams() {
 				const rawA = a[field as keyof T];
 				const rawB = b[field as keyof T];
 
+				console.log('rawA', rawA);
+				console.log('rawB', rawB);
 				const valA = getComparableValue(rawA);
 				const valB = getComparableValue(rawB);
 

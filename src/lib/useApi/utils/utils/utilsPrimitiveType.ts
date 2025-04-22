@@ -37,8 +37,16 @@ export function utilsPrimitiveType() {
 		);
 	}
 
+	function clean(val: Primitive): Primitive {
+		if (typeof val === 'string') {
+			const numberValue = Number(val);
+			return isNaN(numberValue) ? val : numberValue;
+		}
+		return val;
+	}
+
 	function getComparableValue(val: unknown): Primitive {
-		if (isPrimitive(val)) return val;
+		if (isPrimitive(val)) return clean(val);
 
 		if (val instanceof Date) return val.getTime();
 
