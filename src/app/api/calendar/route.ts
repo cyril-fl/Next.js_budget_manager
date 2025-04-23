@@ -1,4 +1,4 @@
-import { ApiResponse } from '@/lib/useApi';
+import { ApiResponse, utilsRefineData } from '@/lib/useApi';
 import data from '@/lib/useData/data';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -7,10 +7,10 @@ export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = Object.fromEntries(searchParams.entries());
-		// const refinedData = utilsRefineData(data.months, params);
+		const refinedData = utilsRefineData(data.calendar, params);
 
 		const res: ApiResponse = {
-			data: data.transactions,
+			data: refinedData,
 			success: true,
 			message: 'Index calendar data retrieved successfully',
 		};

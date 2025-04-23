@@ -1,22 +1,16 @@
 // Imports
+import { config } from '@/lib/useApi';
 import { ApiOptions, ApiPathLabel, ApiResponse } from '../types';
-import { utilsEncodeParams } from './_utilsEncodeParams';
+import { utilsEncodeParams } from '../utils/';
 
 // Define
 
 export function utilsApi() {
-	// Data
+	// Datas
 	// TODO gerer la config de l'api
 	const baseUrl = process.env.api_url;
-	// TODO: mettre en config
-	const tablePath: Record<ApiPathLabel, string> = {
-		auth: 'auth',
-		months: 'months',
-		transactions: 'transactions',
-		years: 'years',
-		yearlyResume: 'years/resume',
-	};
-
+	// TODO: mettre en config avec env. parce que je voudrais que la cofig de .core definise la config de useAPi a terme
+	const tablePath = config.path.routes;
 	// Methods
 	async function get<T = unknown>(
 		target: ApiPathLabel,

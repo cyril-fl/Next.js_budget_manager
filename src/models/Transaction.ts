@@ -74,6 +74,10 @@ export class OutcomeTransactionRecord extends TransactionRecord {
 			datePayment: this.datePayment,
 		};
 	}
+
+	get date() {
+		return [this?.dateDue, this?.datePayment].filter(Boolean) as Date[];
+	}
 }
 
 export class IncomeTransactionRecord extends TransactionRecord {
@@ -97,6 +101,9 @@ export class IncomeTransactionRecord extends TransactionRecord {
 		this.dateReception = dateReception;
 	}
 
+	// Method
+	// C
+	// R
 	// Getters & Setters
 	get value() {
 		return {
@@ -112,4 +119,11 @@ export class IncomeTransactionRecord extends TransactionRecord {
 			dateReception: this.dateReception,
 		};
 	}
+
+	get date() {
+		return [this?.dateReception].filter(Boolean) as Date[];
+	}
+	// U
+	// D
+	// S
 }

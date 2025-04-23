@@ -11,7 +11,24 @@ const availableMethod = {
 
 export const defaultConfig = {
 	url: 'http://localhost:3000/api',
-	pathLabel: ['auth', 'months', 'transactions', 'years', 'yearlyResume'],
+	path: {
+		labels: [
+			'auth',
+			'calendar',
+			'months',
+			'transactions',
+			'years',
+			'yearlyResume',
+		],
+		routes: {
+			auth: 'auth',
+			calendar: 'calendar',
+			months: 'months',
+			transactions: 'transactions',
+			years: 'years',
+			yearlyResume: 'years/resume',
+		},
+	},
 	formula: {
 		filter: availableMethod.filter,
 		transform: availableMethod.transform,
@@ -25,3 +42,7 @@ export const defaultConfig = {
 } as const;
 
 export type Config = typeof defaultConfig;
+// export type LooseConfig = Omit<typeof defaultConfig, 'url' | 'pathLabel'> & {
+// 	url: string;
+// 	pathLabel: string[];
+// };

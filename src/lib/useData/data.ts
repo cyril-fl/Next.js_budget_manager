@@ -1,4 +1,4 @@
-import { SheetController } from '@/controllers/Sheet';
+import { DataFactory } from '@/factories/DataFactory';
 import { ModelFactory } from '@/factories/ModelFactory';
 import { IncomeTransaction, OutcomeTransaction } from '@types';
 import rawData from './mockup/data.json';
@@ -7,6 +7,6 @@ import rawData from './mockup/data.json';
 const records = ModelFactory.createTransactionRecord(
 	rawData as unknown as Array<IncomeTransaction | OutcomeTransaction>
 );
-const sheet = new SheetController(records);
+const data = new DataFactory(records);
 
-export default sheet;
+export default data;

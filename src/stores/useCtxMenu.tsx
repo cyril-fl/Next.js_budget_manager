@@ -1,16 +1,24 @@
 // Imports
+import { CalendarRecord } from '@/models/Calendar';
 import { create } from 'zustand';
 
 // Define
 const VIEW_KEYS = ['overview'] as const;
-export type ViewKey = (typeof VIEW_KEYS)[number];
+export type CtxMenuViewKey = (typeof VIEW_KEYS)[number];
+
+interface CtxMenuView {
+	overview: CalendarRecord[];
+	// futureKey: OtherType[];
+}
 
 type CtxMenuState = {
-	ctx: Record<ViewKey, any[]>;
-	setCtxMenu: <T = any>(key: ViewKey, data: T[]) => void;
+	ctx: CtxMenuView;
+	setCtxMenu: <K extends keyof CtxMenuView>(
+		key: K,
+		data: CtxMenuView[K]
+	) => void;
 };
 
-// Store
 export const useCtxMenu = create<CtxMenuState>()((set) => ({
 	ctx: {
 		overview: [],

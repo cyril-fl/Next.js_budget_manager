@@ -1,12 +1,13 @@
 import CtxMenuClient from '@/components/layout/CtxMenuClient';
 import MainSection from '@/components/wrapper/MainSection';
-import { utilsApi } from '@/lib/useApi';
-import { ViewKey as CtxViewKey } from '@/stores/useCtxMenu';
+import { ApiOptions, utilsApi } from '@/lib/useApi';
+import { CtxMenuViewKey } from '@/stores/useCtxMenu';
 import { ReactNode } from 'react';
 
 interface CtxMenuLayoutProps {
 	children: ReactNode;
-	path: CtxViewKey;
+	path: CtxMenuViewKey;
+	option?: ApiOptions;
 }
 
 // Define
@@ -23,21 +24,7 @@ export default async function CtxMenuLayout({
 	const { get } = utilsApi();
 
 	// TODO check ou est le probleme et pk mes data retourne en string ?
-	const response = await get<Array<LocalData>>('transactions', {
-		fields: ['reportYear', 'reportMonth'],
-		filter: {
-			fn: 'GROUP_BY',
-			args: [
-				{
-					l: 'reportYear',
-				},
-				{
-					l: 'reportMonth',
-				},
-			],
-		},
-		sort: [{ field: 'reportYear' }, { field: 'reportMonth' }],
-	});
+	const response = await get<Array<LocalData>>('calendar', props.option);
 
 	const data = response.data;
 

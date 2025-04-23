@@ -21,6 +21,7 @@ export default function utilsDate() {
 
 		const date = new Date(yearNumber, monthNumber);
 
+		// TODO GERE Local avec option ?local et config.loca as defaut
 		return date.toLocaleString(options?.locale ?? 'default', options);
 	}
 	// Lifecycle
