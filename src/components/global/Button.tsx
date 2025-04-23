@@ -82,8 +82,25 @@ const theme = tv({
 	},
 	compoundVariants: [
 		{
-			variant: 'solid',
 			color: 'neutral',
+			variant: 'nude',
+			hover: true,
+			className: '',
+		},
+		{
+			color: 'neutral',
+			focus: true,
+			className: '',
+		},
+		{
+			color: 'neutral',
+			hover: true,
+			focus: true,
+			className: '',
+		},
+		{
+			color: 'neutral',
+			variant: 'solid',
 			className: {
 				base: `
 					bg-grayscale-100 text-grayscale-500 ring-transparent
@@ -94,23 +111,31 @@ const theme = tv({
 		},
 		{
 			color: 'neutral',
+			variant: 'solid',
 			hover: true,
 			className: 'bg-grayscale-300 text-grayscale-500 dark:bg-grayscale-800',
 		},
 		{
 			color: 'neutral',
-			focus: true,
-			className: '',
+			variant: 'nude',
+			className: {
+				base: `
+					p-0
+					text-grayscale-500 ring-transparent
+					active:text-grayscale-300
+					disabled:cursor-default disabled:text-grayscale-50
+					dark:text-grayscale-500`,
+			},
 		},
 		{
 			color: 'neutral',
+			variant: 'nude',
 			hover: true,
-			focus: true,
-			className: '',
+			className: 'italic text-grayscale-700 dark:text-grayscale-700',
 		},
 		{
-			variant: 'solid',
 			color: 'primary',
+			variant: 'solid',
 			className: {
 				base: `
 					ring-transparent
@@ -136,20 +161,20 @@ const theme = tv({
 			className: '',
 		},
 		{
-			color: 'secondary',
 			variant: 'ghost',
+			color: 'secondary',
 			hover: true,
 			className: 'ring-grayscale-200',
 		},
 		{
-			color: 'secondary',
 			variant: 'ghost',
+			color: 'secondary',
 			focus: true,
 			className: '',
 		},
 		{
-			color: 'secondary',
 			variant: 'ghost',
+			color: 'secondary',
 			hover: true,
 			focus: true,
 			className: '',

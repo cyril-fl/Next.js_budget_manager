@@ -25,11 +25,11 @@ export default function IndexList() {
 	const overviewData = ctx.overview.filter(isCalendarViewRecord);
 
 	return (
-		<div className="overflow-auto">
+		<div className="scrollbar-none mr-4 overflow-auto">
 			{overviewData.map((item, index) => (
 				<ul key={index}>
 					<li>{item.reportYear}</li>
-					<li>
+					<li className="px-1">
 						<ul>
 							{item.monthsIndex.map((month, i) => (
 								<li key={i}>
@@ -44,7 +44,9 @@ export default function IndexList() {
 												month: month,
 											},
 										}}
+										// TODO faire ca avec pour le current month from param
 										// variant={m.reportMonth === month ? 'solid' : 'ghost'}
+										variant="nude"
 									/>
 								</li>
 							))}

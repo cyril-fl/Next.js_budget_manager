@@ -13,8 +13,8 @@ export default function MainSection({ children }: MainSectionProps) {
 	// Render
 	return (
 		<>
-			<main className="grid-base grow">
-				<section className="box col-span-full row-span-full row-start-1">
+			<main className="box flex grow">
+				<section className="grid-base w-full overflow-hidden bg-red-700/10">
 					{children}
 				</section>
 			</main>
