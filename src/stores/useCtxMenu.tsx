@@ -1,5 +1,4 @@
 // Imports
-import { CalendarRecord } from '@/models/Calendar';
 import { create } from 'zustand';
 
 // Define
@@ -7,8 +6,7 @@ const VIEW_KEYS = ['overview'] as const;
 export type CtxMenuViewKey = (typeof VIEW_KEYS)[number];
 
 interface CtxMenuView {
-	overview: CalendarRecord[];
-	// futureKey: OtherType[];
+	overview: object[];
 }
 
 type CtxMenuState = {

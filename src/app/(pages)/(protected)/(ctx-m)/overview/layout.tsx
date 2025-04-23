@@ -1,7 +1,8 @@
 // Imports
 // Define
 
-import CtxMenuLayout from '@/components/layout/CtxMenuLayout';
+import SideMenu from '@/components/layout/dynamicSideMenu/SideMenu';
+import MainSection from '@/components/wrapper/MainSection';
 import { ApiOptions } from '@/lib/useApi';
 import { ReactNode } from 'react';
 
@@ -9,27 +10,15 @@ export default function OverviewLayout({ children }: { children: ReactNode }) {
 	// Data
 	const options: ApiOptions = {
 		fields: ['reportYear', 'monthsIndex'],
-		// filter: {
-		// 	fn: 'GROUP_BY',
-		// 	args: [
-		// 		{
-		// 			l: 'reportYear',
-		// 		},
-		// 		{
-		// 			l: 'reportMonth',
-		// 		},
-		// 	],
-		// },
-		// sort: [{ field: 'reportYear' }, { field: 'reportMonth' }],
 	};
+
 	// Methods
 
 	// Render
 	return (
 		<>
-			<CtxMenuLayout path="overview" option={options}>
-				{children}
-			</CtxMenuLayout>
+			<SideMenu path="overview" target="calendar" option={options} />
+			<MainSection>{children}</MainSection>
 		</>
 	);
 }
