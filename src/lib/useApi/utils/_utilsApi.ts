@@ -22,9 +22,13 @@ export function utilsApi() {
 		try {
 			const res = await fetch(_url, {
 				method: 'GET',
-				//  TODO: Mettre ca dans Options de API
-				// next: { revalidate: 60 },
-				// cache: 'force-cache',
+				// NOTE: Only in Next.js
+				next: {
+					revalidate: option?.nextCache?.revalidate,
+					tags: option?.nextCache?.tags,
+				},
+				cache: option?.nextCache?.cache,
+				// ---
 			});
 			return await res.json();
 		} catch (error) {

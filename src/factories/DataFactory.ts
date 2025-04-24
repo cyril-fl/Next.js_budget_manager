@@ -1,5 +1,6 @@
 // Import
 import { ModelFactory } from '@/factories/ModelFactory';
+import { SummaryFactory } from '@/factories/SummaryFactory';
 import { CalendarRecord } from '@/models/Calendar';
 import { MonthlyTransactionRecord } from '@/models/Month';
 import {
@@ -28,6 +29,10 @@ export class DataFactory {
 		return this.records;
 	}
 
+	get transactionsResume() {
+		return [];
+	}
+
 	get months(): MonthlyTransactionRecord[] {
 		const map = new Map<string, MonthlyTransactionRecord>();
 
@@ -50,6 +55,10 @@ export class DataFactory {
 		return Array.from(map.values());
 	}
 
+	get monthlyResume() {
+		return [];
+	}
+
 	get years(): YearlyTransactionRecord[] {
 		const map = new Map<number, YearlyTransactionRecord>();
 
@@ -68,6 +77,10 @@ export class DataFactory {
 			year.months.sort((a, b) => a.reportMonth - b.reportMonth);
 			return year;
 		});
+	}
+
+	get yearlyResume() {
+		return SummaryFactory.yearlySummary(this.records);
 	}
 
 	get calendar(): CalendarRecord[] {
@@ -103,10 +116,12 @@ export class DataFactory {
 					months[month] = Array.from(dateSet).map((iso) => new Date(iso));
 					monthIndex.push(month);
 				}
+				const monthIndexSorted = monthIndex.sort((a, b) => a - b);
 
-				return new CalendarRecord(year, monthIndex, months);
+				return new CalendarRecord(year, monthIndexSorted, months);
 			})
-			.sort((a, b) => a.year - b.year);
+			.sort((a, b) => a.reportYear - b.reportYear);
 	} // D
+
 	// S
 }

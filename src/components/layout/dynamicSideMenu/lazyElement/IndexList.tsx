@@ -13,7 +13,6 @@ function isCalendarViewRecord(val: unknown): val is CalendarViewRecord {
 	return (
 		typeof val === 'object' &&
 		val !== null &&
-		typeof (val as CalendarViewRecord).reportYear === 'number' &&
 		Array.isArray((val as CalendarViewRecord).monthsIndex)
 	);
 }
@@ -24,36 +23,31 @@ export default function IndexList() {
 
 	const overviewData = ctx.overview.filter(isCalendarViewRecord);
 
+	// TODO transformer ça en Disclosure !
 	return (
-		<div className="scrollbar-none mr-4 overflow-auto">
+		<ul className="h-ful scrollbar-none overflow-y-auto">
 			{overviewData.map((item, index) => (
-				<ul key={index}>
-					<li>{item.reportYear}</li>
-					<li className="px-1">
-						<ul>
-							{item.monthsIndex.map((month, i) => (
-								<li key={i}>
-									<Button
-										label={formatMonth(item.reportYear, month, {
-											month: 'long',
-										})}
-										to={{
-											pathname: '/overview',
-											query: {
-												year: item.reportYear,
-												month: month,
-											},
-										}}
-										// TODO faire ca avec pour le current month from param
-										// variant={m.reportMonth === month ? 'solid' : 'ghost'}
-										variant="nude"
-									/>
-								</li>
-							))}
-						</ul>
-					</li>
-				</ul>
+				<li key={index} className="mb-4">
+					<div className="sticky top-0 z-20 font-bold">{item.reportYear}</div>
+					<ul>
+						{item.monthsIndex.map((month, i) => (
+							<li key={i} className="px-2 py-1">
+								<Button
+									label={formatMonth(item.reportYear, month, { month: 'long' })}
+									to={{
+										pathname: '/overview',
+										query: {
+											year: item.reportYear,
+											month: month,
+										},
+									}}
+									variant="nude"
+								/>
+							</li>
+						))}
+					</ul>
+				</li>
 			))}
-		</div>
+		</ul>
 	);
 }

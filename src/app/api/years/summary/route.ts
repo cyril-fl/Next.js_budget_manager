@@ -1,21 +1,19 @@
-import { ApiResponse, utilsRefineData } from '@/lib/useApi';
+import { ApiResponse } from '@/lib/useApi';
 import data from '@/lib/useData/data';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
 	try {
-		const searchParams = req.nextUrl.searchParams;
-		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = utilsRefineData(data.calendar, params);
+		// const searchParams = req.nextUrl.searchParams;
+		// const params = Object.fromEntries(searchParams.entries());
+		// const refinedData = utilsRefineData(data.years, params);
 
 		const res: ApiResponse = {
-			data: refinedData,
+			data: data.yearlyResume,
 			success: true,
-			message: 'Index calendar data retrieved successfully',
+			message: 'Years data retrieved successfully',
 		};
-
-		console.log('GET calendar data:', refinedData);
 
 		return NextResponse.json(res, { status: 200 });
 	} catch (error: unknown) {

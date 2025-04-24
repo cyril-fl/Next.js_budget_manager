@@ -1,7 +1,7 @@
 'use client';
 // Import
 import { Icon } from '@iconify/react';
-import * as S from '@radix-ui/react-switch';
+import * as RdxSwitch from '@radix-ui/react-switch';
 import { utilsIcons } from '@utils/utilsIcons';
 import { useMemo } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
@@ -84,8 +84,8 @@ const theme = tv({
 });
 
 // Define
-export type SwitchVariants = VariantProps<typeof theme>;
-export interface SwitchProps {
+export type RdxSwitchwitchVariants = VariantProps<typeof theme>;
+export interface RdxSwitchwitchProps {
 	label?: string;
 	noLabel?: boolean;
 	id?: string;
@@ -98,12 +98,12 @@ export interface SwitchProps {
 	trailingLabel?: boolean;
 	className?: string;
 	ui?: Partial<typeof theme.slots>;
-	color?: SwitchVariants['color'];
-	size?: SwitchVariants['size'];
+	color?: RdxSwitchwitchVariants['color'];
+	size?: RdxSwitchwitchVariants['size'];
 	truncate?: boolean;
 }
 
-export default function Switch(props: SwitchProps) {
+export default function RdxSwitchwitch(props: RdxSwitchwitchProps) {
 	// Data
 	const icon = utilsIcons();
 
@@ -153,16 +153,16 @@ export default function Switch(props: SwitchProps) {
 			})}
 		>
 			{(props.leadingLabel || !props.trailingLabel) && Label}
-			<S.Root
+			<RdxSwitch.Root
 				id={props.id}
 				className={ui.base({ className: props.ui?.base })}
 				defaultChecked={props.defaultValue}
 				onCheckedChange={props.onValueChange}
 			>
 				{renderIcon('leading')}
-				<S.Thumb className={ui.thumb({ className: props.ui?.thumb })} />
+				<RdxSwitch.Thumb className={ui.thumb({ className: props.ui?.thumb })} />
 				{renderIcon('trailing')}
-			</S.Root>
+			</RdxSwitch.Root>
 			{props.trailingLabel && Label}
 		</div>
 	);

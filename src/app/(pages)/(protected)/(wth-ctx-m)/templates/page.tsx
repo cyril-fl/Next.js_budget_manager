@@ -1,12 +1,11 @@
-import ViewStyleButton from '@/components/action/ViewStyleButton';
-import Button from '@/components/global/Button';
-import HeadMenuToolbar from '@/components/layout/submenu/HeadMenuToolbar';
+// import ViewStyleButton from '@/components/action/ViewStyleButton';
+// import Button from '@/components/global/Button';
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
 import ListTemplates from '@/components/list/ListTemplates';
-import { utilsIcons } from '@utils/utilsIcons';
 
 export default function SavingsPage() {
 	// Data
-	const icons = utilsIcons();
+	const pageTitle = 'Templates';
 
 	const emptyData: any[] = [];
 	const savingsData = [
@@ -27,25 +26,16 @@ export default function SavingsPage() {
 	// Render
 	return (
 		<>
-			<HeadMenuToolbar
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
+
+			{/*			<D_HeadMenuToolbar
 				title="Template"
 				slots={{
 					right: (
-						<>
-							<ViewStyleButton target="templates" />
-							<Button
-								label="Add"
-								icon={icons.plus}
-								to="/templates/add"
-								size="sm"
-								noLabel
-								leading
-								squared
-							/>
-						</>
+
 					),
 				}}
-			/>
+			/>*/}
 
 			<p>
 				Mettre un bouton Creer dans le hedaer qui servira de menu

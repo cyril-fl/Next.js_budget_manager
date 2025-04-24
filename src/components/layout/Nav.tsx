@@ -1,3 +1,4 @@
+import Tooltip from '@/components/global/Tooltip';
 import NavLink from '@/components/layout/nav/NavLink';
 import { utilsNavigation } from '@utils/utilsNavigation';
 import clsx from 'clsx';
@@ -23,14 +24,21 @@ export default async function NavComponent(props: NavProps) {
 			<ul className="box-base black-box flex flex-col items-center justify-start space-y-2">
 				{pages.map((item, index) => (
 					// TODO: Metre un tooltip au hover
-					<NavLink
+					<Tooltip
+						text={item.label}
 						key={index}
-						size="md"
-						label={item.label}
-						pathname={item.pathname}
-						icon={item.icon}
-						className={item.pathname === 'settings' ? 'mt-auto' : ''}
-					/>
+						position="right"
+						offset={10}
+						arrow
+					>
+						<NavLink
+							size="md"
+							label={item.label}
+							pathname={item.pathname}
+							icon={item.icon}
+							className={item.pathname === 'settings' ? 'mt-auto' : ''}
+						/>
+					</Tooltip>
 				))}
 			</ul>
 		</nav>

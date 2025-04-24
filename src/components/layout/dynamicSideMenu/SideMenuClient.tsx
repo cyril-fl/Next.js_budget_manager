@@ -1,13 +1,13 @@
 'use client';
 // Imports
-import { CtxMenuViewKey, useCtxMenu } from '@/stores/useCtxMenu';
+import { SideMenuProps } from '@/components/layout/dynamicSideMenu/SideMenu';
+import { useCtxMenu } from '@/stores/useCtxMenu';
 import dynamic from 'next/dynamic';
 import { ReactNode, useEffect, useMemo } from 'react';
 
 // Define
-interface CtxMenuClientProps<T extends object> {
+interface SideMenuClientProps<T extends object> extends SideMenuProps {
 	data?: T[];
-	path: CtxMenuViewKey;
 }
 
 const DynamicIndexList = dynamic(
@@ -20,7 +20,7 @@ const DynamicIndexList = dynamic(
 );
 
 export default function SideMenuClient<T extends object>(
-	props: CtxMenuClientProps<T>
+	props: SideMenuClientProps<T>
 ) {
 	// Data
 	const { setCtxMenu } = useCtxMenu();

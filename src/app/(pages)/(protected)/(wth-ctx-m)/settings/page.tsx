@@ -1,14 +1,18 @@
-import HeadMenuToolbar from '@/components/layout/submenu/HeadMenuToolbar';
+// Import
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
+
+// Define
 
 export default function SettingsPage() {
 	// Data
+	const pageTitle = 'Settings';
 
 	// Methods
 
 	// Render
 	return (
 		<>
-			<HeadMenuToolbar title="Setting" />
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
 		</>
 	);
 }

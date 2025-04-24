@@ -5,7 +5,6 @@ import {
 	OutcomeTransaction,
 	TransactionCategory,
 } from '@types';
-import { Fragment } from 'react';
 
 // Define
 interface SummaryByCategoryProps {
@@ -28,25 +27,23 @@ export default function SummaryByCategory(props: SummaryByCategoryProps) {
 				</li>
 
 				{props.data.transactions.map((i, index) => (
-					<Fragment key={index}>
-						<li className="scroll sticky top-0 z-10 border-b bg-white">
+					<li key={index}>
+						<div className="sticky top-8 z-10 border-b bg-white">
 							<span className="block px-2 py-1 font-medium">
 								{i.category} {i.total}
 							</span>
-						</li>
-						<li>
-							<ul>
-								{i.transactions.map((t, tIndex) => (
-									<li key={tIndex}>
-										<Pre data={t} />
-										<Pre data={t} />
-										<Pre data={t} />
-										<Pre data={t} />
-									</li>
-								))}
-							</ul>
-						</li>
-					</Fragment>
+						</div>
+						<ul>
+							{i.transactions.map((t, tIndex) => (
+								<li key={tIndex}>
+									<Pre data={t} />
+									<Pre data={t} />
+									<Pre data={t} />
+									<Pre data={t} />
+								</li>
+							))}
+						</ul>
+					</li>
 				))}
 			</ul>
 		)

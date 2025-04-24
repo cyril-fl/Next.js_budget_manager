@@ -14,7 +14,7 @@ export default function MainSection({ children }: MainSectionProps) {
 	return (
 		<>
 			<main className="box flex grow">
-				<section className="grid-base w-full overflow-hidden bg-red-700/10">
+				<section className="grid-base w-full overflow-hidden">
 					{children}
 				</section>
 			</main>

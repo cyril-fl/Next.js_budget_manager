@@ -10,7 +10,10 @@ export default async function TestPages() {
 	// Methods
 	const { get } = utilsApi();
 
-	const response = await get<Array<Record<string, unknown>>>('calendar', {});
+	const response = await get<Array<Record<string, unknown>>>(
+		'yearlySummary',
+		{}
+	);
 
 	// Render
 	return (

@@ -24,13 +24,22 @@ export function utilsNavigation() {
 			icon: icons.dashboard,
 		},
 		{
+			label: 'Calendar',
+			pathname: {
+				pathname: '/calendar',
+				// TODO modifier ca
+				query: { year: '2025' },
+			},
+			icon: icons.calendar,
+		},
+		{
 			label: 'Overview',
 			pathname: {
 				pathname: '/overview',
 				// TODO modifier ca
 				query: { year: '2025', month: '00' },
 			},
-			icon: icons.calendar,
+			icon: icons.eyeOn,
 		},
 		{
 			label: 'Savings accounts',

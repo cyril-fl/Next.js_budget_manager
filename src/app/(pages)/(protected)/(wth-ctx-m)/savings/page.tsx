@@ -1,11 +1,10 @@
-import ViewStyleButton from '@/components/action/ViewStyleButton';
-import Button from '@/components/global/Button';
-import HeadMenuToolbar from '@/components/layout/submenu/HeadMenuToolbar';
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
 import ListSavings from '@/components/list/ListSavings';
 import { utilsIcons } from '@utils/utilsIcons';
 
 export default function SavingsPage() {
 	// Data
+	const pageTitle = 'Savings';
 	const icons = utilsIcons();
 
 	const emptyData: any[] = [];
@@ -35,7 +34,9 @@ export default function SavingsPage() {
 	// Render
 	return (
 		<>
-			<HeadMenuToolbar
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
+
+			{/*			<D_HeadMenuToolbar
 				title="Saving"
 				slots={{
 					right: (
@@ -53,7 +54,7 @@ export default function SavingsPage() {
 						</>
 					),
 				}}
-			/>
+			/>*/}
 			<ListSavings data={data} />
 		</>
 	);

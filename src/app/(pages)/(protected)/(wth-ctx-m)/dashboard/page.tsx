@@ -1,217 +1,33 @@
-import FolderPreviewCard from '@/components/cards/FolderPreviewCard';
-import Button from '@/components/global/Button';
-import HeadMenuToolbar from '@/components/layout/submenu/HeadMenuToolbar';
+import Pre from '@/.debug/components/Pre';
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
+import { ApiPathLabel, utilsApi } from '@/lib/useApi';
 
-export default async function DashboardPage() {
-	// Data
-	const emptyTable: any[] = [];
-	// TODO Ceci c'est ma route index
-	const fullTable: any[] = [
-		{
-			year: 2021,
-			months: [
-				{
-					number: 0,
-				},
-				{
-					number: 1,
-				},
-				{
-					number: 2,
-				},
-				{
-					number: 3,
-				},
-				{
-					number: 4,
-				},
-				{
-					number: 5,
-				},
-				{
-					number: 6,
-				},
-				{
-					number: 7,
-				},
-				{
-					number: 8,
-				},
-				{
-					number: 9,
-				},
-				{
-					number: 10,
-				},
-				{
-					number: 11,
-				},
-			],
-		},
-		{
-			year: 2022,
-			months: [
-				{
-					number: 0,
-				},
-				{
-					number: 1,
-				},
-				{
-					number: 2,
-				},
-				{
-					number: 3,
-				},
-				{
-					number: 4,
-				},
-				{
-					number: 5,
-				},
-				{
-					number: 6,
-				},
-				{
-					number: 7,
-				},
-				{
-					number: 8,
-				},
-				{
-					number: 9,
-				},
-				{
-					number: 10,
-				},
-				{
-					number: 11,
-				},
-			],
-		},
-		{
-			year: 2023,
-			months: [
-				{
-					number: 0,
-				},
-				{
-					number: 1,
-				},
-				{
-					number: 2,
-				},
-				{
-					number: 3,
-				},
-				{
-					number: 4,
-				},
-				{
-					number: 5,
-				},
-				{
-					number: 6,
-				},
-				{
-					number: 7,
-				},
-				{
-					number: 8,
-				},
-				{
-					number: 9,
-				},
-				{
-					number: 10,
-				},
-				{
-					number: 11,
-				},
-			],
-		},
-		{
-			year: 2024,
-			months: [
-				{
-					number: 0,
-				},
-				{
-					number: 1,
-				},
-				{
-					number: 2,
-				},
-				{
-					number: 3,
-				},
-				{
-					number: 4,
-				},
-				{
-					number: 5,
-				},
-				{
-					number: 6,
-				},
-				{
-					number: 7,
-				},
-				{
-					number: 8,
-				},
-				{
-					number: 9,
-				},
-				{
-					number: 10,
-				},
-				{
-					number: 11,
-				},
-			],
-		},
-		{
-			year: 2025,
-			months: [
-				{
-					number: 0,
-				},
-				{
-					number: 1,
-				},
-				{
-					number: 2,
-				},
-				{
-					number: 3,
-				},
-				{
-					number: 4,
-				},
-			],
-		},
-	];
+type Props = {
+	searchParams: Record<string, string | string[] | undefined>;
+};
 
-	const testData: any[] = fullTable;
-	// Methods
+export default async function Page({ searchParams }: Props) {
+	const pageTitle = 'Dashboard';
+	const { get } = utilsApi();
 
-	// Render
-	if (testData.length === 0) {
-		return (
-			<section className="box col-span-full col-start-1 row-span-full row-start-1 flex grow flex-col items-center justify-center p-4">
-				<h1>Dashboard</h1>
-				<p className="text-sm text-gray-500">No data available.</p>
-				<Button to="/templates/add" label="Create a template" color="primary" />
-			</section>
-		);
-	}
+	const map: Record<string, ApiPathLabel> = {
+		yearly: 'yearlySummary',
+		monthly: 'monthlySummary',
+		transaction: 'transactions',
+	};
+
+	const tab = searchParams.tab as keyof typeof map;
+	const target = map[tab] ?? 'yearlySummary';
+
+	const { data } = await get<Array<Record<string, unknown>>>(target, {});
+
 	return (
 		<>
-			<HeadMenuToolbar title="Setting" />
-			{testData.map((item) => (
-				<FolderPreviewCard item={item} key={item.year} />
-			))}
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
+			<div className="box col-span-full row-span-full row-start-2">
+				<Pre data={searchParams} />
+				<Pre label={String(data?.length)} data={data} />
+			</div>
 		</>
 	);
 }

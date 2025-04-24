@@ -1,3 +1,4 @@
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
 import SummaryByCategory from '@/components/tabler/SummaryByCategory';
 import { utilsApi } from '@/lib/useApi';
 import { MonthDataModel } from '@types';
@@ -16,6 +17,7 @@ export default async function Page({ searchParams }: Props) {
 	}
 
 	// id": "m-2025-0"
+	const pageTitle = `Overview ${year}-${month}`;
 	const { get } = utilsApi();
 	const { data } = await get<Array<MonthDataModel>>('months', {
 		maxRecords: 1,
@@ -42,9 +44,9 @@ export default async function Page({ searchParams }: Props) {
 
 	return (
 		<>
-			<h1 className="col-span-full row-span-1 row-start-1 overflow-scroll text-2xl font-bold">
-				{year}
-			</h1>
+			{/*<D_HeadMenuToolbar title={String(year)} />*/}
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
+
 			<SummaryByCategory data={incomes} />
 
 			<SummaryByCategory data={outcomes} />

@@ -7,15 +7,13 @@ export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = utilsRefineData(data.calendar, params);
+		const refinedData = utilsRefineData(data.years, params);
 
 		const res: ApiResponse = {
 			data: refinedData,
 			success: true,
-			message: 'Index calendar data retrieved successfully',
+			message: 'Years data retrieved successfully',
 		};
-
-		console.log('GET calendar data:', refinedData);
 
 		return NextResponse.json(res, { status: 200 });
 	} catch (error: unknown) {
