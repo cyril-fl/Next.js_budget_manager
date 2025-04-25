@@ -1,3 +1,4 @@
+import NavigationBar from '@/components/layout/navigation/NavigationBar';
 import { utilsApi } from '@/lib/useApi';
 import { MonthDataModel } from '@types';
 
@@ -42,6 +43,14 @@ export default async function Page({ searchParams }: Props) {
 
 	return (
 		<>
+			<NavigationBar>
+				<h1 className="text-2xl font-bold">{pageTitle}</h1>
+				<ul className="flex gap-4">
+					<li>A</li>
+					<li>B</li>
+					<li>C</li>
+				</ul>
+			</NavigationBar>
 			<h2>Overview</h2>
 		</>
 	);

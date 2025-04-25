@@ -1,6 +1,5 @@
 // Import
 import { useConsole } from '@/.debug/hooks/useConsole';
-import AuthForm from '@/components/form/AuthForm';
 // Define
 
 export default function LoginPage() {
@@ -12,8 +11,6 @@ export default function LoginPage() {
 
 	// Render
 	return (
-		<section className="flex grow flex-col items-center justify-center p-4">
-			<AuthForm />
-		</section>
+		<section className="flex grow flex-col items-center justify-center p-4"></section>
 	);
 }
