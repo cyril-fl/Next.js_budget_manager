@@ -13,10 +13,10 @@ export default async function Page({ searchParams }: Props) {
 	const map: Record<string, ApiPathLabel> = {
 		yearly: 'yearlySummary',
 		monthly: 'monthlySummary',
-		transaction: 'transactions',
 	};
 
-	const tab = searchParams.tab as keyof typeof map;
+	const search = await searchParams;
+	const tab = search.tab as keyof typeof map;
 	const target = map[tab] ?? 'yearlySummary';
 
 	const { data } = await get<Array<Record<string, unknown>>>(target, {});
@@ -25,7 +25,7 @@ export default async function Page({ searchParams }: Props) {
 		<>
 			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
 			<div className="box col-span-full row-span-full row-start-2">
-				<Pre data={searchParams} />
+				<Pre data={search} />
 				<Pre label={String(data?.length)} data={data} />
 			</div>
 		</>

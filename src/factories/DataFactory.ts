@@ -1,13 +1,14 @@
 // Import
 import { ModelFactory } from '@/factories/ModelFactory';
-import { SummaryFactory } from '@/factories/SummaryFactory';
 import { CalendarRecord } from '@/models/Calendar';
 import { MonthlyTransactionRecord } from '@/models/Month';
+import { MonthSummary, YearlySummaryRecord } from '@/models/Summary';
 import {
 	IncomeTransactionRecord,
 	OutcomeTransactionRecord,
 } from '@/models/Transaction';
 import { YearlyTransactionRecord } from '@/models/Year';
+import { TransactionRecord } from '@types';
 
 // Class
 export class DataFactory {
@@ -27,10 +28,6 @@ export class DataFactory {
 	// R
 	get transactions() {
 		return this.records;
-	}
-
-	get transactionsResume() {
-		return [];
 	}
 
 	get months(): MonthlyTransactionRecord[] {
@@ -55,8 +52,22 @@ export class DataFactory {
 		return Array.from(map.values());
 	}
 
-	get monthlyResume() {
-		return [];
+	get monthlySummary() {
+		const groupedByMonth = this.records.reduce<
+			Record<string, TransactionRecord[]>
+		>((acc, transaction) => {
+			const key = `${transaction.reportYear}-${String(transaction.reportMonth).padStart(2, '0')}`;
+
+			if (!acc[key]) acc[key] = [];
+
+			acc[key].push(transaction);
+			return acc;
+		}, {});
+
+		return Object.entries(groupedByMonth).map(([key, records]) => {
+			const [year, month] = key.split('-').map(Number);
+			return new MonthSummary(year, month, records);
+		});
 	}
 
 	get years(): YearlyTransactionRecord[] {
@@ -79,8 +90,22 @@ export class DataFactory {
 		});
 	}
 
-	get yearlyResume() {
-		return SummaryFactory.yearlySummary(this.records);
+	get yearlySummary() {
+		const groupedByYear = this.records.reduce<
+			Record<number, TransactionRecord[]>
+		>((acc, transaction) => {
+			const year = transaction.reportYear;
+
+			if (!acc[year]) acc[year] = [];
+
+			acc[year].push(transaction);
+			return acc;
+		}, {});
+
+		return Object.entries(groupedByYear).map(([year, records]) => {
+			records.sort((a, b) => a.reportMonth - b.reportMonth);
+			return new YearlySummaryRecord(Number(year), records);
+		});
 	}
 
 	get calendar(): CalendarRecord[] {

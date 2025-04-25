@@ -13,11 +13,11 @@ export default function MainSection({ children }: MainSectionProps) {
 	// Render
 	return (
 		<>
-			<main className="box flex grow">
-				<section className="grid-base w-full overflow-hidden">
-					{children}
-				</section>
-			</main>
+			{/*<main className="box flex grow">*/}
+			{/*	<section className="grid-base w-full overflow-hidden">*/}
+			{children}
+			{/*</section>*/}
+			{/*</main>*/}
 		</>
 	);
 }

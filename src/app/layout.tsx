@@ -1,5 +1,4 @@
 import '@/assets/style/globals.css';
-import Nav from '@/components/layout/Nav';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import React from 'react';
@@ -26,10 +25,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${geistSans.variable} ${geistMono.variable} size-screen gap-2 overflow-y-hidden antialiased`}
-			>
-				<Nav gridClassName="" />
+			<body>
+				{/*className={`${geistSans.variable} ${geistMono.variable} size-screen gap-2 overflow-y-hidden antialiased`}*/}
+				{/*<Nav gridClassName="" />*/}
 				{children}
 			</body>
 		</html>

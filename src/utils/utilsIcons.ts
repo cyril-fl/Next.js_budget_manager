@@ -20,10 +20,13 @@ export function utilsIcons() {
 		list: 'ph:list-bullets',
 		grid: 'ph:grid-four',
 		plus: 'ph:plus',
+		overview: 'ph:table',
 		savings: 'ph:bank',
 		settings: 'ph:gear-six',
 		test: 'ph:test-tube',
 		template: 'ph:cards',
+		chevronDown: 'ph:caret-down',
+		chevronUp: 'ph:caret-up',
 	};
 
 	return {

@@ -16,7 +16,6 @@ export default function FluxTabler(props: IncomesTablerProps) {
 		);
 	}, [props.title]);
 
-	// Regrouper par catégorie
 	const groupedByCategory = useMemo(() => {
 		if (!props.list) return {};
 

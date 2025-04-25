@@ -22,6 +22,7 @@ export default async function HeaderToolbar<T extends object>(
 	// Methods
 
 	// Render
+	// TODO utilise les component de raidx
 	return (
 		<HeaderToolbarClient
 			path={props.path}

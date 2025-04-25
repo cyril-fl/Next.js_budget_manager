@@ -1,6 +1,8 @@
+'use client';
+
 // Imports
 import { Tooltip as RdxTooltip } from 'radix-ui';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
 
 // UI
@@ -80,7 +82,7 @@ interface TooltipProps {
 	 * @property {number} debounce - Time (in ms) to prevent multiple consecutive triggers.
 	 */
 	duration?: { delay: number; debounce: number };
-
+	defaultOpen?: boolean;
 	// kbds?: KbdProps['value'][] | KbdProps[]
 
 	class?: string;
@@ -89,6 +91,7 @@ interface TooltipProps {
 
 export default function Tooltip(props: TooltipProps) {
 	// Data
+	const [isOpen, setIsOpen] = useState(!!props.defaultOpen);
 
 	// Methods
 	const uiTooltip = useMemo(
@@ -105,10 +108,14 @@ export default function Tooltip(props: TooltipProps) {
 	return (
 		<RdxTooltip.Provider
 			delayDuration={props.duration?.delay ?? 0}
-			disableHoverableContent={props.prevent}
 			skipDelayDuration={props.duration?.debounce ?? 0}
+			disableHoverableContent={props.prevent}
 		>
-			<RdxTooltip.Root>
+			<RdxTooltip.Root
+				defaultOpen={props.defaultOpen}
+				open={isOpen}
+				onOpenChange={setIsOpen}
+			>
 				<RdxTooltip.Trigger asChild>
 					{props.children ?? (
 						<div>

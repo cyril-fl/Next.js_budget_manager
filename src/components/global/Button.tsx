@@ -122,6 +122,7 @@ const theme = tv({
 				base: `
 					p-0
 					text-grayscale-500 ring-transparent
+					hover:bg-grayscale-50 hover:text-grayscale-300
 					active:text-grayscale-300
 					disabled:cursor-default disabled:text-grayscale-50
 					dark:text-grayscale-500`,

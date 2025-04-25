@@ -1,13 +1,15 @@
+// Import
 import { utilsIcons } from '@utils/utilsIcons';
 import { LinkProps } from 'next/link';
 
+// Define
 export type NavigationItem = {
 	label: string;
 	pathname: string | LinkProps['href'];
 	children?: NavigationItem[];
 	icon?: string;
 };
-
+// Ut
 // noinspection JSUnusedGlobalSymbols
 export function utilsNavigation() {
 	const isProd = process.env.next_env === 'production';
@@ -39,7 +41,7 @@ export function utilsNavigation() {
 				// TODO modifier ca
 				query: { year: '2025', month: '00' },
 			},
-			icon: icons.eyeOn,
+			icon: icons.overview,
 		},
 		{
 			label: 'Savings accounts',
@@ -51,7 +53,6 @@ export function utilsNavigation() {
 			pathname: '/templates',
 			icon: icons.template,
 		},
-
 		{
 			label: 'Settings',
 			pathname: 'settings',

@@ -1,16 +1,16 @@
-import { ApiResponse } from '@/lib/useApi';
+import { ApiResponse, utilsRefineData } from '@/lib/useApi';
 import data from '@/lib/useData/data';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
 	try {
-		// const searchParams = req.nextUrl.searchParams;
-		// const params = Object.fromEntries(searchParams.entries());
-		// const refinedData = utilsRefineData(data.years, params);
+		const searchParams = req.nextUrl.searchParams;
+		const params = Object.fromEntries(searchParams.entries());
+		const refinedData = utilsRefineData(data.yearlySummary, params);
 
 		const res: ApiResponse = {
-			data: data.yearlyResume,
+			data: refinedData,
 			success: true,
 			message: 'Years data retrieved successfully',
 		};

@@ -8,39 +8,37 @@ export default function DashboardToolBar() {
 	// Data
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-
-	// Methods
-
-	// Render
-
 	const params = (tab: string) => ({
 		...Object.fromEntries(searchParams.entries()),
 		tab,
 	});
-	// TODO faire un MAP
-	return (
-		<>
-			<Button
-				label="Yearly resume"
-				to={{
-					pathname: '/dashboard',
-					query: params('yearly'),
-				}}
-			/>
-			<Button
-				label="Monthly resume"
-				to={{
-					pathname: '/dashboard',
-					query: params('monthly'),
-				}}
-			/>
-			<Button
-				label="Transaction resume"
-				to={{
-					pathname: '/dashboard',
-					query: params('transaction'),
-				}}
-			/>
-		</>
-	);
+
+	const Actions = [
+		{
+			label: 'Yearly resume',
+			to: {
+				pathname,
+				query: params('yearly'),
+			},
+		},
+		{
+			label: 'Monthly resume',
+			to: {
+				pathname,
+				query: params('monthly'),
+			},
+		},
+	];
+
+	// Methods
+
+	// Render
+	return Actions.map((action) => (
+		<Button
+			key={action.label}
+			label={action.label}
+			to={action.to}
+			className="btn btn-primary"
+		/>
+	));
 }

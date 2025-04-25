@@ -8,7 +8,7 @@ interface FormatMonthOptions extends DateTimeFormatOptions {
 
 export default function utilsDate() {
 	// Data
-
+	// TODO prevois un refacto avec @international/date
 	// Methods
 	function formatMonth(
 		year: number | string,

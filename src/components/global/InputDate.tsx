@@ -8,6 +8,7 @@ import { utilsInput } from '@utils/utilsInput';
 import React, {
 	ChangeEvent,
 	createRef,
+	Fragment,
 	RefObject,
 	useMemo,
 	useState,
@@ -216,7 +217,7 @@ export default function InputDate<T extends object, K extends keyof T>(
 				{props.leading && IconElement}
 
 				{segments.map((segment, index) => (
-					<React.Fragment key={segment.key}>
+					<Fragment key={segment.key}>
 						<input
 							id={`${id}-${segment.key}`} // unique id par champ
 							ref={objectInputRef[segment.key]}
@@ -231,7 +232,7 @@ export default function InputDate<T extends object, K extends keyof T>(
 							onInput={handleInput}
 						/>
 						{index !== segments.length - 1 && <span>/</span>}
-					</React.Fragment>
+					</Fragment>
 				))}
 				{props.trailing && IconElement}
 			</div>

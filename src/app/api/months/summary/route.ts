@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = utilsRefineData(data.years, params);
+		const refinedData = utilsRefineData(data.monthlySummary, params);
 
 		const res: ApiResponse = {
 			data: refinedData,

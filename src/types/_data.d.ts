@@ -1,3 +1,7 @@
+import {
+	IncomeTransactionRecord,
+	OutcomeTransactionRecord,
+} from '@/models/Transaction';
 import { FLUX_TYPES, MONTHS, PAYMENT_STATUS, RECEIPT_STATUS } from './constant';
 
 export type FluxType = (typeof FLUX_TYPES)[number];
@@ -20,6 +24,7 @@ export interface IncomeTransaction extends BaseTransaction {
 	status?: PaymentStatus;
 	date_reception?: Date;
 }
+
 export interface OutcomeTransaction extends BaseTransaction {
 	type: 'outcome';
 	status: ReceiptStatus;
@@ -58,3 +63,16 @@ interface YearDataModel {
 	totalOutcome: number;
 	months: MonthDataModel[];
 }
+
+export type KeyValue = {
+	key: string;
+	value: number;
+};
+
+export interface FilterOption {
+	type?: string;
+}
+
+export type TransactionRecord =
+	| OutcomeTransactionRecord
+	| IncomeTransactionRecord;
