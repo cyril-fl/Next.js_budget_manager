@@ -1,3 +1,4 @@
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
 import { utilsIcons } from '@utils/utilsIcons';
 
 export default function SavingsPage() {
@@ -33,6 +34,7 @@ export default function SavingsPage() {
 	return (
 		<>
 			<h2>Saving</h2>
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
 		</>
 	);
 }

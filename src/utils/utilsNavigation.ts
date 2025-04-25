@@ -4,6 +4,7 @@ import { LinkProps } from 'next/link';
 
 // Define
 export type NavigationItem = {
+	id: string;
 	label: string;
 	pathname: string | LinkProps['href'];
 	children?: NavigationItem[];
@@ -17,6 +18,7 @@ export function utilsNavigation() {
 
 	const description: NavigationItem[] = [
 		{
+			id: 'dashboard',
 			label: 'Dashboard',
 			pathname: {
 				pathname: '/dashboard',
@@ -26,6 +28,7 @@ export function utilsNavigation() {
 			icon: icons.dashboard,
 		},
 		{
+			id: 'calendar',
 			label: 'Calendar',
 			pathname: {
 				pathname: '/calendar',
@@ -35,6 +38,7 @@ export function utilsNavigation() {
 			icon: icons.calendar,
 		},
 		{
+			id: 'overview',
 			label: 'Overview',
 			pathname: {
 				pathname: '/overview',
@@ -44,16 +48,19 @@ export function utilsNavigation() {
 			icon: icons.overview,
 		},
 		{
+			id: 'savings',
 			label: 'Savings accounts',
 			pathname: '/savings',
 			icon: icons.savings,
 		},
 		{
+			id: 'templates',
 			label: 'Template',
 			pathname: '/templates',
 			icon: icons.template,
 		},
 		{
+			id: 'settings',
 			label: 'Settings',
 			pathname: 'settings',
 			icon: icons.settings,
@@ -62,6 +69,7 @@ export function utilsNavigation() {
 
 	if (!isProd) {
 		description.unshift({
+			id: 'test',
 			label: 'Test',
 			pathname: '/test',
 			icon: icons.test,

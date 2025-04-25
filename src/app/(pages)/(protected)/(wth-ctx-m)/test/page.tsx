@@ -5,7 +5,6 @@ import { utilsApi } from '@/lib/useApi';
 
 export default async function TestPages() {
 	// Data
-
 	// Methods
 	const { get } = utilsApi();
 
@@ -18,10 +17,24 @@ export default async function TestPages() {
 		// ],
 	});
 
+	// const SelectGroup: SelectionGroup<number> = {
+	// 	label: 'Monthly Summary',
+	// 	options: [
+	// 		{
+	// 			displayValue: 'January',
+	// 			value: 1200,
+	// 		},
+	// 		{
+	// 			displayValue: 'February',
+	// 			value: 1500,
+	// 		},
+	// 		{
+	// 			displayValue: 'March',
+	// 			value: 800,
+	// 		},
+	// 	],
+	// };
+
 	// Render
-	return (
-		<>
-			<h2>Test</h2>
-		</>
-	);
+	return <div></div>;
 }

@@ -1,6 +1,8 @@
 // import ViewStyleButton from '@/components/action/ViewStyleButton';
 // import Button from '@/components/global/Button';
 
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
+
 export default function SavingsPage() {
 	// Data
 	const pageTitle = 'Templates';
@@ -24,7 +26,14 @@ export default function SavingsPage() {
 	// Render
 	return (
 		<>
-			<h2>templates</h2>
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
+
+			<p>
+				Mettre un bouton Creer dans le hedaer qui servira de menu
+				contextuel{' '}
+			</p>
+
+			{/*<ListTemplates data={data} />*/}
 		</>
 	);
 }

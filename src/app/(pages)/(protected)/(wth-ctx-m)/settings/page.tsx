@@ -2,6 +2,8 @@
 
 // Define
 
+import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
+
 export default function SettingsPage() {
 	// Data
 	const pageTitle = 'Settings';
@@ -11,7 +13,7 @@ export default function SettingsPage() {
 	// Render
 	return (
 		<>
-			<h2>setting</h2>
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
 		</>
 	);
 }

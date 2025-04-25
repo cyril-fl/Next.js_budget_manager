@@ -68,6 +68,10 @@ export type XOR<T, U> = T | U extends object
 	? (Without<T, U> & U) | (Without<U, T> & T)
 	: T | U;
 
+export function pick<T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> {
+	return Object.fromEntries(keys.map((k) => [k, obj[k]])) as Pick<T, K>;
+}
+
 // Utils
 export type Callback = <T = unknown>(...args: any[]) => T | void;
 

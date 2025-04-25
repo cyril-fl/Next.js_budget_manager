@@ -26,7 +26,10 @@ export function utilsIcons() {
 		test: 'ph:test-tube',
 		template: 'ph:cards',
 		chevronDown: 'ph:caret-down',
+		chevronDownBold: 'ph:caret-down-bold',
 		chevronUp: 'ph:caret-up',
+		chevronUpBold: 'ph:caret-up-bold',
+		check: 'ph:check',
 	};
 
 	return {

@@ -25,10 +25,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			{/*  */}
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} size-screen gap-2 overflow-y-hidden antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} size-screen antialiased`}
 			>
-				{children}
+				<section className="size-screen flex gap-2 overflow-y-hidden p-2">
+					{children}
+				</section>
 			</body>
 		</html>
 	);
