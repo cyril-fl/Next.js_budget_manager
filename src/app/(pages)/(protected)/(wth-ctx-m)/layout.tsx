@@ -1,6 +1,5 @@
 // Imports
 // Define
-import MainSection from '@/components/wrapper/MainSection';
 import React from 'react';
 
 export default function WithoutCtxMenuLayout({
@@ -11,9 +10,5 @@ export default function WithoutCtxMenuLayout({
 	// Methods
 
 	// Render
-	return (
-		<>
-			<MainSection>{children}</MainSection>
-		</>
-	);
+	return <>{children}</>;
 }

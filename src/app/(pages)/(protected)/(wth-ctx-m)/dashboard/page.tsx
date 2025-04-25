@@ -1,5 +1,3 @@
-import Pre from '@/.debug/components/Pre';
-import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
 import { ApiPathLabel, utilsApi } from '@/lib/useApi';
 
 type Props = {
@@ -23,11 +21,7 @@ export default async function Page({ searchParams }: Props) {
 
 	return (
 		<>
-			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
-			<div className="box col-span-full row-span-full row-start-2">
-				<Pre data={search} />
-				<Pre label={String(data?.length)} data={data} />
-			</div>
+			<h2>Dashboard</h2>
 		</>
 	);
 }

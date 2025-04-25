@@ -1,3 +1,4 @@
+import Navigation from '@/app/layout/Navigation';
 import '@/assets/style/globals.css';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
@@ -27,7 +28,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body>
 				{/*className={`${geistSans.variable} ${geistMono.variable} size-screen gap-2 overflow-y-hidden antialiased`}*/}
-				{/*<Nav gridClassName="" />*/}
+				<Navigation />
 				{children}
 			</body>
 		</html>

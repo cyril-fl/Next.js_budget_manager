@@ -1,7 +1,5 @@
 // import ViewStyleButton from '@/components/action/ViewStyleButton';
 // import Button from '@/components/global/Button';
-import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
-import ListTemplates from '@/components/list/ListTemplates';
 
 export default function SavingsPage() {
 	// Data
@@ -26,23 +24,7 @@ export default function SavingsPage() {
 	// Render
 	return (
 		<>
-			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
-
-			{/*			<D_HeadMenuToolbar
-				title="Template"
-				slots={{
-					right: (
-
-					),
-				}}
-			/>*/}
-
-			<p>
-				Mettre un bouton Creer dans le hedaer qui servira de menu
-				contextuel{' '}
-			</p>
-
-			<ListTemplates data={data} />
+			<h2>templates</h2>
 		</>
 	);
 }

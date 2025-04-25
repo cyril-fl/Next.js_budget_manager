@@ -1,5 +1,3 @@
-import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
-import ListSavings from '@/components/list/ListSavings';
 import { utilsIcons } from '@utils/utilsIcons';
 
 export default function SavingsPage() {
@@ -34,28 +32,7 @@ export default function SavingsPage() {
 	// Render
 	return (
 		<>
-			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
-
-			{/*			<D_HeadMenuToolbar
-				title="Saving"
-				slots={{
-					right: (
-						<>
-							<ViewStyleButton target="savings" />
-							<Button
-								label="Add"
-								icon={icons.plus}
-								to="/savings/add"
-								size="sm"
-								noLabel
-								leading
-								squared
-							/>
-						</>
-					),
-				}}
-			/>*/}
-			<ListSavings data={data} />
+			<h2>Saving</h2>
 		</>
 	);
 }

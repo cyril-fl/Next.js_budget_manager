@@ -1,5 +1,3 @@
-import CreateTemplateForm from '@/components/form/CreateTemplateForm';
-
 export default function TemplatesPage() {
 	// Data
 
@@ -8,7 +6,7 @@ export default function TemplatesPage() {
 	// Render
 	return (
 		<>
-			<CreateTemplateForm />
+			<h2>Createform</h2>
 		</>
 	);
 }

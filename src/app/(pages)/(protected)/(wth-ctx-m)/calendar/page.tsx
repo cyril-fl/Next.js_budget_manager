@@ -1,5 +1,3 @@
-import CalendarCard from '@/components/cards/CalendarCard';
-import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
 import { utilsApi } from '@/lib/useApi';
 import { LocalItem, options, target } from '@utils/frequentRequest/calendar';
 
@@ -29,9 +27,7 @@ export default async function DashboardPage() {
 	// }
 	return (
 		<>
-			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
-
-			{data?.map((item, index) => <CalendarCard item={item} key={index} />)}
+			<h2>Calendar</h2>
 		</>
 	);
 }

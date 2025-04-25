@@ -1,5 +1,3 @@
-import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
-import SummaryByCategory from '@/components/tabler/SummaryByCategory';
 import { utilsApi } from '@/lib/useApi';
 import { MonthDataModel } from '@types';
 
@@ -44,12 +42,7 @@ export default async function Page({ searchParams }: Props) {
 
 	return (
 		<>
-			{/*<D_HeadMenuToolbar title={String(year)} />*/}
-			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
-
-			<SummaryByCategory data={incomes} />
-
-			<SummaryByCategory data={outcomes} />
+			<h2>Overview</h2>
 		</>
 	);
 }
