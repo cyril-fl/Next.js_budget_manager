@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Budget Management
 
-## Getting Started
+ComptApp is a financial management application built with [Next.js](https://nextjs.org/), [TypeScript](https://www.typescriptlang.org/), and [Tailwind CSS](https://tailwindcss.com/).  
+It helps users manage budgets, track income and expenses, and visualize their financial data.
 
-First, run the development server:
+---
+
+## ✨ Features
+
+- **Budget Management**: Track yearly and monthly budgets.
+- **Income and Expense Tracking**: Categorize and filter financial transactions.
+- **Dynamic Routing**: Fetch and display data based on URL parameters.
+- **Responsive Design**: Built with Tailwind CSS for a modern, responsive UI.
+- **API Integration**: Fetch data via reusable utility functions.
+
+---
+
+## 🛠 Technologies
+
+- [Next.js](https://nextjs.org/) – Framework for SSR and SSG.
+- [TypeScript](https://www.typescriptlang.org/) – Typed JavaScript for safer code.
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS framework.
+- [React](https://react.dev/) – Component-based UI library.
+- [npm](https://www.npmjs.com/) – Package manager.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v16+
+- A package manager: npm, yarn, pnpm, or bun
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd comptapp
+npm install  # or yarn install / pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev  # or yarn dev / pnpm dev / bun dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-## Learn More
+### Production Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The production build will be in the `.next/` directory.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📁 Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+ ├─ app/           # Main application pages
+ ├─ components/    # Reusable UI components
+ ├─ types/         # TypeScript types
+ └─ utils/         # Utility functions
+next.config.ts     # Next.js configuration
+tailwind.config.js # Tailwind CSS configuration
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🚀 Deployment
+
+Deploy easily on [Vercel](https://vercel.com/) or follow the [Next.js deployment guide](https://nextjs.org/docs/deployment).
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 🙏 Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
