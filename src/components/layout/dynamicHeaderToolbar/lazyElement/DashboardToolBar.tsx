@@ -1,7 +1,7 @@
 // Imports
 import { Select, SelectionGroup } from '@/components/ui/Select';
 import { utilsIcons } from '@utils/utilsIcons';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 // Define
 
@@ -10,35 +10,42 @@ export default function DashboardToolBar() {
 	const icons = utilsIcons();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-	const params = (tab: string) => ({
-		...Object.fromEntries(searchParams.entries()),
-		tab,
-	});
+	const router = useRouter();
 
 	const SelectGroup: SelectionGroup<string> = {
 		options: [
 			{
-				displayValue: 'Monthly',
-				value: 'Month',
+				displayValue: 'Yearly',
+				value: 'year',
 			},
 			{
-				displayValue: 'Yearly',
-				value: 'Year',
+				displayValue: 'Monthly',
+				value: 'month',
 			},
 		],
 	};
+
 	// Methods
-	// TODO: On change redirect to same path change querrys
+	function encodeUrlParams(tab: string) {
+		const newParams = new URLSearchParams(searchParams.toString());
+		newParams.set('tab', tab);
+		return newParams.toString();
+	}
+	function handleChange(value: string) {
+		router.push(`${pathname}?${encodeUrlParams(value)}`);
+	}
 
 	// Render
 	return (
-		<Select<string>
-			// placeholder="Placeholder"
-			options={SelectGroup}
-			closeIcon={icons.chevronDownBold}
-			openIcon={icons.chevronUpBold}
-			className="justify-end"
-			defaultValue={SelectGroup.options[0].value}
-		/>
+		<>
+			<Select<string>
+				options={SelectGroup}
+				closeIcon={icons.chevronDownBold}
+				openIcon={icons.chevronUpBold}
+				className="justify-end"
+				defaultValue={searchParams.get('tab') ?? SelectGroup.options[0].value}
+				onChange={handleChange}
+			/>
+		</>
 	);
 }
