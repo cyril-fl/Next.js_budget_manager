@@ -79,9 +79,9 @@ Deploy easily on [Vercel](https://vercel.com/) or follow the [Next.js deployment
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+## Contribution & License
+- **License**: This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+- **Contribution**: No contributions are needed as this project is for educational purposes only.
 
 ---
 
