@@ -16,14 +16,11 @@ export default async function HeaderToolbar<T extends object>(
 	// Data
 	const { get } = utilsApi();
 	// TODO check ou est le probleme et pk mes data retourne en string et non number?
-	const { data } = props.target
-		? await get<Array<T>>(props.target, props.option)
-		: { data: undefined };
+	const { data } = await get<Array<T>>(props.target, props.option);
 
 	// Methods
 
 	// Render
-	// TODO utilise les component de raidx
 	return (
 		<HeaderToolbarClient
 			path={props.path}

@@ -1,7 +1,7 @@
 'use client';
 // Imports
 import { SideMenuProps } from '@/components/layout/dynamicSideMenu/SideMenu';
-import { useCtxMenu } from '@/stores/useCtxMenu';
+import { CtxMenuViewKey, useCtxMenu } from '@/stores/useCtxMenu';
 import dynamic from 'next/dynamic';
 import { ReactNode, useEffect, useMemo } from 'react';
 
@@ -12,11 +12,7 @@ interface SideMenuClientProps<T extends object> extends SideMenuProps {
 
 const DynamicIndexList = dynamic(
 	() =>
-		import('../../../components/layout/dynamicSideMenu/lazyElement/IndexList'),
-	{
-		loading: () => <p>Loading...</p>,
-		ssr: false,
-	}
+		import('../../../components/layout/dynamicSideMenu/lazyElement/IndexList')
 );
 
 // Component
@@ -24,18 +20,19 @@ export default function SideMenuClient<T extends object>(
 	props: SideMenuClientProps<T>
 ) {
 	// Data
-	const { setCtxMenu } = useCtxMenu();
+	const { ctx, setCtxMenu } = useCtxMenu();
 
 	useEffect(() => {
-		if (props.path === 'overview') {
-			setCtxMenu(props.path, props.data ?? []);
-		}
-	}, [props.data, props.path, setCtxMenu]);
+		if (ctx.index === props.data) return;
+
+		setCtxMenu('index', props.data ?? []);
+	}, [ctx.index, props.data, setCtxMenu]);
 
 	// Render
 	const Menu = useMemo(() => {
-		const menuMap: Record<string, ReactNode> = {
+		const menuMap: Record<CtxMenuViewKey, ReactNode> = {
 			overview: <DynamicIndexList />,
+			dashboard: <DynamicIndexList />,
 		};
 
 		return menuMap[props.path] ?? null;

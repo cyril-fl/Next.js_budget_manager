@@ -1,12 +1,12 @@
-import { DataFactory } from '@/factories/DataFactory';
+import { DataRepository } from '@/factories/DataRepository';
 import { ModelFactory } from '@/factories/ModelFactory';
-import { IncomeTransaction, OutcomeTransaction } from '@types';
+import { UnknownTransaction } from '@types';
 import rawData from './mockup/data.json';
 
 // TODO recuperer les data d'une DB
-const records = ModelFactory.createTransactionRecord(
-	rawData as unknown as Array<IncomeTransaction | OutcomeTransaction>
+const records = ModelFactory.createTransactionRecordList(
+	rawData as unknown as Array<UnknownTransaction>
 );
-const data = new DataFactory(records);
+const data = new DataRepository(records);
 
 export default data;

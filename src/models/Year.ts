@@ -7,13 +7,13 @@ import {
 
 export class YearlyTransactionRecord extends FinancialOperation {
 	readonly id: string;
-	readonly reportYear: number;
+	readonly year: number;
 	readonly months: MonthlyTransactionSimplifiedRecord[];
 
-	constructor(reportYear: number) {
+	constructor(year: number) {
 		super();
-		this.id = `y-${reportYear}`;
-		this.reportYear = reportYear;
+		this.id = `y-${year}`;
+		this.year = year;
 		this.months = [];
 		this.updateTotalIncome();
 		this.updateTotalOutcome();
@@ -22,16 +22,14 @@ export class YearlyTransactionRecord extends FinancialOperation {
 	// Method
 	// C
 	add(transaction: IncomeTransactionRecord | OutcomeTransactionRecord) {
-		if (transaction.reportYear !== this.reportYear) return;
+		if (transaction.year !== this.year) return;
 
-		let currentMonth = this.months.find(
-			(m) => m.reportMonth === transaction.reportMonth
-		);
+		let currentMonth = this.months.find((m) => m.month === transaction.month);
 
 		if (!currentMonth) {
 			currentMonth = new MonthlyTransactionSimplifiedRecord(
-				transaction.reportYear,
-				transaction.reportMonth
+				transaction.year,
+				transaction.month
 			);
 			this.months.push(currentMonth);
 		}

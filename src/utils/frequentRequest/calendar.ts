@@ -1,14 +1,11 @@
-import { Month } from '@types';
+import { CalendarRecord } from '@/models/Calendar';
 
 export const target = 'calendar';
 export const options = {
-	fields: ['reportYear', 'monthsIndex'],
+	fields: ['year', 'months'],
 	nextCache: {
 		revalidate: 60,
 		tags: ['calendar'],
 	},
 };
-export interface LocalItem {
-	reportYear: number;
-	monthsIndex: Month[];
-}
+export type LocalItem = Omit<CalendarRecord, 'detailedMonth'>;

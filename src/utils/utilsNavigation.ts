@@ -1,4 +1,5 @@
 // Import
+import { Month } from '@types';
 import { utilsIcons } from '@utils/utilsIcons';
 import { LinkProps } from 'next/link';
 
@@ -7,10 +8,15 @@ export type NavigationItem = {
 	id: string;
 	label: string;
 	pathname: string | LinkProps['href'];
+	validParams?: string[];
 	children?: NavigationItem[];
 	icon?: string;
 };
-// Ut
+interface NavigationProps {
+	currentYear?: number;
+	currentMonth?: Month;
+}
+// Utils
 // noinspection JSUnusedGlobalSymbols
 export function utilsNavigation() {
 	const isProd = process.env.next_env === 'production';
@@ -18,53 +24,44 @@ export function utilsNavigation() {
 
 	const description: NavigationItem[] = [
 		{
-			id: 'dashboard',
-			label: 'Dashboard',
-			pathname: {
-				pathname: '/dashboard',
-				// TODO modifier ca
-				query: { year: '2025' },
-			},
-			icon: icons.dashboard,
-		},
-		{
-			id: 'calendar',
-			label: 'Calendar',
-			pathname: {
-				pathname: '/calendar',
-				// TODO modifier ca
-				query: { year: '2025' },
-			},
-			icon: icons.calendar,
-		},
-		{
 			id: 'overview',
 			label: 'Overview',
-			pathname: {
-				pathname: '/overview',
-				// TODO modifier ca
-				query: { year: '2025', month: '00' },
-			},
+			pathname: '/overview',
+			validParams: ['year', 'month'],
 			icon: icons.overview,
 		},
 		{
+			id: 'dashboard',
+			label: 'Dashboard',
+			pathname: '/dashboard',
+			validParams: ['tab', 'year', 'month'],
+			icon: icons.dashboard,
+		},
+		/*		{
+			id: 'calendar',
+			label: 'Calendar',
+				pathname: '/calendar',
+			icon: icons.calendar,
+		},*/
+
+		/*		{
 			id: 'savings',
 			label: 'Savings accounts',
 			pathname: '/savings',
 			icon: icons.savings,
-		},
-		{
+		},*/
+		/*		{
 			id: 'templates',
 			label: 'Template',
 			pathname: '/templates',
 			icon: icons.template,
-		},
-		{
+		},*/
+		/*		{
 			id: 'settings',
 			label: 'Settings',
 			pathname: 'settings',
 			icon: icons.settings,
-		},
+		},*/
 	];
 
 	if (!isProd) {
@@ -94,8 +91,28 @@ export function utilsNavigation() {
 			: currentItem;
 	};
 
+	const getValidParams = (
+		params: Record<string, string | string[] | undefined>,
+		validParams?: string[]
+	) => {
+		if (!params) return {};
+		if (!validParams?.length) return {};
+
+		const valid = Object.fromEntries(
+			validParams
+				?.map((key) =>
+					typeof params[key] === 'string' && params[key]?.length
+						? [key, params[key]]
+						: null
+				)
+				.filter(Boolean) as [string, string][]
+		);
+
+		return valid;
+	};
 	return {
 		pages: description,
 		findPageByPath,
+		getValidParams,
 	};
 }

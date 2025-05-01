@@ -1,12 +1,13 @@
 // Imports
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 // Define
-const VIEW_KEYS = ['overview'] as const;
+const VIEW_KEYS = ['overview', 'dashboard'] as const;
 export type CtxMenuViewKey = (typeof VIEW_KEYS)[number];
 
 interface CtxMenuView {
-	overview: object[];
+	index: object[];
 }
 
 type CtxMenuState = {
@@ -17,15 +18,23 @@ type CtxMenuState = {
 	) => void;
 };
 
-export const useCtxMenu = create<CtxMenuState>()((set) => ({
-	ctx: {
-		overview: [],
-	},
-	setCtxMenu: (key, data) =>
-		set((state) => ({
+export const useCtxMenu = create<CtxMenuState>()(
+	persist(
+		(set) => ({
 			ctx: {
-				...state.ctx,
-				[key]: data,
+				index: [],
 			},
-		})),
-}));
+			setCtxMenu: (key, data) =>
+				set((state) => ({
+					ctx: {
+						...state.ctx,
+						[key]: data,
+					},
+				})),
+		}),
+		{
+			name: 'ctx-menu-storage', // nom de la clé dans localStorage
+			partialize: (state) => ({ ctx: state.ctx }), // facultatif : ne persister que `ctx`
+		}
+	)
+);

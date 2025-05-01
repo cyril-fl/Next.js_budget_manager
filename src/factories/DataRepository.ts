@@ -2,31 +2,46 @@
 import { ModelFactory } from '@/factories/ModelFactory';
 import { CalendarRecord } from '@/models/Calendar';
 import { MonthlyTransactionRecord } from '@/models/Month';
-import { MonthSummary, YearlySummaryRecord } from '@/models/Summary';
-import {
-	IncomeTransactionRecord,
-	OutcomeTransactionRecord,
-} from '@/models/Transaction';
+import { MonthSummaryRecord, YearlySummaryRecord } from '@/models/Summary';
 import { YearlyTransactionRecord } from '@/models/Year';
-import { TransactionRecord } from '@types';
+import { TransactionRecord, UnknownTransaction } from '@types';
 
+interface Patch {
+	id: string;
+	patch: Partial<UnknownTransaction>;
+}
 // Class
-export class DataFactory {
-	private readonly records: Array<
-		OutcomeTransactionRecord | IncomeTransactionRecord
-	>;
+export class DataRepository {
+	protected records: TransactionRecord[];
 
-	constructor(
-		flux: Array<OutcomeTransactionRecord | IncomeTransactionRecord> = []
-	) {
+	constructor(flux: TransactionRecord[] = []) {
 		this.records = flux;
 	}
 
 	//Method
 
 	// C
+	add(
+		record: Omit<UnknownTransaction, 'id'> | Omit<UnknownTransaction, 'id'>[]
+	): void {
+		const temp = Array.isArray(record) ? record : [record];
+
+		const transaction = temp.map((r) => {
+			return {
+				...r,
+				// id: `${r.type.slice(0, 3).toUpperCase()}-${r.category.slice(0, 3).toUpperCase()}-${r.year}-${r.month}-${Date.now()}`,
+				id: `${r.type.slice(0, 3).toUpperCase()}-${r.category.slice(0, 3).toUpperCase()}-${r.year}-${r.month}`,
+			};
+		});
+
+		const transactionRecord =
+			ModelFactory.createTransactionRecordList(transaction);
+
+		this.records.push(...transactionRecord);
+	}
+
 	// R
-	get transactions() {
+	get transactions(): TransactionRecord[] {
 		return this.records;
 	}
 
@@ -34,14 +49,14 @@ export class DataFactory {
 		const map = new Map<string, MonthlyTransactionRecord>();
 
 		for (const record of this.records) {
-			const { reportYear, reportMonth } = record;
-			const key = `${reportYear}-${reportMonth}`;
+			const { year, month } = record;
+			const key = `${year}-${month}`;
 
 			if (!map.has(key)) {
 				const newData =
 					ModelFactory.createMonthlyTransactionRecord<MonthlyTransactionRecord>(
-						reportYear,
-						reportMonth
+						year,
+						month
 					);
 				map.set(key, newData);
 			}
@@ -52,11 +67,11 @@ export class DataFactory {
 		return Array.from(map.values());
 	}
 
-	get monthlySummary() {
+	get monthlySummary(): MonthSummaryRecord[] {
 		const groupedByMonth = this.records.reduce<
 			Record<string, TransactionRecord[]>
 		>((acc, transaction) => {
-			const key = `${transaction.reportYear}-${String(transaction.reportMonth).padStart(2, '0')}`;
+			const key = `${transaction.year}-${String(transaction.month).padStart(2, '0')}`;
 
 			if (!acc[key]) acc[key] = [];
 
@@ -66,7 +81,7 @@ export class DataFactory {
 
 		return Object.entries(groupedByMonth).map(([key, records]) => {
 			const [year, month] = key.split('-').map(Number);
-			return new MonthSummary(year, month, records);
+			return new MonthSummaryRecord(year, month, records);
 		});
 	}
 
@@ -74,27 +89,27 @@ export class DataFactory {
 		const map = new Map<number, YearlyTransactionRecord>();
 
 		for (const record of this.records) {
-			const { reportYear } = record;
+			const { year } = record;
 
-			if (!map.has(reportYear)) {
-				const newData = new YearlyTransactionRecord(reportYear);
-				map.set(reportYear, newData);
+			if (!map.has(year)) {
+				const newData = new YearlyTransactionRecord(year);
+				map.set(year, newData);
 			}
 
-			map.get(reportYear)!.add(record);
+			map.get(year)!.add(record);
 		}
 
 		return Array.from(map.values()).map((year) => {
-			year.months.sort((a, b) => a.reportMonth - b.reportMonth);
+			year.months.sort((a, b) => a.month - b.month);
 			return year;
 		});
 	}
 
-	get yearlySummary() {
+	get yearlySummary(): YearlySummaryRecord[] {
 		const groupedByYear = this.records.reduce<
 			Record<number, TransactionRecord[]>
 		>((acc, transaction) => {
-			const year = transaction.reportYear;
+			const year = transaction.year;
 
 			if (!acc[year]) acc[year] = [];
 
@@ -103,7 +118,7 @@ export class DataFactory {
 		}, {});
 
 		return Object.entries(groupedByYear).map(([year, records]) => {
-			records.sort((a, b) => a.reportMonth - b.reportMonth);
+			records.sort((a, b) => a.month - b.month);
 			return new YearlySummaryRecord(Number(year), records);
 		});
 	}
@@ -112,7 +127,7 @@ export class DataFactory {
 		const map = new Map<number, Map<number, Set<string>>>();
 
 		for (const record of this.records) {
-			const { reportYear: y, reportMonth: m } = record;
+			const { year: y, month: m } = record;
 
 			if (!map.has(y)) {
 				map.set(y, new Map());
@@ -145,8 +160,34 @@ export class DataFactory {
 
 				return new CalendarRecord(year, monthIndexSorted, months);
 			})
-			.sort((a, b) => a.reportYear - b.reportYear);
-	} // D
+			.sort((a, b) => a.year - b.year);
+	}
+
+	// U
+	update(value: Patch | Patch[]): void {
+		const updates = Array.isArray(value) ? value : [value];
+		const patchMap = new Map(updates.map(({ id, patch }) => [id, patch]));
+
+		this.records = this.records.map((record) => {
+			const patch = patchMap.get(record.id);
+			if (!patch) return record;
+
+			const updatedData = {
+				...record,
+				...patch,
+			} as UnknownTransaction;
+
+			const updatedRecord = ModelFactory.createTransactionRecord(updatedData);
+			return updatedRecord ?? record;
+		});
+	}
+
+	//  D
+	delete(id: string | string[]): void {
+		const ids = Array.isArray(id) ? id : [id];
+
+		this.records = this.records.filter((record) => !ids.includes(record.id));
+	}
 
 	// S
 }

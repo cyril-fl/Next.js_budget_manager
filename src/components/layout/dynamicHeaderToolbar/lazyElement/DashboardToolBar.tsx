@@ -1,16 +1,16 @@
 // Imports
-import { Select, SelectionGroup } from '@/components/ui/Select';
-import { utilsIcons } from '@utils/utilsIcons';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-// Define
+import { SelectionGroup } from '@/components/ui/Select';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { Toolbar } from 'radix-ui';
 
 export default function DashboardToolBar() {
 	// Data
-	const icons = utilsIcons();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-	const router = useRouter();
+	const params = Object.fromEntries(searchParams.entries());
+
+	const tab = searchParams.get('tab') ?? 'year';
 
 	const SelectGroup: SelectionGroup<string> = {
 		options: [
@@ -25,27 +25,44 @@ export default function DashboardToolBar() {
 		],
 	};
 
-	// Methods
-	function encodeUrlParams(tab: string) {
-		const newParams = new URLSearchParams(searchParams.toString());
-		newParams.set('tab', tab);
-		return newParams.toString();
-	}
-	function handleChange(value: string) {
-		router.push(`${pathname}?${encodeUrlParams(value)}`);
-	}
-
 	// Render
 	return (
-		<>
-			<Select<string>
-				options={SelectGroup}
-				closeIcon={icons.chevronDownBold}
-				openIcon={icons.chevronUpBold}
-				className="justify-end"
-				defaultValue={searchParams.get('tab') ?? SelectGroup.options[0].value}
-				onChange={handleChange}
-			/>
-		</>
+		<Toolbar.Root className="flex items-center">
+			<Toolbar.ToggleGroup
+				type="single"
+				value={tab}
+				aria-label="Value display"
+				className="bg-grayscale-100 text-grayscale-700 flex items-center justify-center gap-2 rounded-md px-1.5 py-1"
+			>
+				{SelectGroup.options.map((item) => (
+					<Toolbar.ToggleItem
+						key={item.value}
+						value={item.value}
+						aria-label={item.displayValue}
+						className="data-[state=on]:text-grayscale-800 hover:text-grayscale-400 cursor-pointer rounded px-1.5 py-1 text-xs data-[state=on]:bg-white"
+						asChild
+					>
+						<Link
+							href={{
+								pathname: pathname,
+								query: {
+									...params,
+									tab: item.value,
+								},
+							}}
+						>
+							{item.displayValue}
+						</Link>
+					</Toolbar.ToggleItem>
+				))}
+			</Toolbar.ToggleGroup>
+		</Toolbar.Root>
 	);
 }
+
+// Define
+
+// export default () => (
+
+// 	</HoverCard.Root>
+// );

@@ -1,20 +1,25 @@
 // Imports
-// Define
-import NavigationItem from '@/components/layout/navigation/NavigationItem';
+import NavigationList from '@/components/layout/navigation/NavigationList';
 import { utilsNavigation } from '@utils/utilsNavigation';
 import { Fragment, ReactNode } from 'react';
 
+// Define
 interface NavigationProps {
 	children?: ReactNode;
 	hideChildren?: boolean;
 }
 
-export default function NavigationBar({ children, ...props }: NavigationProps) {
+export default async function NavigationBar({
+	children,
+	...props
+}: NavigationProps) {
 	// Data
-	const { pages } = utilsNavigation();
+	const { pages, getValidParams } = utilsNavigation();
 	const isChildren = children && !props.hideChildren;
-	const topNavItems = pages.slice(0, -1);
-	const bottomNavItems = pages.slice(-1);
+
+	// TODO Refactor ceci pour un meilleur control.
+	// const topNavItems = pages.slice(0, -1);
+	// const bottomNavItems = pages.slice(-1);
 
 	// Methods
 
@@ -29,33 +34,8 @@ export default function NavigationBar({ children, ...props }: NavigationProps) {
 	return (
 		<Component className="flex shrink-0 items-stretch gap-2 overflow-hidden">
 			<nav className="box-base black-box flex flex-col items-center justify-start space-y-2 text-white">
-				<ul className="flex grow flex-col gap-2">
-					{topNavItems.map((item, index) => (
-						<NavigationItem
-							key={index}
-							text={item.label}
-							label={item.label}
-							position="right"
-							offset={10}
-							to={item.pathname}
-							icon={item.icon}
-							arrow
-						/>
-					))}
-				</ul>
-				<ul className="flex grow flex-col justify-end gap-2">
-					{bottomNavItems.map((item, index) => (
-						<NavigationItem
-							key={index}
-							text={item.label}
-							position="right"
-							offset={10}
-							to={item.pathname}
-							icon={item.icon}
-							arrow
-						/>
-					))}
-				</ul>
+				<NavigationList List={pages} />
+				{/*<NavigationList List={bottomNavItems} className="justify-end" />*/}
 			</nav>
 
 			{CtxMenu}

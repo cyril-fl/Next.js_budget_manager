@@ -8,11 +8,11 @@ import {
 	OutcomeTransactionRecord,
 } from '@/models/Transaction';
 import {
-	IncomeTransaction,
 	Month,
-	OutcomeTransaction,
 	PaymentStatus,
 	ReceiptStatus,
+	TransactionRecord,
+	UnknownTransaction,
 } from '@types';
 
 export class ModelFactory {
@@ -20,8 +20,8 @@ export class ModelFactory {
 	static createMonthlyTransactionRecord<
 		T extends MonthlyTransactionRecord | MonthlyTransactionSimplifiedRecord,
 	>(
-		reportYear: number,
-		reportMonth: number,
+		year: number,
+		month: number,
 		incomes: CategoryRecord<Partial<IncomeTransactionRecord>>[] = [],
 		outcomes: CategoryRecord<Partial<OutcomeTransactionRecord>>[] = [],
 		option?: {
@@ -32,47 +32,46 @@ export class ModelFactory {
 			? MonthlyTransactionSimplifiedRecord
 			: MonthlyTransactionRecord;
 
-		return new object(reportYear, reportMonth, incomes, outcomes) as T;
+		return new object(year, month, incomes, outcomes) as T;
 	}
 
 	static createTransactionRecord(
-		data: Array<IncomeTransaction | OutcomeTransaction>
-	) {
+		transaction: UnknownTransaction
+	): TransactionRecord | null {
+		if (!transaction.type) return null;
+
+		const common: [string, string, string, string, number, Month, number] = [
+			transaction.id,
+			transaction.label,
+			transaction.category,
+			transaction.currency,
+			transaction.amount,
+			transaction.month,
+			transaction.year,
+		];
+
+		switch (transaction.type) {
+			case 'income':
+				return new IncomeTransactionRecord(
+					...common,
+					transaction.status as ReceiptStatus,
+					transaction.dayReception
+				);
+			case 'outcome':
+				return new OutcomeTransactionRecord(
+					...common,
+					transaction.status as PaymentStatus,
+					transaction.dayDue,
+					transaction.dayPayment
+				);
+			default:
+				return null;
+		}
+	}
+
+	static createTransactionRecordList(data: UnknownTransaction[]) {
 		return data
-			.map((r) => {
-				if (!r.type) return null;
-
-				const common: [string, string, string, string, number, Month, number] =
-					[
-						r.id,
-						r.label,
-						r.category,
-						r.currency,
-						r.amount,
-						r.reportMonth,
-						r.reportYear,
-					];
-
-				switch (r.type) {
-					case 'income':
-						return new IncomeTransactionRecord(
-							...common,
-							r.status as ReceiptStatus,
-							r.date_reception ? new Date(r.date_reception) : undefined
-						);
-					case 'outcome':
-						return new OutcomeTransactionRecord(
-							...common,
-							r.status as PaymentStatus,
-							r.date_due ? new Date(r.date_due) : undefined,
-							r.date_payment ? new Date(r.date_payment) : undefined
-						);
-					default:
-						return null;
-				}
-			})
-			.filter(Boolean) as Array<
-			IncomeTransactionRecord | OutcomeTransactionRecord
-		>;
+			.map((r) => ModelFactory.createTransactionRecord(r))
+			.filter(Boolean) as TransactionRecord[];
 	}
 }

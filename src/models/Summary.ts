@@ -59,10 +59,12 @@ export abstract class SummaryRecord {
 		if (!option?.type) return values;
 		return values.filter((transaction) => transaction.type === option.type);
 	}
+
+	protected buildStats(records: TransactionRecord[], total: number) {}
 }
 
 export class YearlySummaryRecord extends SummaryRecord {
-	readonly reportYear: number;
+	readonly year: number;
 	readonly monthsList: number[];
 
 	readonly monthlyTransactionCount: KeyValue[];
@@ -75,9 +77,9 @@ export class YearlySummaryRecord extends SummaryRecord {
 	readonly statsIncomes: YSummaryStats;
 	readonly statsOutcome: YSummaryStats;
 
-	constructor(year: number, records: TransactionRecord[]) {
+	public constructor(year: number, records: TransactionRecord[]) {
 		super();
-		this.reportYear = year;
+		this.year = year;
 
 		this.monthsList = this.getDistinctMonths(records);
 
@@ -101,22 +103,20 @@ export class YearlySummaryRecord extends SummaryRecord {
 	}
 
 	private getDistinctMonths(records: TransactionRecord[]): number[] {
-		return [...new Set(records.map((r) => r.reportMonth))].sort(
-			(a, b) => a - b
-		);
+		return [...new Set(records.map((r) => r.month))].sort((a, b) => a - b);
 	}
 
 	private buildTransactionCountByMonth(
 		records: TransactionRecord[]
 	): KeyValue[] {
 		const countByMonth: Record<number, number> = {};
-		records.forEach(({ reportMonth }) => {
-			countByMonth[reportMonth] = (countByMonth[reportMonth] || 0) + 1;
+		records.forEach(({ month }) => {
+			countByMonth[month] = (countByMonth[month] || 0) + 1;
 		});
 		return this.getKeyValue(countByMonth);
 	}
 
-	private buildStats(
+	override buildStats(
 		records: TransactionRecord[],
 		total: number
 	): YSummaryStats {
@@ -124,10 +124,10 @@ export class YearlySummaryRecord extends SummaryRecord {
 		const monthSum: Record<number, number> = {};
 		const txCountByMonth: Record<number, number> = {};
 
-		records.forEach(({ value, amount, reportMonth }) => {
+		records.forEach(({ value, amount, month }) => {
 			catSum[value.category] = (catSum[value.category] || 0) + amount;
-			monthSum[reportMonth] = (monthSum[reportMonth] || 0) + amount;
-			txCountByMonth[reportMonth] = (txCountByMonth[reportMonth] || 0) + 1;
+			monthSum[month] = (monthSum[month] || 0) + amount;
+			txCountByMonth[month] = (txCountByMonth[month] || 0) + 1;
 		});
 
 		const amountByCategory = this.getKeyValue(catSum);
@@ -147,9 +147,9 @@ export class YearlySummaryRecord extends SummaryRecord {
 	}
 }
 
-export class MonthSummary extends SummaryRecord {
-	readonly reportYear: number;
-	readonly reportMonth: number;
+export class MonthSummaryRecord extends SummaryRecord {
+	readonly year: number;
+	readonly month: number;
 
 	readonly transactionCount: number;
 
@@ -161,11 +161,14 @@ export class MonthSummary extends SummaryRecord {
 	readonly statsIncomes: MSummaryStats;
 	readonly statsOutcome: MSummaryStats;
 
-	constructor(year: number, month: number, records: TransactionRecord[]) {
+	public constructor(
+		year: number,
+		month: number,
+		records: TransactionRecord[]
+	) {
 		super();
-		this.reportYear = year;
-		this.reportYear = year;
-		this.reportMonth = month;
+		this.year = year;
+		this.month = month;
 
 		this.transactionCount = records.length;
 
@@ -186,13 +189,13 @@ export class MonthSummary extends SummaryRecord {
 		);
 	}
 
-	private buildStats(
+	override buildStats(
 		records: TransactionRecord[],
 		total: number
 	): MSummaryStats {
 		const catSum: Record<string, number> = {};
 
-		records.forEach(({ value, amount, reportMonth }) => {
+		records.forEach(({ value, amount, month }) => {
 			catSum[value.category] = (catSum[value.category] || 0) + amount;
 		});
 

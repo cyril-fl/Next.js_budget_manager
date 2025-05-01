@@ -1,4 +1,8 @@
 export const RECEIPT_STATUS = ['received', 'pending', 'expected'] as const;
 export const PAYMENT_STATUS = ['paid', 'pending', 'overdue'] as const;
-export const FLUX_TYPES = ['income', 'outcome'] as const;
+export const TRANSACTION_TYPES = ['income', 'outcome'] as const;
 export const MONTHS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
+export const DAYS = [
+	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+	23, 24, 25, 26, 27, 28, 29, 30, 31,
+];

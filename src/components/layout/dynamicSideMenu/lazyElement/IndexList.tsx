@@ -1,59 +1,53 @@
 'use client';
+
 // Import
 import Button from '@/components/ui/Button';
 import Disclosure from '@/components/ui/Disclosure';
 import { useCtxMenu } from '@/stores/useCtxMenu';
+import { LocalItem as CalendarViewRecord } from '@utils/frequentRequest/calendar';
 import utilsDate from '@utils/utilsDate';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 // Define
-export interface CalendarViewRecord {
-	reportYear: number;
-	monthsIndex: number[];
-	detailedMonth: Record<number, Date[]>;
-}
-
-function isCalendarViewRecord(val: unknown): val is CalendarViewRecord {
-	return (
-		typeof val === 'object' &&
-		val !== null &&
-		Array.isArray((val as CalendarViewRecord).monthsIndex)
-	);
-}
 
 export default function IndexList() {
 	// Data
 	const { ctx } = useCtxMenu();
 	const { formatMonth } = utilsDate();
 	const searchParams = useSearchParams();
-	const searchYear = searchParams.get('year');
-	const overviewData = ctx.overview.filter(isCalendarViewRecord);
+	const params = Object.fromEntries(searchParams.entries());
+
+	const pathname = usePathname();
+	// const searchYear = searchParams.get('year');
+	const indexData = ctx.index as CalendarViewRecord[];
 
 	// Methods
+	// TODO le Disclosure se ferme quand je clique sur un autre lien je voudrais le laisser ouver.
 
 	// Render
 	return (
 		<ul className="scrollbar-none h-full w-24 shrink-0 overflow-y-auto">
-			{overviewData.map((item, index) => (
+			{indexData.map((item, index) => (
 				<li key={index} className="mb-4">
 					<Disclosure
-						label={String(item.reportYear)}
-						defaultOpen={Number(searchYear) == item.reportYear}
+						label={String(item.year)}
+						// defaultOpen={Number(searchYear) == item.year}
 						variant="nude"
 						squared
 						ui={{ base: 'bg-grayscale-50' }}
 					>
 						<ul>
-							{item.monthsIndex.map((month, i) => (
+							{item.months.map((month, i) => (
 								<li key={i} className="px-2 py-1">
 									<Button
-										label={formatMonth(item.reportYear, month, {
+										label={formatMonth(item.year, month, {
 											month: 'long',
 										})}
 										to={{
-											pathname: '/overview',
+											pathname: pathname,
 											query: {
-												year: item.reportYear,
+												...params,
+												year: item.year,
 												month: month,
 											},
 										}}

@@ -1,5 +1,7 @@
 // Import
+import Pre from '@/.debug/components/Pre';
 import HeaderToolbar from '@/components/layout/dynamicHeaderToolbar/HeaderToolbar';
+import { utilsApi } from '@/lib/useApi';
 
 // Define
 type Props = {
@@ -16,37 +18,32 @@ export default async function Page({ searchParams }: Props) {
 		return <div>Invalid year or month</div>;
 	}
 
-	// id": "m-2025-0"
-	const pageTitle = `Overview ${year}-${month}`;
-	// const { get } = utilsApi();
-	// const { data } = await get<Array<MonthDataModel>>('months', {
-	// 	maxRecords: 1,
-	// 	filter: {
-	// 		fn: 'AND',
-	// 		args: [
-	// 			{ l: 'reportYear', r: year },
-	// 			{ l: 'reportMonth', r: month },
-	// 		],
-	// 	},
-	// });
+	// Data
+	const { get } = utilsApi();
+	const pageTitle = `Overview`;
+	const pageTitleB = `Overview ${year}-${month}`;
 
-	// const flatData = data?.[0];
-	// const incomes = {
-	// 	total: flatData?.totalIncome ?? 0,
-	// 	category: 'Incomes',
-	// 	transactions: flatData?.incomes ?? [],
-	// };
-	// const outcomes = {
-	// 	total: flatData?.totalOutcome ?? 0,
-	// 	category: 'Outcomes',
-	// 	transactions: flatData?.outcomes ?? [],
-	// };
+	const { data } = await get<Array<Record<string, unknown>>>('months', {
+		maxRecords: 1,
+		filter: {
+			fn: 'AND',
+			args: [
+				{ l: 'year', r: year },
+				{ l: 'month', r: month },
+			],
+		},
+	});
 
+	// Methods
+
+	// Render
 	return (
 		<>
-			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitle} />
-
-			<h2>Overview</h2>
+			<HeaderToolbar path={pageTitle.toLowerCase()} title={pageTitleB} />
+			<div className="col-span-full overflow-hidden">
+				<h2>Overview</h2>
+				<Pre data={data} />
+			</div>
 		</>
 	);
 }

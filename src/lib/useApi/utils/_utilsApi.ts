@@ -13,9 +13,11 @@ export function utilsApi() {
 	const tablePath = config.path.routes;
 	// Methods
 	async function get<T = unknown>(
-		target: ApiPathLabel,
+		target?: ApiPathLabel,
 		option?: ApiOptions
 	): Promise<ApiResponse<T>> {
+		if (!target) return { success: false, error: 'No target' };
+
 		const params = utilsEncodeParams(option);
 		const _url = `${baseUrl}/${getTable(target)}${params}`;
 

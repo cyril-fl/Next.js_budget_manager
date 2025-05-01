@@ -6,23 +6,21 @@ import {
 export class CategoryRecord<
 	T extends Partial<IncomeTransactionRecord | OutcomeTransactionRecord>,
 > {
-	category: string;
-	transactions: T[];
-	total: number = 0;
+	readonly category: string;
+	readonly transactions: T[];
+	protected total: number = 0;
 
-	constructor(category: string, transactions: T[] = []) {
+	public constructor(category: string, transactions: T[] = []) {
 		this.category = category;
 		this.transactions = transactions;
 		this.updateTotal();
 	}
 
-	// Method
 	// C
 	add(record: T) {
 		this.transactions.push(record);
 		this.updateTotal();
 	}
-
 	// R
 	// U
 	updateTotal() {
@@ -31,6 +29,6 @@ export class CategoryRecord<
 			0
 		);
 	}
-	// 	//  D
-	// 	//  S
+	//  D
+	//  S
 }

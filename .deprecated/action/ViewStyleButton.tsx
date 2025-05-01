@@ -2,9 +2,9 @@
 
 // Imports
 import Button from '@/components/ui/Button';
-import { useViewStyle, ViewKey } from '@/stores/useViewStyle';
 import { utilsIcons } from '@utils/utilsIcons';
 import { useMemo } from 'react';
+import { useViewStyle, ViewKey } from '../../../.deprecated/useViewStyle';
 
 // Define
 interface ViewStyleButtonProps {

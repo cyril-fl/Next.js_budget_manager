@@ -1,7 +1,7 @@
 // Imports
 // Define
 
-import ViewStyleButton from '@/components/action/ViewStyleButton';
+// import ViewStyleButton from '@/components/action/ViewStyleButton';
 import Button from '@/components/ui/Button';
 import { utilsIcons } from '@utils/utilsIcons';
 
@@ -14,7 +14,7 @@ export default function TemplateToolBar() {
 	// Render
 	return (
 		<>
-			<ViewStyleButton target="templates" />
+			{/*<ViewStyleButton target="templates" />*/}
 			<Button
 				label="Add"
 				icon={icons.plus}

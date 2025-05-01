@@ -1,15 +1,15 @@
 export class CalendarRecord {
-	readonly reportYear: number;
-	readonly monthsIndex: number[];
+	readonly year: number;
+	readonly months: number[];
 	readonly detailedMonth: Record<number, Date[]>;
 
-	constructor(
-		reportYear: number,
-		monthsIndex: number[],
+	public constructor(
+		year: number,
+		months: number[],
 		detailedMonth: Record<number, Date[]>
 	) {
-		this.reportYear = reportYear;
-		this.monthsIndex = monthsIndex;
+		this.year = year;
+		this.months = months;
 		this.detailedMonth = detailedMonth;
 	}
 }

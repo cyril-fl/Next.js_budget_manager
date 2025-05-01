@@ -2,8 +2,8 @@
 
 // Import
 import { Icon } from '@iconify/react';
+import { SelectContentProps } from '@radix-ui/react-select';
 import { utilsIcons } from '@utils/utilsIcons';
-import { clsx } from 'clsx';
 import { Select as RdxSelect } from 'radix-ui';
 import { Fragment, ReactNode, useCallback, useMemo, useState } from 'react';
 import { tv, VariantProps } from 'tailwind-variants';
@@ -13,29 +13,46 @@ const theme = tv({
 	slots: {
 		base: 'focus:ring-none inline-flex items-center justify-between focus:outline-none  ',
 		triggerIcon: ' ',
-		value: 'placeholder:text-gray-400 placeholder-gray-400',
-		label: ' tracking-wider  uppercase',
+		value: '',
+		label: 'tracking-wider uppercase',
 		content: 'z-50  focus:outline-none ',
 		scrollButton: 'flex items-center justify-center',
 		scrollIcon: '',
-		group: 'space-y-1',
+		group: '',
 		separator: '',
+		item: 'focus:ring-none outline-0 relative flex cursor-pointer items-center',
+		indicator: 'data-[state=checked]:block data-[state=unchecked]:hidden',
+		indicatorIcon: '',
 	},
 	variants: {
 		variant: {
-			nude: {
-				base: 'font-bold',
-			},
+			nude: '',
+			toolbar: '',
 		},
 		color: {
 			neutral: '',
 		},
 		size: {
 			xs: '',
-			sm: '',
+			sm: {
+				base: 'gap-2 text-xs',
+				content: 'shadow-lg bg-white p-1 rounded-md',
+				group: 'space-y-1',
+				triggerIcon: 'ml-1 size-2',
+				separator: 'my-1 border-t',
+				item: 'rounded px-1.5 py-1 text-xs gap-1',
+				indicator: 'size-3 ',
+				indicatorIcon: 'size-full ',
+			},
 			md: {
 				base: 'gap-2 text-sm',
-				content: '',
+				content: 'shadow-lg bg-white',
+				group: 'space-y-1',
+				triggerIcon: 'ml-2 size-4',
+				separator: 'my-1 border-t',
+				item: 'rounded px-1.5 py-1 text-sm gap-2',
+				indicator: 'size-4 ',
+				indicatorIcon: 'size-full ',
 			},
 			lg: '',
 		},
@@ -50,25 +67,48 @@ const theme = tv({
 		{
 			variant: 'nude',
 			color: 'neutral',
-			size: 'md',
 			className: {
-				base: '',
-				content: 'shadow-lg bg-white rounded-md p-2 space-y-1 ',
-				triggerIcon: 'text-grayscale-700 ml-2',
+				base: 'font-bold',
+				value: 'text-grayscale-400',
+				content: 'shadow-lg bg-white',
+				triggerIcon: 'text-grayscale-700',
 				label: 'text-gray-400',
 				scrollButton: 'text-gray-400',
 				scrollIcon: 'text-grayscale-700',
-				separator: 'my-1 border-t',
+				separator: '',
+				item: `text-gray-700 transition-colors outline-none select-none
+				data-[state=checked]:bg-grayscale-900 data-[state=checked]:text-grayscale-50 hover:bg-gray-100 data-[state=checked]:font-medium
+				data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+				indicator: 'text-white',
+			},
+		},
+		{
+			variant: 'toolbar',
+			color: 'neutral',
+			className: {
+				base: 'font-bold ring ring-grayscale-300 text-grayscale-700 px-1.5 py-1 rounded',
+				value: 'text-red-200',
+				content: 'shadow-lg bg-white',
+				triggerIcon: 'text-grayscale-700',
+				label: 'text-gray-400',
+				scrollButton: 'text-gray-400',
+				scrollIcon: 'text-grayscale-700',
+				separator: '',
+				item: `text-gray-700 transition-colors outline-none select-none
+				data-[state=checked]:bg-grayscale-900 data-[state=checked]:text-grayscale-50 hover:bg-gray-100 data-[state=checked]:font-medium
+				data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
+				indicator: 'text-white',
 			},
 		},
 	],
 	defaultVariants: {
 		variant: 'nude',
 		color: 'neutral',
-		size: 'md',
+		size: 'sm',
 	},
 });
 export type SelectVariants = VariantProps<typeof theme>;
+
 // Define
 export type SelectionGroup<T> = {
 	label?: string;
@@ -78,20 +118,31 @@ export type SelectionOption<T> = {
 	value: T;
 	displayValue: string;
 };
-export interface SelectProps<T> {
+export interface SelectProps<T>
+	extends Pick<
+		SelectContentProps,
+		'alignOffset' | 'align' | 'sideOffset' | 'side' | 'position'
+	> {
 	placeholder?: string;
 	defaultValue?: string;
 	options: SelectionGroup<T> | SelectionGroup<T>[];
 	onChange?: (value: string) => void;
-	variant?: SelectVariants['variant'];
-	color?: SelectVariants['color'];
 	scrollButton?: boolean;
+	checkedIndicator?: boolean;
 	separator?: boolean;
 	block?: boolean;
 	fit?: boolean;
+	variant?: SelectVariants['variant'];
+	color?: SelectVariants['color'];
 	className?: string;
 	openIcon?: string;
 	closeIcon?: string;
+	ui?: Partial<typeof theme.slots>;
+}
+interface SelectItemProps {
+	value: string;
+	children?: ReactNode;
+	className?: string;
 	ui?: Partial<typeof theme.slots>;
 }
 
@@ -143,7 +194,28 @@ export function Select<T = string>(props: SelectProps<T>) {
 		},
 		[isOpen, icons, props.scrollButton]
 	);
+
 	// Render
+	const SelectItem = ({ value, children }: SelectItemProps) => (
+		<RdxSelect.Item
+			value={value}
+			className={ui.item({ className: props.ui?.item })}
+		>
+			<RdxSelect.ItemText>{children}</RdxSelect.ItemText>
+
+			{props.checkedIndicator && (
+				<RdxSelect.ItemIndicator
+					className={ui.indicator({ className: props.ui?.indicator })}
+				>
+					<Icon
+						icon={icons.check}
+						className={ui.indicatorIcon({ className: props.ui?.indicatorIcon })}
+					/>
+				</RdxSelect.ItemIndicator>
+			)}
+		</RdxSelect.Item>
+	);
+
 	return (
 		<RdxSelect.Root
 			onValueChange={props.onChange}
@@ -154,7 +226,12 @@ export function Select<T = string>(props: SelectProps<T>) {
 					className: [props.ui?.base, props.className],
 				})}
 			>
-				<RdxSelect.Value placeholder={props.placeholder} />
+				<RdxSelect.Value
+					placeholder={props.placeholder}
+					className={ui.value({
+						className: [props.ui?.value, props.className],
+					})}
+				/>
 				<RdxSelect.Icon
 					className={ui.triggerIcon({
 						className: [props.ui?.triggerIcon, props.className],
@@ -167,10 +244,11 @@ export function Select<T = string>(props: SelectProps<T>) {
 
 			<RdxSelect.Portal>
 				<RdxSelect.Content
-					position="popper"
-					side="bottom"
-					sideOffset={0}
-					align="center"
+					position={props.position}
+					side={props.side}
+					sideOffset={props.sideOffset}
+					align={props.align}
+					alignOffset={props.alignOffset}
 					className={ui.content({ className: props.ui?.content })}
 				>
 					{ScrollButton('up')}
@@ -209,35 +287,5 @@ export function Select<T = string>(props: SelectProps<T>) {
 				</RdxSelect.Content>
 			</RdxSelect.Portal>
 		</RdxSelect.Root>
-	);
-}
-interface SelectItemProps {
-	value: string;
-	children?: ReactNode;
-	className?: string;
-}
-
-export function SelectItem({ value, children }: SelectItemProps) {
-	// Data
-	const icons = utilsIcons();
-	// Methods
-
-	// Render
-	return (
-		<RdxSelect.Item
-			value={value}
-			className={clsx(
-				'focus:ring-none outline-0',
-				'relative flex cursor-pointer items-center rounded px-1.5 py-1 text-sm text-gray-700 transition-colors outline-none select-none',
-				'data-[state=checked]:bg-grayscale-900 data-[state=checked]:text-grayscale-50 hover:bg-gray-100 data-[state=checked]:font-medium',
-				'data-[disabled]:pointer-events-none data-[disabled]:opacity-50'
-			)}
-		>
-			<RdxSelect.ItemText>{children}</RdxSelect.ItemText>
-
-			{/*<RdxSelect.ItemIndicator className="absolute right-3 data-[state=checked]:block data-[state=unchecked]:hidden">*/}
-			{/*	<Icon icon={icons.check} className="size-4 text-blue-500" />*/}
-			{/*</RdxSelect.ItemIndicator>*/}
-		</RdxSelect.Item>
 	);
 }

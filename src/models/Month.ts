@@ -9,19 +9,19 @@ import {
 // Class
 export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 	readonly id: string;
-	readonly reportMonth: number;
+	readonly month: number;
 	readonly incomes: CategoryRecord<Partial<IncomeTransactionRecord>>[] = [];
 	readonly outcomes: CategoryRecord<Partial<OutcomeTransactionRecord>>[] = [];
 
 	protected constructor(
-		reportYear: number,
-		reportMonth: number,
+		year: number,
+		month: number,
 		incomes: CategoryRecord<Partial<IncomeTransactionRecord>>[] = [],
 		outcomes: CategoryRecord<Partial<OutcomeTransactionRecord>>[] = []
 	) {
 		super();
-		this.id = `m-${reportYear}-${reportMonth}`;
-		this.reportMonth = reportMonth;
+		this.id = `m-${year}-${month}`;
+		this.month = month;
 		this.incomes = incomes;
 		this.outcomes = outcomes;
 
@@ -32,8 +32,8 @@ export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 	// Method
 	// C
 	add(record: IncomeTransactionRecord | OutcomeTransactionRecord) {
-		const { category, type, reportMonth } = record.value;
-		if (reportMonth !== this.reportMonth) return;
+		const { category, type, month } = record.value;
+		if (month !== this.month) return;
 
 		if (type === 'income') this.addIncome(record as IncomeTransactionRecord);
 		if (type === 'outcome') this.addOutcome(record as OutcomeTransactionRecord);
@@ -42,7 +42,7 @@ export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 		this.updateTotalOutcome();
 	}
 	addIncome(record: IncomeTransactionRecord) {
-		const { category, type, reportYear, reportMonth, ...rest } = record.value;
+		const { category, type, year, month, ...rest } = record.value;
 
 		let group = this.incomes.find((g) => g.category === category);
 
@@ -54,7 +54,7 @@ export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 		group.add(rest);
 	}
 	addOutcome(record: OutcomeTransactionRecord) {
-		const { category, type, reportYear, reportMonth, ...rest } = record.value;
+		const { category, type, year, month, ...rest } = record.value;
 
 		let group = this.outcomes.find((g) => g.category === category);
 
@@ -86,26 +86,26 @@ export abstract class BaseMonthlyTransactionRecord extends FinancialOperation {
 }
 
 export class MonthlyTransactionRecord extends BaseMonthlyTransactionRecord {
-	reportYear: number;
+	readonly year: number;
 
-	constructor(
-		reportYear: number,
-		reportMonth: number,
+	protected constructor(
+		year: number,
+		month: number,
 		incomes: CategoryRecord<Partial<IncomeTransactionRecord>>[] = [],
 		outcomes: CategoryRecord<Partial<OutcomeTransactionRecord>>[] = []
 	) {
-		super(reportYear, reportMonth, incomes, outcomes);
-		this.reportYear = reportYear;
+		super(year, month, incomes, outcomes);
+		this.year = year;
 	}
 }
 
 export class MonthlyTransactionSimplifiedRecord extends BaseMonthlyTransactionRecord {
 	constructor(
-		reportYear: number,
-		reportMonth: number,
+		year: number,
+		month: number,
 		incomes: CategoryRecord<Partial<IncomeTransactionRecord>>[] = [],
 		outcomes: CategoryRecord<Partial<OutcomeTransactionRecord>>[] = []
 	) {
-		super(reportYear, reportMonth, incomes, outcomes);
+		super(year, month, incomes, outcomes);
 	}
 }

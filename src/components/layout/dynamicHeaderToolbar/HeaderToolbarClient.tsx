@@ -1,8 +1,10 @@
 'use client';
 // Imports
+import { useCtxMenu } from '@/stores/useCtxMenu';
 import dynamic from 'next/dynamic';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useEffect, useMemo } from 'react';
 import { HeaderToolbarProps } from './HeaderToolbar';
+//
 
 // Define
 export interface HeaderToolbarClientProps<T extends object>
@@ -11,22 +13,21 @@ export interface HeaderToolbarClientProps<T extends object>
 }
 
 const LazyTemplateToolBar = dynamic(
-	() => import('./lazyElement/TemplateToolBar'),
-	{
-		loading: () => <p>Loading...</p>,
-	}
+	() => import('./lazyElement/TemplateToolBar')
 );
 const LazyDashboardToolBar = dynamic(
-	() => import('./lazyElement/DashboardToolBar'),
-	{
-		loading: () => <p>Loading...</p>,
-	}
+	() => import('./lazyElement/DashboardToolBar')
 );
 
 export default function HeaderToolbarClient<T extends object>(
 	props: HeaderToolbarClientProps<T>
 ) {
 	// Data
+	const { setCtxMenu } = useCtxMenu();
+
+	useEffect(() => {
+		setCtxMenu('index', props.data ?? []);
+	}, [props.data, props.path, setCtxMenu]);
 
 	// Methods
 	const LeftSlot = useMemo(() => {

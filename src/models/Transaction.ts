@@ -1,32 +1,41 @@
 // Import
-import { Month, PaymentStatus, ReceiptStatus } from '@types';
+import {
+	Day,
+	Month,
+	PaymentStatus,
+	ReceiptStatus,
+	TransactionType,
+} from '@types';
 
 // Class
-abstract class TransactionRecord {
+export abstract class TransactionRecord {
 	readonly id: string;
+	readonly type: TransactionType;
 	protected label: string;
-	protected category: string;
+	readonly category: string;
 	readonly currency: string;
 	protected rawAmount: number;
-	readonly reportMonth: Month;
-	readonly reportYear: number;
+	readonly month: Month;
+	readonly year: number;
 
 	protected constructor(
 		id: string,
+		type: TransactionType,
 		label: string,
 		category: string,
 		currency: string,
 		amount: number,
-		reportMonth: Month,
-		reportYear: number
+		month: Month,
+		year: number
 	) {
 		this.id = id;
+		this.type = type;
 		this.label = label;
 		this.category = category;
 		this.currency = currency;
 		this.rawAmount = amount;
-		this.reportMonth = reportMonth;
-		this.reportYear = reportYear;
+		this.month = month;
+		this.year = year;
 	}
 
 	get amount() {
@@ -36,29 +45,29 @@ abstract class TransactionRecord {
 }
 
 export class OutcomeTransactionRecord extends TransactionRecord {
-	readonly type = 'outcome' as const;
 	protected status?: PaymentStatus;
-	protected dateDue?: Date;
-	protected datePayment?: Date;
+	protected dayDue?: Day;
+	protected dayPayment?: Day;
 
-	constructor(
+	public constructor(
 		id: string,
 		label: string,
 		category: string,
 		currency: string,
 		amount: number,
-		reportMonth: Month,
-		reportYear: number,
+		month: Month,
+		year: number,
 		status?: PaymentStatus,
-		dateDue?: Date,
-		datePayment?: Date
+		dayDue?: Day,
+		dayPayment?: Day
 	) {
-		super(id, label, category, currency, amount, reportMonth, reportYear);
+		super(id, 'outcome', label, category, currency, amount, month, year);
 		this.status = status;
-		this.dateDue = dateDue;
-		this.datePayment = datePayment;
+		this.dayDue = dayDue;
+		this.dayPayment = dayPayment;
 	}
-	// Getters & Setters
+	//C
+	// R
 	get value() {
 		return {
 			id: this.id,
@@ -67,44 +76,49 @@ export class OutcomeTransactionRecord extends TransactionRecord {
 			category: this.category,
 			currency: this.currency,
 			amount: this.amount,
-			reportMonth: this.reportMonth,
-			reportYear: this.reportYear,
+			month: this.month,
+			year: this.year,
 			status: this.status,
-			dateDue: this.dateDue,
-			datePayment: this.datePayment,
+			dayDue: this.dayDue,
+			dayPayment: this.dayPayment,
 		};
 	}
 
 	get date() {
-		return [this?.dateDue, this?.datePayment].filter(Boolean) as Date[];
+		const dateDue = new Date(this.year, this.month, this.dayDue);
+		const datePayment = new Date(this.year, this.month, this.dayPayment);
+
+		console.log('get date: dateDue', dateDue);
+		console.log('get date: datePayment', datePayment);
+		return [dateDue, datePayment];
 	}
+	// U
+	// D
+	// S
 }
 
 export class IncomeTransactionRecord extends TransactionRecord {
-	readonly type = 'income' as const;
 	protected status?: ReceiptStatus;
-	protected dateReception?: Date;
+	protected dayReception?: Day;
 
-	constructor(
+	public constructor(
 		id: string,
 		label: string,
 		category: string,
 		currency: string,
 		amount: number,
-		reportMonth: Month,
-		reportYear: number,
+		month: Month,
+		year: number,
 		status?: ReceiptStatus,
-		dateReception?: Date
+		dayReception?: Day
 	) {
-		super(id, label, category, currency, amount, reportMonth, reportYear);
+		super(id, 'income', label, category, currency, amount, month, year);
 		this.status = status;
-		this.dateReception = dateReception;
+		this.dayReception = dayReception;
 	}
 
-	// Method
 	// C
 	// R
-	// Getters & Setters
 	get value() {
 		return {
 			id: this.id,
@@ -113,15 +127,18 @@ export class IncomeTransactionRecord extends TransactionRecord {
 			category: this.category,
 			currency: this.currency,
 			amount: this.amount,
-			reportMonth: this.reportMonth,
-			reportYear: this.reportYear,
+			month: this.month,
+			year: this.year,
 			status: this.status,
-			dateReception: this.dateReception,
+			dayReception: this.dayReception,
 		};
 	}
 
 	get date() {
-		return [this?.dateReception].filter(Boolean) as Date[];
+		const dateReception = new Date(this.year, this.month, this.dayReception);
+
+		console.log('get date: dateReception', dateReception);
+		return [dateReception];
 	}
 	// U
 	// D
