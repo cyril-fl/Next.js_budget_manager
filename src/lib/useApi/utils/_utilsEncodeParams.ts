@@ -3,7 +3,6 @@ import { ApiFormula, ApiOptions, ApiSortParam } from '../types';
 import { utilsFilterParams, utilsSortParams } from './params';
 
 // Define
-
 export function utilsEncodeParams(params: ApiOptions | undefined) {
 	if (!params) return '';
 

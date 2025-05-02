@@ -3,8 +3,9 @@
 import Pre from '@/.debug/components/Pre';
 import Button from '@/components/ui/Button';
 import { DataRepository } from '@/factories/DataRepository';
+import { utilsApi } from '@/lib/useApi';
 import { UnknownTransaction } from '@types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Define
 
@@ -14,7 +15,7 @@ export default function TestPages() {
 
 	const [sheet, setSheet] = useState(new DataRepository());
 	// Methods
-	// const { get } = utilsApi();
+	const { suppress, get } = utilsApi();
 
 	const testIncome: Omit<UnknownTransaction, 'id'> = {
 		label: 'income_0',
@@ -28,15 +29,22 @@ export default function TestPages() {
 		dayReception: 16,
 	};
 
-	/*	const response = await get<Array<Record<string, unknown>>>('calendar', {
-		// maxRecords: 1,
-		// fields: [
-		// 	'transactionByMonth',
-		// 	'incomeTransactionByMonth',
-		// 	'outcomeTransactionByMonth',
-		// ],
-	});*/
-	//
+	const [data, setData] = useState<Array<Record<string, unknown>>>([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			return await get<Array<Record<string, unknown>>>('transactions', {});
+		};
+
+		fetchData()
+			.then((res) => {
+				console.log('res', res);
+				setData(res.data ?? []);
+			})
+			.catch((error) => {
+				console.error('Error:', error);
+			});
+	}, []);
 
 	function handleAddIncome() {
 		setSheet((prev) => {
@@ -46,12 +54,16 @@ export default function TestPages() {
 		});
 	}
 
-	function handleDeleteIncome() {
-		setSheet((prev) => {
-			const newRepo = new DataRepository([...prev.transactions]); // ou clone si possible
-			newRepo.delete('INC-SAL-2024-0');
-			return newRepo;
-		});
+	async function handleDeleteIncome() {
+		console.log('handleDeleteIncome');
+		const res = await suppress('transactions', [
+			'flux_0',
+			'flux_1',
+			'flux_99',
+			'flux_5',
+		]);
+
+		console.log('res in front !', res);
 	}
 
 	function handleUpdateIncome() {
@@ -79,13 +91,13 @@ export default function TestPages() {
 	return (
 		<div>
 			<div className={'flex gap-4 p-4'}>
-				<Pre data={testIncome} />
-				<Pre data={sheet} />
+				<Pre data={data} />
+				{/*<Pre data={sheet} />*/}
 			</div>
 
-			<Button label={'Add Income'} onClick={handleAddIncome} />
+			{/*<Button label={'Add Income'} onClick={handleAddIncome} />*/}
 			<Button label={'Delete Income'} onClick={handleDeleteIncome} />
-			<Button label={'Update Income'} onClick={handleUpdateIncome} />
+			{/*<Button label={'Update Income'} onClick={handleUpdateIncome} />*/}
 		</div>
 	);
 }

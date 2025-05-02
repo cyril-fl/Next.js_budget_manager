@@ -1,4 +1,8 @@
-import { ApiResponse, utilsRefineData } from '@/lib/useApi';
+import {
+	ApiResponse,
+	utilsDecodeDeleteParams,
+	utilsRefineData,
+} from '@/lib/useApi';
 import data from '@/lib/useData/data';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -11,6 +15,32 @@ export async function GET(req: NextRequest) {
 
 		const res: ApiResponse = {
 			data: refinedData,
+			success: true,
+			message: 'Transaction data retrieved successfully',
+		};
+
+		return NextResponse.json(res, { status: 200 });
+	} catch (error: unknown) {
+		const res: ApiResponse = {
+			success: false,
+			message:
+				error && typeof error === 'object' && 'message' in error
+					? String((error as { message: unknown }).message)
+					: 'Internal Server Error',
+		};
+
+		return NextResponse.json(res, { status: 500 });
+	}
+}
+
+export async function DELETE(req: NextRequest) {
+	try {
+		const searchParams = req.nextUrl.searchParams;
+		const params = utilsDecodeDeleteParams(searchParams);
+		data.delete(params);
+
+		const res: ApiResponse = {
+			data: data.transactions,
 			success: true,
 			message: 'Transaction data retrieved successfully',
 		};

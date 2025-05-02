@@ -1,5 +1,5 @@
 // Imports
-import { config } from '@/lib/useApi';
+import { config, utilsEncodeDeleteParams } from '@/lib/useApi';
 import { ApiOptions, ApiPathLabel, ApiResponse } from '../types';
 import { utilsEncodeParams } from '../utils/';
 
@@ -41,14 +41,33 @@ export function utilsApi() {
 		}
 	}
 
+	async function suppress(target?: ApiPathLabel, id?: string | string[]) {
+		if (!target) return { success: false, error: 'No target' };
+		if (!id) return { success: false, error: 'No ID given' };
+
+		const params = utilsEncodeDeleteParams(id);
+		const _url = `${baseUrl}/${getTable(target)}${params}`;
+
+		try {
+			const res = await fetch(_url, {
+				method: 'DELETE',
+			});
+			return await res.json();
+		} catch (error) {
+			return {
+				success: false,
+				error: (error as Error).message,
+			};
+		}
+	}
+
 	// async function post<T = unknown>(target: ApiField) {}
 	// async function put<T = unknown>(target: ApiField) {}
-	// async function suppress<T = unknown>(target: ApiField) {}
 
 	// Helpers
 	function getTable(target: ApiPathLabel | string): string {
 		return tablePath[target as ApiPathLabel] ?? target;
 	}
 
-	return { get };
+	return { get, suppress };
 }

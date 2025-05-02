@@ -183,10 +183,12 @@ export class DataRepository {
 	}
 
 	//  D
-	delete(id: string | string[]): void {
+	delete(id: string | string[]) {
 		const ids = Array.isArray(id) ? id : [id];
 
 		this.records = this.records.filter((record) => !ids.includes(record.id));
+
+		return this.records;
 	}
 
 	// S
