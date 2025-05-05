@@ -1,10 +1,10 @@
 // Import
-import { ModelFactory } from '@/factories/ModelFactory';
-import { CalendarRecord } from '@/models/Calendar';
-import { MonthlyTransactionRecord } from '@/models/Month';
-import { MonthSummaryRecord, YearlySummaryRecord } from '@/models/Summary';
-import { YearlyTransactionRecord } from '@/models/Year';
-import { TransactionRecord, UnknownTransaction } from '@types';
+import { ModelFactory } from '../factories/ModelFactory';
+import { CalendarRecord } from '../models/Calendar';
+import { MonthlyTransactionRecord } from '../models/Month';
+import { MonthSummaryRecord, YearlySummaryRecord } from '../models/Summary';
+import { YearlyTransactionRecord } from '../models/Year';
+import { TransactionRecord, UnknownTransaction } from '../types';
 
 interface Patch {
 	id: string;

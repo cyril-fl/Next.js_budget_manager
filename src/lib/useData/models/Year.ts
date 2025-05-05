@@ -1,9 +1,9 @@
-import { FinancialOperation } from '@/controllers/FinancialOperation';
-import { MonthlyTransactionSimplifiedRecord } from '@/models/Month';
+import { FinancialOperation } from '@/lib/useData/controllers/FinancialOperation';
+import { MonthlyTransactionSimplifiedRecord } from './Month';
 import {
 	IncomeTransactionRecord,
 	OutcomeTransactionRecord,
-} from '@/models/Transaction';
+} from './Transaction';
 
 export class YearlyTransactionRecord extends FinancialOperation {
 	readonly id: string;

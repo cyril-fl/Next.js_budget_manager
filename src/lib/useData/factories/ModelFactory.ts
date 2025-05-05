@@ -1,12 +1,3 @@
-import { CategoryRecord } from '@/models/Category';
-import {
-	MonthlyTransactionRecord,
-	MonthlyTransactionSimplifiedRecord,
-} from '@/models/Month';
-import {
-	IncomeTransactionRecord,
-	OutcomeTransactionRecord,
-} from '@/models/Transaction';
 import {
 	Month,
 	PaymentStatus,
@@ -14,6 +5,15 @@ import {
 	TransactionRecord,
 	UnknownTransaction,
 } from '@types';
+import { CategoryRecord } from '../models/Category';
+import {
+	MonthlyTransactionRecord,
+	MonthlyTransactionSimplifiedRecord,
+} from '../models/Month';
+import {
+	IncomeTransactionRecord,
+	OutcomeTransactionRecord,
+} from '../models/Transaction';
 
 export class ModelFactory {
 	// Static Methods

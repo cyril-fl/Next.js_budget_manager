@@ -1,7 +1,7 @@
 import {
 	IncomeTransactionRecord,
 	OutcomeTransactionRecord,
-} from '@/models/Transaction';
+} from '../models/Transaction';
 import {
 	DAYS,
 	MONTHS,

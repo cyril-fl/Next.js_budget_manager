@@ -2,8 +2,12 @@ import {
 	ApiResponse,
 	utilsDecodeDeleteParams,
 	utilsRefineData,
+	utilsRefineDataBis,
 } from '@/lib/useApi';
-import data from '@/lib/useData/data';
+import db from '@/lib/useData';
+import { DataRepository } from '@/lib/useData/factories/DataRepository';
+import { ModelFactory } from '@/lib/useData/factories/ModelFactory';
+import { UnknownTransaction } from '@/lib/useData/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: mettre des header et un cors ect
@@ -11,8 +15,20 @@ export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = utilsRefineData(data.transactions, params);
 
+		console.log('Transaction - GET: params', params);
+		const transactions = await db.collection('transactions').find({}).toArray();
+		const records = ModelFactory.createTransactionRecordList(
+			transactions as unknown as Array<UnknownTransaction>
+		);
+		const data = new DataRepository(records);
+
+		const refinedData = utilsRefineData(data.transactions, params);
+		const refinedDataBis = utilsRefineDataBis(params);
+		console.log('Transaction - GET: refinedDataBis', refinedDataBis);
+
+		// console.log('data.transactions', data.transactions);
+		// console.log('Transaction - GET: db', transactions);
 		const res: ApiResponse = {
 			data: refinedData,
 			success: true,
@@ -36,11 +52,15 @@ export async function GET(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
-		const params = utilsDecodeDeleteParams(searchParams);
-		data.delete(params);
+		const recordIDs = utilsDecodeDeleteParams(searchParams);
+
+		// console.log('params', recordIDs);
+		// data.delete(recordIDs);
+		// console.log('data', data.transactions);
 
 		const res: ApiResponse = {
-			data: data.transactions,
+			// data: data.transactions,
+			data: { ok: true },
 			success: true,
 			message: 'Transaction data retrieved successfully',
 		};

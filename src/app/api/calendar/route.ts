@@ -1,5 +1,5 @@
 import { ApiResponse, utilsRefineData } from '@/lib/useApi';
-import data from '@/lib/useData/data';
+import data from '@/lib/useData';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: mettre des header et un cors ect
@@ -14,8 +14,6 @@ export async function GET(req: NextRequest) {
 			success: true,
 			message: 'Index calendar data retrieved successfully',
 		};
-
-		console.log('GET calendar data:', refinedData);
 
 		return NextResponse.json(res, { status: 200 });
 	} catch (error: unknown) {

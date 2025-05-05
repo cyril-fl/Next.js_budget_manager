@@ -1,5 +1,5 @@
 // Import
-import { FinancialOperation } from '@/controllers/FinancialOperation';
+import { FinancialOperation } from '../controllers/FinancialOperation';
 import { CategoryRecord } from './Category';
 import {
 	IncomeTransactionRecord,
