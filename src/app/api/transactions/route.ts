@@ -2,8 +2,8 @@ import {
 	ApiResponse,
 	utilsDecodeDeleteParams,
 	utilsDecodeParams,
-} from '@/lib/useApi';
-import db from '@/lib/useData';
+} from '@/lib_D/useApi';
+import db from '@/lib_D/useData';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: mettre des header et un cors ect
@@ -13,32 +13,10 @@ export async function GET(req: NextRequest) {
 		const encodedParams = Object.fromEntries(searchParams.entries());
 		const decodedParams = utilsDecodeParams(encodedParams);
 
+		console.log('params', decodedParams);
 		const records = await db
 			.collection('transactions')
-			.aggregate([
-				{ $match: decodedParams.filterParams },
-				{ $skip: decodedParams.offsetParam },
-				{ $limit: decodedParams.maxRecordsParam },
-				{ $sort: decodedParams.sortParams },
-				{
-					$group: {
-						_id: { year: '$year', month: '$month' },
-						records: { $push: '$$ROOT' },
-					},
-				},
-				{
-					$project: {
-						_id: 1,
-						records: {
-							$map: {
-								input: '$records',
-								as: 'record',
-								in: decodedParams.fieldsParams,
-							},
-						},
-					},
-				},
-			])
+			.aggregate(decodedParams)
 			.toArray();
 
 		const res: ApiResponse = {

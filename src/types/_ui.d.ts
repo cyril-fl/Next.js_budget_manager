@@ -1,4 +1,4 @@
-import { ApiOptions, ApiPathLabel } from '@/lib/useApi';
+import { ApiOptions, ApiPathLabel } from '@/lib_D/useApi';
 
 export interface DynamicElementProps<T = string> {
 	path: T;

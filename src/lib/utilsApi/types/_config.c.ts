@@ -1,4 +1,4 @@
-import { config } from '@/lib/useApi';
+import { config } from '@/lib_D/useApi';
 
 export const fnArray = config.formula.array;
 export const fnFilter = config.formula.filter;

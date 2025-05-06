@@ -1,4 +1,4 @@
-import { config } from '@/lib/useApi';
+import { config } from '@/lib_D/useApi';
 
 export type ApiPathLabel = (typeof config.path.labels)[number];
 

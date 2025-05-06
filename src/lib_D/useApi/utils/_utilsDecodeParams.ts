@@ -1,5 +1,6 @@
 // Imports
-import { utilsOffsetParams } from '@/lib/useApi/utils/params/_utilsOffsetParams';
+import { utilsOffsetParams } from '@/lib_D/useApi/utils/params/_utilsOffsetParams';
+import { Document } from 'mongodb';
 import { ApiParam } from '..//types';
 import {
 	utilsFieldsParams,
@@ -34,7 +35,9 @@ export function utilsRefineData<T extends object = object>(
 	return maxedData;
 }
 
-export function utilsDecodeParams<T extends object = object>(params: ApiParam) {
+export function utilsDecodeParams<T extends object = object>(
+	params: ApiParam
+): Document[] {
 	// Data
 	const { decodeFilterNew } = utilsFilterParams();
 	const { decodeSortNew } = utilsSortParams();
@@ -42,11 +45,36 @@ export function utilsDecodeParams<T extends object = object>(params: ApiParam) {
 	const { decodeMaxRecords } = utilsMaxRecordsParams();
 	const { decodeOffset } = utilsOffsetParams();
 
-	return {
-		filterParams: decodeFilterNew(params),
-		sortParams: decodeSortNew(params),
-		fieldsParams: decodeFieldsNew(params),
-		maxRecordsParam: decodeMaxRecords(params),
-		offsetParam: decodeOffset(params),
-	};
+	const filterParams = decodeFilterNew(params);
+	const sortParams = decodeSortNew(params);
+	const fieldsParams = decodeFieldsNew(params);
+	const maxRecordsParam = decodeMaxRecords(params);
+	const offsetParam = decodeOffset(params);
+
+	return [
+		filterParams ? { $match: filterParams } : undefined,
+		offsetParam ? { $skip: offsetParam } : undefined,
+		maxRecordsParam ? { $limit: maxRecordsParam } : undefined,
+		// sortParams ? { $sort: sortParams } : undefined,
+		{
+			$group: {
+				_id: { year: '$year', month: '$month' },
+				records: { $push: '$$ROOT' },
+			},
+		},
+		fieldsParams
+			? {
+					$project: {
+						_id: 1,
+						records: {
+							$map: {
+								input: '$records',
+								as: 'record',
+								in: fieldsParams,
+							},
+						},
+					},
+				}
+			: undefined,
+	].filter(Boolean) as Document[];
 }

@@ -1,4 +1,4 @@
-import { Database } from '@/lib/useData/controllers/Database';
+import { Database } from '@/lib_D/useData/controllers/Database';
 
 const instance = await Database.getInstance();
 await instance.init();

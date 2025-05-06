@@ -1,4 +1,4 @@
-import { FinancialOperation } from '@/lib/useData/controllers/FinancialOperation';
+import { FinancialOperation } from '@/lib_D/useData/controllers/FinancialOperation';
 import { MonthlyTransactionSimplifiedRecord } from './Month';
 import {
 	IncomeTransactionRecord,

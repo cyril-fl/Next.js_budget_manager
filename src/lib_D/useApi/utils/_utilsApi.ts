@@ -1,5 +1,5 @@
 // Imports
-import { config, utilsEncodeDeleteParams } from '@/lib/useApi';
+import { config, utilsEncodeDeleteParams } from '@/lib_D/useApi';
 import { ApiOptions, ApiPathLabel, ApiResponse } from '../types';
 import { utilsEncodeParams } from '../utils/';
 

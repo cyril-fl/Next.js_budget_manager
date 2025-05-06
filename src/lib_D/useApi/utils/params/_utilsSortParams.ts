@@ -1,5 +1,5 @@
 // Import
-import { utilsPrimitiveType } from '@/lib/useApi/utils/utils/_utilsPrimitiveType';
+import { utilsPrimitiveType } from '@/lib_D/useApi/utils/utils/_utilsPrimitiveType';
 import { ApiParam, ApiSortParam } from '../../types';
 
 // Define

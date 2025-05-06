@@ -1,4 +1,4 @@
-import { config } from '@/lib/useApi';
+import { config } from '@/lib_D/useApi';
 import { ApiNamedOperator, ApiSymbolOperator } from './_operator';
 
 export type ApiFormulaFilter = (typeof config.formula.filter)[number];

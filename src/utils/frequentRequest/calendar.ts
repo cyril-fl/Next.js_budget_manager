@@ -1,4 +1,4 @@
-import { CalendarRecord } from '@/lib/useData/models/Calendar';
+import { CalendarRecord } from '@/lib_D/useData/models/Calendar';
 
 export const target = 'calendar';
 export const options = {
