@@ -1,36 +1,48 @@
 import {
 	ApiResponse,
 	utilsDecodeDeleteParams,
-	utilsRefineData,
-	utilsRefineDataBis,
+	utilsDecodeParams,
 } from '@/lib/useApi';
 import db from '@/lib/useData';
-import { DataRepository } from '@/lib/useData/factories/DataRepository';
-import { ModelFactory } from '@/lib/useData/factories/ModelFactory';
-import { UnknownTransaction } from '@/lib/useData/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
-		const params = Object.fromEntries(searchParams.entries());
+		const encodedParams = Object.fromEntries(searchParams.entries());
+		const decodedParams = utilsDecodeParams(encodedParams);
 
-		console.log('Transaction - GET: params', params);
-		const transactions = await db.collection('transactions').find({}).toArray();
-		const records = ModelFactory.createTransactionRecordList(
-			transactions as unknown as Array<UnknownTransaction>
-		);
-		const data = new DataRepository(records);
+		const records = await db
+			.collection('transactions')
+			.aggregate([
+				{ $match: decodedParams.filterParams },
+				{ $skip: decodedParams.offsetParam },
+				{ $limit: decodedParams.maxRecordsParam },
+				{ $sort: decodedParams.sortParams },
+				{
+					$group: {
+						_id: { year: '$year', month: '$month' },
+						records: { $push: '$$ROOT' },
+					},
+				},
+				{
+					$project: {
+						_id: 1,
+						records: {
+							$map: {
+								input: '$records',
+								as: 'record',
+								in: decodedParams.fieldsParams,
+							},
+						},
+					},
+				},
+			])
+			.toArray();
 
-		const refinedData = utilsRefineData(data.transactions, params);
-		const refinedDataBis = utilsRefineDataBis(params);
-		console.log('Transaction - GET: refinedDataBis', refinedDataBis);
-
-		// console.log('data.transactions', data.transactions);
-		// console.log('Transaction - GET: db', transactions);
 		const res: ApiResponse = {
-			data: refinedData,
+			data: records,
 			success: true,
 			message: 'Transaction data retrieved successfully',
 		};

@@ -19,6 +19,27 @@ export function utilsFieldsParams() {
 		return fieldsArray;
 	}
 
+	function decodeFieldsParamsNew(params: ApiParam) {
+		const fields = params.fields;
+		if (!fields) return {};
+
+		const fieldsArray = decodeURIComponent(fields).split(',');
+		if (!fieldsArray.length) return {};
+
+		const projection: { [key: string]: 1 } = {};
+		fieldsArray.forEach((field) => {
+			projection[field] = 1;
+		});
+
+		return Object.keys(projection).reduce(
+			(acc, key) => {
+				acc[key] = `$$record.${key}`;
+				return acc;
+			},
+			{} as Record<string, string>
+		);
+	}
+
 	function applyFieldsParams<T extends object>(
 		data: T[],
 		fields: string[]
@@ -41,6 +62,7 @@ export function utilsFieldsParams() {
 	return {
 		encodeFields: encodeFieldsParams,
 		decodeFields: decodeFieldsParams,
+		decodeFieldsNew: decodeFieldsParamsNew,
 		applyFields: applyFieldsParams,
 	};
 }

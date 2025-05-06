@@ -1,32 +1,46 @@
 // Imports
 import Pre from '@/.debug/components/Pre';
-import { utilsApi } from '@/lib/useApi';
+import { ApiFormula, utilsApi } from '@/lib/useApi';
 
 // Define
 
 export default async function TestPages() {
 	// Data
+	const filter: ApiFormula = {
+		fn: 'AND',
+		args: [
+			{
+				l: 'year',
+				r: 2025,
+			},
+			{
+				l: 'month',
+				r: 0,
+			},
+			{
+				l: 'type',
+				r: 'income',
+			},
+		],
+	};
+
 	const { get } = utilsApi();
 
 	const { data } = await get<object>('transactions', {
-		maxRecords: 1,
-		filter: {
-			fn: 'AND',
-			args: [
-				{
-					l: 'year',
-					r: 2025,
-				},
-				{
-					l: 'month',
-					r: 0,
-				},
-				{
-					l: 'type',
-					r: 'income',
-				},
-			],
-		},
+		filter,
+		// maxRecords: 4,
+		// offset: 1,
+		// fields: ['label', 'amount'],
+		// sort: [
+		// 	{
+		// 		field: 'amount',
+		// 		direction: 'asc',
+		// 	},
+		// 	{
+		// 		field: 'label',
+		// 		direction: 'asc',
+		// 	},
+		// ],
 	});
 
 	// Render

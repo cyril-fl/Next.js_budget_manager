@@ -5,7 +5,7 @@ import {
 	PaymentStatus,
 	ReceiptStatus,
 	TransactionType,
-} from '@types';
+} from '../types';
 
 // Class
 export abstract class TransactionRecord {

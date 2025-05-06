@@ -14,6 +14,6 @@ export type ApiOptions = {
 	maxRecords?: number;
 	pageSize?: number;
 	filter?: ApiFormula | string;
-	offset?: string;
+	offset?: number;
 	sort?: ApiSortParam | ApiSortParam[];
 } & NextCache;

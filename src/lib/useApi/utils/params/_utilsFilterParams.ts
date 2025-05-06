@@ -18,6 +18,7 @@ import {
 	utilsFormulaFilter,
 	utilsFormulaTransform,
 	utilsParseFormula,
+	utilsParseFormulaToMongo,
 	utilsRedirection,
 } from '../utils/formula';
 
@@ -125,9 +126,7 @@ export function utilsFilterParams() {
 		return handleBaseBuild(filter.fn, parsedArgs, defaultOp);
 	}
 
-	function decodeFilterParams(
-		params: ApiParam
-	): ApiConvertedFormula | undefined {
+	function decodeFilterParams(params: ApiParam) {
 		const filter = params.filter;
 		if (!filter) return;
 
@@ -137,6 +136,14 @@ export function utilsFilterParams() {
 		if (!isFormula(decodedFilter)) return;
 
 		return parse(decodedFilter);
+	}
+
+	function decodeFilterParamsNew(params: ApiParam) {
+		const filter = params.filter;
+		if (!filter) return;
+
+		const decodedFilter = decodeURIComponent(filter);
+		return utilsParseFormulaToMongo(decodedFilter);
 	}
 
 	function applyFormula<T extends object>(
@@ -163,6 +170,7 @@ export function utilsFilterParams() {
 	return {
 		encodeFilter: encodeFilterParams,
 		decodeFilter: decodeFilterParams,
+		decodeFilterNew: decodeFilterParamsNew,
 		applyFilter: applyFormula,
 	};
 }

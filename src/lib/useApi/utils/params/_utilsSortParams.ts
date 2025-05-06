@@ -40,6 +40,52 @@ export function utilsSortParams() {
 		return sortArray.filter((item) => item.field);
 	}
 
+	function decodeSortParamsNew(params: ApiParam) {
+		const sortArray: ApiSortParam[] | undefined = [];
+
+		Object.keys(params).forEach((key) => {
+			const match = key.match(/^sort\[(\d+)]\[(field|direction)]$/);
+
+			if (!match) return;
+			const index = parseInt(match[1], 10);
+			const type = match[2] as 'field' | 'direction';
+
+			sortArray[index] = sortArray[index] || { field: '', direction: 'asc' };
+
+			sortArray[index][type] = params[key] as 'asc' | 'desc';
+		});
+
+		return sortArray
+			.filter((item) => item.field)
+			.reduce((sortObj: { [key: string]: 1 | -1 }, { field, direction }) => {
+				sortObj[field] = direction === 'asc' ? 1 : -1;
+				return sortObj;
+			}, {});
+	}
+	// return Object.keys(params)
+	// 	.filter((key) => /^sort\[\d+]\[field|direction]$/.test(key))
+	// 	.reduce(
+	// 		(sortArray: { field: string; direction: 'asc' | 'desc' }[], key) => {
+	// 			const match = key.match(/^sort\[(\d+)]\[(field|direction)]$/);
+	// 			if (!match) return sortArray;
+	//
+	// 			const [, index, type] = match;
+	// 			const value = params[key] as 'asc' | 'desc';
+	//
+	// 			// Assurer que sortArray[index] a le bon type
+	// 			sortArray[+index] = sortArray[+index] || {
+	// 				field: '',
+	// 				direction: 'asc',
+	// 			};
+	//
+	// 			sortArray[+index][type] = value;
+	//
+	// 			return sortArray;
+	// 		},
+	// 		[]
+	// 	)
+	// 	.filter((item) => item.field) // Garder uniquement les éléments ayant un champ
+
 	function applySortParams<T extends object>(
 		data: T[],
 		sortParams: ApiSortParam[]
@@ -73,6 +119,7 @@ export function utilsSortParams() {
 	return {
 		encodeSort: encodeSortParams,
 		decodeSort: decodeSortParams,
+		decodeSortNew: decodeSortParamsNew,
 		applySort: applySortParams,
 	};
 }

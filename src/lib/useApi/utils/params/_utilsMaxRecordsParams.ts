@@ -5,16 +5,17 @@ import { ApiParam } from '../../types';
 
 export function utilsMaxRecordsParams() {
 	// Data
+	const defaultValue = 100;
 
 	// Methods
 	function encodeMaxRecordsParams() {}
 
 	function decodeMaxRecordsParams(params: ApiParam) {
 		const maxRecords = params.maxRecords;
-		if (!maxRecords) return;
+		if (!maxRecords) return defaultValue;
 
 		const maxRecordsParam = parseInt(maxRecords, 10);
-		if (isNaN(maxRecordsParam)) return;
+		if (isNaN(maxRecordsParam)) return defaultValue;
 
 		return maxRecordsParam;
 	}

@@ -10,6 +10,15 @@ import {
 
 // Define
 // type ConvertedArgument = Array<ApiConvertedComparison | ApiConvertedFormula>;
+type MangoCondition = {
+	[field: string | number | symbol]: {
+		[operator: string]: string | number | boolean | undefined;
+	};
+};
+
+type MangoQuery = {
+	[logical: string]: Array<MangoCondition | MangoQuery>;
+};
 
 export function utilsParseFormula() {
 	//  Data
@@ -76,8 +85,16 @@ export function utilsParseClause() {
 		return l.replace(/[{}]/g, '');
 	}
 
-	function sanitizeRight(r: string) {
-		return r.replace(/^'|'$/g, '');
+	// function sanitizeRight(r: string) {
+	// 	return r.replace(/^'|'$/g, '');
+	// }
+
+	function sanitizeRight(r: string): string | number {
+		const value = r.replace(/^'|'$/g, '');
+		if (!isNaN(Number(value)) && value.trim() !== '') {
+			return Number(value);
+		}
+		return value;
 	}
 
 	function parseWithOperator(
@@ -121,26 +138,60 @@ export function utilsParseClause() {
 	return { parse: handleParse };
 }
 
-/*// NOTE: Entry point to parse if the formula does not start with a function
-export function _parseClause(value: string): ConvertedArgument {
+export function utilsParseFormulaToMongo(
+	params: string
+): MangoQuery | MangoCondition | undefined {
+	const { parse, isFormula } = utilsParseFormula();
+	if (!isFormula(params)) return;
+
+	const parsed = parse(params);
+	if (!parsed) return;
+
 	// Data
-	const { parse: parseFormula, smartSplit, isFormula } = utilsParseFormula();
-	const { parse: parseClause } = utilsParseClause();
-	const result: ConvertedArgument = [];
-	const parts = value.includes(',') ? smartSplit(value) : [value];
+	const opMap: Record<ApiSymbolOperator, string> = {
+		'=': '$eq',
+		'==': '$eq',
+		'!=': '$ne',
+		'!==': '$ne',
+		'>': '$gt',
+		'<': '$lt',
+		'>=': '$gte',
+		'<=': '$lte',
+	};
 
-	//  Return
-	for (const part of parts) {
-		const trimmed = part.trim();
+	function recurse(
+		formula: ApiConvertedFormula | ApiConvertedComparison
+	): MangoQuery | MangoCondition | undefined {
+		if ('fn' in formula) {
+			const mangoFn = `$${formula.fn.toLowerCase()}`;
+			const args = isArray(formula.args) ? formula.args : [formula.args];
+			const recursedArgs = args
+				.map(recurse)
+				.filter((arg): arg is MangoCondition | MangoQuery => arg !== undefined);
 
-		if (isFormula(trimmed)) {
-			const formula = parseFormula(trimmed);
-			if (formula) result.push(formula);
-		} else {
-			const clause = parseClause(trimmed);
-			if (clause) result.push(clause);
+			return { [mangoFn]: recursedArgs };
 		}
+
+		const { l, r, symbol } = formula;
+		if (!symbol || r === undefined) {
+			throw new Error(`Invalid comparison: ${JSON.stringify(formula)}`);
+		}
+
+		const operator = opMap[symbol as keyof typeof opMap];
+		if (!operator) {
+			throw new Error(`Unknown operator: ${symbol}`);
+		}
+
+		return {
+			[l as any]: {
+				[operator]: isNaN(Number(r)) ? r : Number(r),
+			},
+		};
 	}
 
-	return result;
-}*/
+	return recurse(parsed);
+}
+
+function isArray<T>(value: T | T[]): value is T[] {
+	return Array.isArray(value);
+}

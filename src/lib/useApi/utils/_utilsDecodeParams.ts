@@ -1,4 +1,5 @@
 // Imports
+import { utilsOffsetParams } from '@/lib/useApi/utils/params/_utilsOffsetParams';
 import { ApiParam } from '..//types';
 import {
 	utilsFieldsParams,
@@ -25,10 +26,27 @@ export function utilsRefineData<T extends object = object>(
 	const fieldsParams = decodeFields(params);
 	const maxRecordsParam = decodeMaxRecords(params);
 
-	const filteredData = applyFilter(data, filterParams);
-	const sortedData = applySort(filteredData, sortParams);
+	// const filteredData = applyFilter(data, filterParams);
+	const sortedData = applySort(data, sortParams);
 	const extractedFields = applyFields(sortedData, fieldsParams);
 	const maxedData = applyMaxRecords(extractedFields, maxRecordsParam);
 
 	return maxedData;
+}
+
+export function utilsDecodeParams<T extends object = object>(params: ApiParam) {
+	// Data
+	const { decodeFilterNew } = utilsFilterParams();
+	const { decodeSortNew } = utilsSortParams();
+	const { decodeFieldsNew } = utilsFieldsParams();
+	const { decodeMaxRecords } = utilsMaxRecordsParams();
+	const { decodeOffset } = utilsOffsetParams();
+
+	return {
+		filterParams: decodeFilterNew(params),
+		sortParams: decodeSortNew(params),
+		fieldsParams: decodeFieldsNew(params),
+		maxRecordsParam: decodeMaxRecords(params),
+		offsetParam: decodeOffset(params),
+	};
 }
