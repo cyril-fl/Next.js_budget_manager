@@ -1,4 +1,5 @@
+import apiHandler from './_api';
 import dashboardHandler from './_dashboard';
 import overviewHandler from './_overview';
 
-export { dashboardHandler, overviewHandler };
+export { apiHandler, dashboardHandler, overviewHandler };

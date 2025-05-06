@@ -1,55 +1,68 @@
+'use client';
 // Imports
 import Pre from '@/.debug/components/Pre';
-import { ApiFormula, utilsApi } from '@/lib_D/useApi';
+import { utilsApi } from '@/server/utilsApi';
+import { useEffect, useState } from 'react';
 
 // Define
 
-export default async function TestPages() {
+// export default async function TestPages() {
+export default function TestPages() {
 	// Data
-	const filter: ApiFormula = {
-		fn: 'AND',
-		args: [
-			{
-				l: 'year',
-				r: 2025,
-			},
-			{
-				l: 'month',
-				r: 0,
-			},
-			{
-				l: 'type',
-				r: 'income',
-			},
-		],
-	};
+	// const filter: ApiFormula = {
+	// 	fn: 'AND',
+	// 	args: [
+	// 		{
+	// 			l: 'year',
+	// 			r: 2025,
+	// 		},
+	// 		{
+	// 			l: 'month',
+	// 			r: 0,
+	// 		},
+	// 		{
+	// 			l: 'type',
+	// 			r: 'income',
+	// 		},
+	// 	],
+	// };
 
 	const { get } = utilsApi();
+	const [data, setData] = useState<object>({});
+	useEffect(() => {
+		const fetchData = async () => {
+			return await get<object>('transactions', {
+				// filter,
+				limit: 4,
+				offset: 1,
+				fields: ['label', 'amount'],
+				sort: [
+					{
+						field: 'amount',
+						direction: 'asc',
+					},
+					{
+						field: 'label',
+						direction: 'asc',
+					},
+				],
+			});
+		};
 
-	const { data } = await get<object>('transactions', {
-		filter,
-		// maxRecords: 4,
-		// offset: 1,
-		// fields: ['label', 'amount'],
-		// sort: [
-		// 	{
-		// 		field: 'amount',
-		// 		direction: 'asc',
-		// 	},
-		// 	{
-		// 		field: 'label',
-		// 		direction: 'asc',
-		// 	},
-		// ],
-	});
+		fetchData().then((res) => {
+			console.log('res', res);
+			setData(res.data ?? []);
+		});
+	}, []);
 
 	// Render
 	return (
 		<div>
 			<div className={'flex gap-4 p-4'}>
 				<h1>Test</h1>
-				<Pre data={data} />
+				<Pre data={data} label="Params" />
 			</div>
+			s
 		</div>
 	);
 }

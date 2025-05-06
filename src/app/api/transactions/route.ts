@@ -1,26 +1,20 @@
-import {
-	ApiResponse,
-	utilsDecodeDeleteParams,
-	utilsDecodeParams,
-} from '@/lib_D/useApi';
-import db from '@/lib_D/useData';
+// Import
+import { ApiResponse, utilsDecodeGetParams } from '@/server/utilsApi';
 import { NextRequest, NextResponse } from 'next/server';
-
-// TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
-		const encodedParams = Object.fromEntries(searchParams.entries());
-		const decodedParams = utilsDecodeParams(encodedParams);
-
-		console.log('params', decodedParams);
-		const records = await db
-			.collection('transactions')
-			.aggregate(decodedParams)
-			.toArray();
+		const params = utilsDecodeGetParams(searchParams);
+		console.log('params', params);
+		// console.log('params', decodedParams);
+		// const records = await db
+		// 	.collection('transactions')
+		// 	.aggregate(decodedParams)
+		// 	.toArray();
 
 		const res: ApiResponse = {
-			data: records,
+			// data: records,
+			data: { ok: true },
 			success: true,
 			message: 'Transaction data retrieved successfully',
 		};
@@ -40,9 +34,10 @@ export async function GET(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
+	console.log('DELETE transactions');
 	try {
 		const searchParams = req.nextUrl.searchParams;
-		const recordIDs = utilsDecodeDeleteParams(searchParams);
+		// const recordIDs = utilsDecodeDeleteParams(searchParams);
 
 		// console.log('params', recordIDs);
 		// data.delete(recordIDs);

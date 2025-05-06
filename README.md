@@ -67,7 +67,7 @@ src/
  ├─ components/    # Reusable UI components
  ├─ types/         # TypeScript types
  └─ utils/         # Utility functions
-next.config.ts     # Next.js configuration
+next._schema.ts     # Next.js configuration
 tailwind.config.js # Tailwind CSS configuration
 ```
 
