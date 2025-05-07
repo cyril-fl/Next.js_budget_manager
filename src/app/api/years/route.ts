@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { utilsRefineData } from '../../../../.deprecated/lib_D/useApi';
 import { ApiResponse } from '../../../../.deprecated/lib_D/useApi/types';
 
-// TODO: mettre des header et un cors ect
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
