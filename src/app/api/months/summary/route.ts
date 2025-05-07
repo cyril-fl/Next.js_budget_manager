@@ -1,15 +1,44 @@
-import { ApiResponse, utilsRefineData } from '@/lib_D/useApi';
-import data from '@/lib_D/useData';
+import db from '@/server/db';
+import {
+	ApiResponse,
+	utilsDecodeGetParams,
+	utilsPipeline,
+} from '@/server/utilsApi';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
+		// const searchParams = req.nextUrl.searchParams;
+		// const params = Object.fromEntries(searchParams.entries());
+		// const refinedData = utilsRefineData(data.monthlySummary, params);
+		//
+		// const res: ApiResponse = {
+		// 	data: refinedData,
+		// 	success: true,
+		// };
+		//
+		// return NextResponse.json(res, { status: 200 });
+
 		const searchParams = req.nextUrl.searchParams;
-		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = utilsRefineData(data.monthlySummary, params);
+		const params = utilsDecodeGetParams(searchParams);
+		// const pipeline = utilsPipeline(params, {
+		// 	group: (v) => ({
+		// 		$group: {
+		// 			_id: '$year',
+		// 			total: { $sum: '$amount' },
+		// 			record: { $push: '$$ROOT' },
+		// 		},
+		// 	}),
+		// });
+
+		const pipeline = utilsPipeline(params);
+		const records = await db
+			.collection('transactions')
+			.aggregate(pipeline)
+			.toArray();
 
 		const res: ApiResponse = {
-			data: refinedData,
+			data: records,
 			success: true,
 			message: 'Years data retrieved successfully',
 		};

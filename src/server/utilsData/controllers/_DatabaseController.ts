@@ -1,31 +1,29 @@
 // Import
 import { useConsole } from '@/.debug/hooks/useConsole';
+import { assert } from '@core';
 import { Db, MongoClient, MongoClientOptions } from 'mongodb';
+import { config } from '../..//config';
 // Data
 // eslint-disable-next-line react-hooks/rules-of-hooks
 const Console = useConsole();
 
-const MONGODB_URL =
-	'mongodb://cyril-fl:1963@localhost:27017/compta_app?authSource=admin';
-const MONGODB_NAME = 'compta_app';
+const MONGODB_URL = config.mongo?.url;
+const MONGODB_NAME = config.mongo?.name;
+assert<string>(MONGODB_URL, 'MONGODB_URL is not defined');
+assert<string>(MONGODB_NAME, 'MONGODB_URL is not defined');
 
-/*if (!MONGODB_URL || !MONGODB_NAME) {
-	throw new Error(
-		'⚠️ MongoDB URL or name is not defined. Please check your environment variables.'
-	);
-}*/
-let _instance: Database | undefined;
+let _instance: DatabaseController | undefined;
 
 // Class
-export class Database {
+export class DatabaseController {
 	private _client: MongoClient | null = null;
 	protected _db: Db | null = null;
 
 	private constructor() {}
 
-	public static async getInstance(): Promise<Database> {
+	public static async getInstance(): Promise<DatabaseController> {
 		if (!_instance) {
-			_instance = new Database();
+			_instance = new DatabaseController();
 			await _instance.connect();
 		}
 		return _instance;
@@ -44,7 +42,8 @@ export class Database {
 
 		try {
 			const options: MongoClientOptions = {};
-			this._client = await MongoClient.connect(MONGODB_URL, options);
+
+			this._client = await MongoClient.connect(MONGODB_URL ?? '', options);
 			this._db = this._client.db(MONGODB_NAME);
 
 			Console.log('✅ MongoDB connected.');

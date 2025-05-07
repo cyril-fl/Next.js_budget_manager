@@ -1,6 +1,6 @@
 // Import
 import SideMenuClient from '@/components/layout/dynamicSideMenu/SideMenuClient';
-import { utilsApi } from '@/lib_D/useApi';
+import { utilsApi } from '@/server/utilsApi';
 import { CtxMenuViewKey } from '@/stores/useCtxMenu';
 import { DynamicElementProps } from '@types';
 

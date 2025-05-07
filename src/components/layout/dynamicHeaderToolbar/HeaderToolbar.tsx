@@ -1,7 +1,8 @@
 // Imports
 import HeaderToolbarClient from '@/components/layout/dynamicHeaderToolbar/HeaderToolbarClient';
+import { utilsApi } from '@/server/utilsApi';
 import { DynamicElementProps } from '@types';
-import { utilsApi } from '../../../../.deprecated/lib_D/useApi';
+// import { utilsApi } from '../../../../.deprecated/lib_D/useApi';
 
 // Define
 export interface HeaderToolbarProps extends DynamicElementProps {

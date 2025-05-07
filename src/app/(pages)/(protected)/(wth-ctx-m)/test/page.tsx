@@ -32,20 +32,20 @@ export default function TestPages() {
 	useEffect(() => {
 		const fetchData = async () => {
 			return await get<object>('transactions', {
-				filter,
-				limit: 4,
-				offset: 1,
-				fields: ['label', 'amount'],
-				sort: [
-					{
-						field: 'amount',
-						direction: 'asc',
-					},
-					{
-						field: 'label',
-						direction: 'asc',
-					},
-				],
+				// filter,
+				// limit: 4,
+				// offset: 1,
+				// sort: [
+				// 	{
+				// 		field: 'amount',
+				// 		direction: 'asc',
+				// 	},
+				// 	{
+				// 		field: 'label',
+				// 		direction: 'asc',
+				// 	},
+				// ],
+				// fields: ['label'],
 			});
 		};
 
