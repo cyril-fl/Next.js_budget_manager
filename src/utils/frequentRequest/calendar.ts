@@ -1,11 +1,11 @@
-import { CalendarRecord } from '@/lib_D/useData/models/Calendar';
-
-export const target = 'calendar';
+export const target = 'yearlyCalendar';
 export const options = {
-	fields: ['year', 'months'],
 	nextCache: {
 		revalidate: 60,
 		tags: ['calendar'],
 	},
 };
-export type LocalItem = Omit<CalendarRecord, 'detailedMonth'>;
+export interface LocalItem {
+	year: number;
+	months: number[];
+}

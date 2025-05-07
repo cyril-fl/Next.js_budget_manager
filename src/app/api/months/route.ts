@@ -1,15 +1,59 @@
-import { ApiResponse, utilsRefineData } from '@/lib_D/useApi';
-import data from '@/lib_D/useData';
+import db from '@/server/db';
+import {
+	ApiResponse,
+	utilsDecodeGetParams,
+	utilsPipeline,
+} from '@/server/utilsApi';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
-		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = utilsRefineData(data.months, params);
+		const params = utilsDecodeGetParams(searchParams);
+		// TODO: Faire un order ou [filter, group,  .... fields]
+		const pipeline = utilsPipeline(params, {
+			group: (v) => ({
+				$group: {
+					_id: {
+						$concat: [{ $toString: '$year' }, '-', { $toString: '$month' }],
+					},
+					year: { $first: '$year' },
+					month: { $first: '$month' },
+					record: { $push: '$$ROOT' },
+				},
+			}),
+			project: (v) => ({
+				$project: {
+					_id: 0,
+					year: 1,
+					month: 1,
+					outcomes: {
+						$filter: {
+							input: '$record', // <-- ici le $
+							as: 'item',
+							cond: { $eq: ['$$item.type', 'outcome'] },
+						},
+					},
+					incomes: {
+						$filter: {
+							input: '$record', // <-- ici aussi
+							as: 'item',
+							cond: { $eq: ['$$item.type', 'income'] },
+						},
+					},
+				},
+			}),
+		});
+
+		const records = await db
+			.collection('transactions')
+			.aggregate(pipeline)
+			.toArray();
+
+		// TODO Passer les record dans une factory pour les transformer
 
 		const res: ApiResponse = {
-			data: refinedData,
+			data: records,
 			success: true,
 			message: 'Month data retrieved successfully',
 		};

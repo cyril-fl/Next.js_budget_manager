@@ -1,59 +1,37 @@
-'use client';
 // Imports
 import Pre from '@/.debug/components/Pre';
 import { utilsApi } from '@/server/utilsApi';
-import { useEffect, useState } from 'react';
 
 // Define
 
-// export default async function TestPages() {
-export default function TestPages() {
+export default async function TestPages() {
 	// Data
-	const filter = {
-		fn: 'AND',
-		args: [
-			{
-				l: 'year',
-				r: 2025,
-			},
-			{
-				l: 'month',
-				r: 0,
-			},
-			{
-				l: 'type',
-				r: 'income',
-			},
-		],
-	};
-
 	const { get } = utilsApi();
-	const [data, setData] = useState<object>({});
-	useEffect(() => {
-		const fetchData = async () => {
-			return await get<object>('transactions', {
-				filter,
-				limit: 4,
-				offset: 1,
-				fields: ['label', 'amount'],
-				sort: [
-					{
-						field: 'amount',
-						direction: 'asc',
-					},
-					{
-						field: 'label',
-						direction: 'asc',
-					},
-				],
-			});
-		};
 
-		fetchData().then((res) => {
-			console.log('res', res);
-			setData(res.data ?? []);
-		});
-	}, []);
+	const { data } = await get<object>('yearlySummary', {
+		// filter: {
+		// 	$and: [
+		// 		{
+		// 			year: { $eq: 2025 },
+		// 		},
+		// 		{
+		// 			$or: [
+		// 				{
+		// 					month: { $eq: 0 },
+		// 				},
+		// 				{
+		// 					month: { $eq: 1 },
+		// 				},
+		// 			],
+		// 		},
+		// 	],
+		// },
+		// fields: ['month', 'year'],
+		// fields: ['incomesStats'],
+		// offset: 1,
+		// limit: 1,
+		// sort: [{ field: 'year', direction: 'desc' }],
+	});
 
 	// Render
 	return (

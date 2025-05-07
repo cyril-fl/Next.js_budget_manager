@@ -1,6 +1,6 @@
 // Imports
 import { config } from '../../config';
-import { ApiEndpoint, ApiRequestOptions, ApiResponse } from '../types';
+import { ApiEncodedParams, ApiEndpoint, ApiResponse } from '../types';
 import { utilsEncodeGetParams } from './get/_utilsEncodeGetParams';
 
 // Define
@@ -13,9 +13,9 @@ export function utilsApi() {
 	const token = config.bearer;
 
 	// Methods
-	async function get<T = unknown>(
+	async function get<T = unknown, K = any>(
 		target?: ApiEndpoint,
-		option?: ApiRequestOptions
+		option?: ApiEncodedParams<K>
 	): Promise<ApiResponse<T>> {
 		try {
 			handleAssertRecord(target);

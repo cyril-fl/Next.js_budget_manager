@@ -1,20 +1,23 @@
 // Import
+import db from '@/server/db';
 import { ApiResponse, utilsDecodeGetParams } from '@/server/utilsApi';
+import { utilsPipeline } from '@/server/utilsApi/utils/_utilsPipeline';
 import { NextRequest, NextResponse } from 'next/server';
+
+// Handlers
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = utilsDecodeGetParams(searchParams);
-		console.log('params', params);
-		// console.log('params', decodedParams);
-		// const records = await db
-		// 	.collection('transactions')
-		// 	.aggregate(decodedParams)
-		// 	.toArray();
+		const pipeline = utilsPipeline(params);
+
+		const records = await db
+			.collection('transactions')
+			.aggregate(pipeline)
+			.toArray();
 
 		const res: ApiResponse = {
-			// data: records,
-			data: { ok: true },
+			data: records,
 			success: true,
 			message: 'Transaction data retrieved successfully',
 		};

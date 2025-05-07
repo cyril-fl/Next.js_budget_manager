@@ -23,6 +23,10 @@ export type PrivateLabels = (typeof PRIVATE_LABELS)[number];
 export interface RawConfig<T extends string | number | symbol = string> {
 	url: string;
 	bearer: string;
+	mongo?: {
+		url: string;
+		name: string;
+	};
 	path: {
 		labels: T[];
 		routes: Partial<Record<T, string>>;

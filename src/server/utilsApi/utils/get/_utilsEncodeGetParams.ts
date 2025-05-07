@@ -1,4 +1,4 @@
-import { ApiRequestOptions, ApiSortParam } from '@/server/utilsApi';
+import { ApiEncodedParams, ApiSortParam } from '@/server/utilsApi';
 
 function isApiSortParam(item: unknown): item is ApiSortParam {
 	return (
@@ -8,7 +8,7 @@ function isApiSortParam(item: unknown): item is ApiSortParam {
 	);
 }
 
-function handleSortParam(value: ApiRequestOptions['sort']) {
+function handleSortParam(value: ApiEncodedParams['sort']) {
 	const sortArray = Array.isArray(value) ? value : [value];
 	return sortArray
 		.filter(isApiSortParam)
@@ -28,7 +28,7 @@ function handleDefaultParam(key: string, value: unknown) {
 }
 
 export function utilsEncodeGetParams(
-	params: ApiRequestOptions | undefined
+	params: ApiEncodedParams | undefined
 ): string {
 	if (!params) return '';
 
@@ -37,7 +37,7 @@ export function utilsEncodeGetParams(
 
 		switch (key) {
 			case 'sort':
-				return handleSortParam(value as ApiRequestOptions['sort']);
+				return handleSortParam(value as ApiEncodedParams['sort']);
 			case 'filter':
 				return handleFilterParam(value);
 			default:

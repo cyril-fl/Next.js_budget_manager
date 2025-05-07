@@ -1,15 +1,39 @@
-import { ApiResponse, utilsRefineData } from '@/lib_D/useApi';
-import data from '@/lib_D/useData';
+import { days, groupBy, months } from '@/app/api/calendar/utils';
+import db from '@/server/db';
+import {
+	ApiResponse,
+	utilsDecodeGetParams,
+	utilsPipeline,
+} from '@/server/utilsApi';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
-		const params = Object.fromEntries(searchParams.entries());
-		const refinedData = utilsRefineData(data.calendar, params);
+		const params = utilsDecodeGetParams(searchParams);
+		const pipeline = utilsPipeline(
+			params,
+			{
+				group: (v) => groupBy,
+				project: () => ({
+					$project: {
+						_id: 0,
+						year: 1,
+						months,
+						days,
+					},
+				}),
+			},
+			['filter', 'group', 'project', 'offset', 'limit', 'fields', 'sort']
+		);
+
+		const records = await db
+			.collection('transactions')
+			.aggregate(pipeline)
+			.toArray();
 
 		const res: ApiResponse = {
-			data: refinedData,
+			data: records,
 			success: true,
 			message: 'Index calendar data retrieved successfully',
 		};
