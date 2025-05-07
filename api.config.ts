@@ -12,6 +12,8 @@ const LABELS = [
 type Labels = typeof LABELS[number];
 
 const config = defineConfig<Labels>({
+	// TODO Mettre un process.env qqelque par 
+	bearer: 'cyril-f-test',
 	path: {
 		labels: [...LABELS],
 		routes: {

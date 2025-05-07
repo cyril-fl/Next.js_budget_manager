@@ -10,8 +10,7 @@ export function utilsApi() {
 	// TODO: mettre en config avec env. parce que je voudrais que la cofig de .core definise la config de useAPi a terme
 	const baseUrl = config.url;
 	const tablePath = config.path?.routes;
-	// TODO: mettre le token dans le .env
-	const token = 'config.token';
+	const token = config.bearer;
 
 	// Methods
 	async function get<T = unknown>(

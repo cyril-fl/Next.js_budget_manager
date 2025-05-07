@@ -9,30 +9,30 @@ import { useEffect, useState } from 'react';
 // export default async function TestPages() {
 export default function TestPages() {
 	// Data
-	// const filter: ApiFormula = {
-	// 	fn: 'AND',
-	// 	args: [
-	// 		{
-	// 			l: 'year',
-	// 			r: 2025,
-	// 		},
-	// 		{
-	// 			l: 'month',
-	// 			r: 0,
-	// 		},
-	// 		{
-	// 			l: 'type',
-	// 			r: 'income',
-	// 		},
-	// 	],
-	// };
+	const filter = {
+		fn: 'AND',
+		args: [
+			{
+				l: 'year',
+				r: 2025,
+			},
+			{
+				l: 'month',
+				r: 0,
+			},
+			{
+				l: 'type',
+				r: 'income',
+			},
+		],
+	};
 
 	const { get } = utilsApi();
 	const [data, setData] = useState<object>({});
 	useEffect(() => {
 		const fetchData = async () => {
 			return await get<object>('transactions', {
-				// filter,
+				filter,
 				limit: 4,
 				offset: 1,
 				fields: ['label', 'amount'],

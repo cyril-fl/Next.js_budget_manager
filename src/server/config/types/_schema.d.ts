@@ -22,7 +22,8 @@ export type OptionKeys = (typeof OPTIONS_KEYS)[number];
 export type PrivateLabels = (typeof PRIVATE_LABELS)[number];
 export interface RawConfig<T extends string | number | symbol = string> {
 	url: string;
-	path?: {
+	bearer: string;
+	path: {
 		labels: T[];
 		routes: Partial<Record<T, string>>;
 	};
