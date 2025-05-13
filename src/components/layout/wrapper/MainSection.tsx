@@ -13,11 +13,5 @@ export default function MainSection({ children }: MainSectionProps) {
 	// Methods
 
 	// Render
-	return (
-		<main className="box flex">
-			{/*<main className="">*/}
-			{/*grid-base w-full overflow-hidden*/}
-			<section className="">{children}</section>
-		</main>
-	);
+	return <main className="grid-base grow overflow-hidden">{children}</main>;
 }

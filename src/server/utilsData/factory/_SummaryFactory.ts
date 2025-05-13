@@ -1,5 +1,6 @@
 import {
 	RawRecordM as MonthlyRecord,
+	SummaryMonthly,
 	SummaryYearly,
 	RawRecordY as YearlyRecord,
 } from '../models';
@@ -12,6 +13,6 @@ export class SummaryFactory {
 	}
 
 	public static monthly(records: MonthlyRecord[]) {
-		return records.map((record) => new SummaryYearly(record));
+		return records.map((record) => new SummaryMonthly(record));
 	}
 }

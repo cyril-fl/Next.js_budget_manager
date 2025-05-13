@@ -72,7 +72,8 @@ export default function HeaderToolbarClient<T extends object>(
 
 	// Render
 	return (
-		<header className="border-grayscale-200 col-span-full row-span-1 row-start-1 flex items-center justify-between gap-2 border-b pb-2">
+		<header className="box col-span-full row-span-1 row-start-1">
+			{/*<header className="border-grayscale-200  flex items-center justify-between gap-2 border-b pb-2">=*/}
 			{LeftSlot}
 			{CenterSlot}
 			{RightSlot}

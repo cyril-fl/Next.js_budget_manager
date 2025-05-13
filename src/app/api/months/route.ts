@@ -4,56 +4,58 @@ import {
 	utilsDecodeGetParams,
 	utilsPipeline,
 } from '@/server/utilsApi';
+import { SummaryFactory } from '@/server/utilsData/factory';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = utilsDecodeGetParams(searchParams);
-		// TODO: Faire un order ou [filter, group,  .... fields]
-		const pipeline = utilsPipeline(params, {
-			group: (v) => ({
-				$group: {
-					_id: {
-						$concat: [{ $toString: '$year' }, '-', { $toString: '$month' }],
+		const pipeline = utilsPipeline(
+			params,
+			{
+				group: (v) => ({
+					$group: {
+						_id: {
+							$concat: [{ $toString: '$year' }, '-', { $toString: '$month' }],
+						},
+						year: { $first: '$year' },
+						month: { $first: '$month' },
+						record: { $push: '$$ROOT' },
 					},
-					year: { $first: '$year' },
-					month: { $first: '$month' },
-					record: { $push: '$$ROOT' },
-				},
-			}),
-			project: (v) => ({
-				$project: {
-					_id: 0,
-					year: 1,
-					month: 1,
-					outcomes: {
-						$filter: {
-							input: '$record', // <-- ici le $
-							as: 'item',
-							cond: { $eq: ['$$item.type', 'outcome'] },
+				}),
+				project: (v) => ({
+					$project: {
+						_id: 0,
+						year: 1,
+						month: 1,
+						outcomes: {
+							$filter: {
+								input: '$record',
+								as: 'item',
+								cond: { $eq: ['$$item.type', 'outcome'] },
+							},
+						},
+						incomes: {
+							$filter: {
+								input: '$record',
+								as: 'item',
+								cond: { $eq: ['$$item.type', 'income'] },
+							},
 						},
 					},
-					incomes: {
-						$filter: {
-							input: '$record', // <-- ici aussi
-							as: 'item',
-							cond: { $eq: ['$$item.type', 'income'] },
-						},
-					},
-				},
-			}),
-		});
+				}),
+			},
+			['filter', 'group', 'project', 'offset', 'limit', 'fields', 'sort']
+		);
 
 		const records = await db
 			.collection('transactions')
 			.aggregate(pipeline)
 			.toArray();
 
-		// TODO Passer les record dans une factory pour les transformer
-
 		const res: ApiResponse = {
-			data: records,
+			data: SummaryFactory.monthly(records),
 			success: true,
 			message: 'Month data retrieved successfully',
 		};

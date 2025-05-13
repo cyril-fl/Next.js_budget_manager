@@ -8,40 +8,19 @@ export default async function TestPages() {
 	// Data
 	const { get } = utilsApi();
 
-	const { data } = await get<object>('yearlySummary', {
+	const { data } = await get<object>('months', {
 		// filter: {
-		// 	$and: [
-		// 		{
-		// 			year: { $eq: 2025 },
-		// 		},
-		// 		{
-		// 			$or: [
-		// 				{
-		// 					month: { $eq: 0 },
-		// 				},
-		// 				{
-		// 					month: { $eq: 1 },
-		// 				},
-		// 			],
-		// 		},
-		// 	],
+		// $and: [{ year: { $eq: 2025 } }, { month: { $eq: 1 } }],
 		// },
-		// fields: ['month', 'year'],
-		// fields: ['incomesStats'],
-		// offset: 1,
-		// limit: 1,
-		// sort: [{ field: 'year', direction: 'desc' }],
+		limit: 1,
 	});
 
 	// Render
 	return (
-		<div>
-			<div className={'flex gap-4 p-4'}>
-				<h1>Test</h1>
-				<Pre data={data} label="Params" />
-			</div>
-			s
-		</div>
+		<Pre
+			data={data}
+			class="col-span-full row-span-full flex h-screen max-h-none grow items-stretch"
+		/>
 	);
 }
 

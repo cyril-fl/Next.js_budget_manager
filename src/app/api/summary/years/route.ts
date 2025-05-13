@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
 	try {
 		const searchParams = req.nextUrl.searchParams;
 		const params = utilsDecodeGetParams(searchParams);
-		// const pipeline = utilsPipeline(params);
 		const pipeline = utilsPipeline(
 			params,
 			{
@@ -98,7 +97,6 @@ export async function GET(req: NextRequest) {
 
 		console.log('records', records);
 		const res: ApiResponse = {
-			// data: records,
 			data: SummaryFactory.yearly(records),
 			success: true,
 			message: 'Years data retrieved successfully',

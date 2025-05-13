@@ -16,22 +16,30 @@ export class SummaryYearly extends SummaryController {
 	readonly year?: number;
 	readonly month?: Month[];
 	readonly transactionCount?: number;
-	readonly totalIncome?: number;
-	readonly totalOutcome?: number;
-	readonly balance?: number;
-	readonly inNoutRatio?: number | null;
+
+	// TODO remplacer any
 	readonly incomesStats?: any;
 	readonly outcomesStats?: any;
 
+	readonly balance?: number;
+	readonly inNoutRatio?: number | null;
 	constructor(records: RawRecordY) {
 		super();
 		this.year = records.year;
 		this.month = records.month;
 		this.transactionCount = records.transactionCount;
-		this.balance = this.getBalance(this.totalIncome, this.totalOutcome);
-		this.inNoutRatio = this.getRatio(this.totalIncome, this.totalOutcome);
+
 		this.incomesStats = this.buildStats(records.incomes);
 		this.outcomesStats = this.buildStats(records.outcomes);
+
+		this.inNoutRatio = this.getRatio(
+			this.incomesStats.total,
+			this.outcomesStats.total
+		);
+		this.balance = this.getBalance(
+			this.incomesStats.total,
+			this.outcomesStats.total
+		);
 	}
 
 	override buildStats(records?: Transaction[]) {
