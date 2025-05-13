@@ -1,6 +1,6 @@
 // Imports
 import Button, { ButtonProps } from '@/components/ui/Button';
-import Tooltip, { TooltipProps } from '@/components/ui/Tooltip';
+import { TooltipProps } from '@/components/ui/Tooltip';
 import { pick } from '@core';
 
 // Define
@@ -28,18 +28,20 @@ export default function NavigationItem(props: NavigationItemProps) {
 	// Render
 	return (
 		<li>
-			<Tooltip {...propsTooltip}>
-				<Button
-					size="sm"
-					variant="ghost"
-					color="secondary"
-					leading
-					noLabel
-					// rounded
-					// squared
-					{...propsButton}
-				/>
-			</Tooltip>
+			{/*TODO DELETE classname*/}
+			{/*<Tooltip {...propsTooltip}>*/}
+			<Button
+				size="md"
+				variant="ghost"
+				color="secondary"
+				leading
+				noLabel
+				className="text-stone-950"
+				// rounded
+				// squared
+				{...propsButton}
+			/>
+			{/*</Tooltip>*/}
 		</li>
 	);
 }

@@ -16,7 +16,7 @@ export function utilsIcons() {
 	// NOTE: Icon in custom project or custom component
 	const customIcons = {
 		calendar: 'ph:calendar-dots',
-		dashboard: 'ph:squares-four-bold',
+		dashboard: 'ph:squares-four',
 		list: 'ph:list-bullets',
 		grid: 'ph:grid-four',
 		plus: 'ph:plus',

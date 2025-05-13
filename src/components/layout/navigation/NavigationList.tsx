@@ -48,7 +48,8 @@ export default function NavigationList(props: NavigationListProps) {
 
 	// Render
 	return (
-		<ul className={clsx('flex grow flex-col gap-2', props.className)}>
+		//
+		<ul className={clsx('', props.className)}>
 			{props.List.map((item, index) => (
 				<NavigationItem
 					key={index}

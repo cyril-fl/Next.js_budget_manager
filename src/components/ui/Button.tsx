@@ -34,13 +34,13 @@ const theme = tv({
 			},
 			sm: {
 				label: 'text-xs font-normal space-x-1',
-				base: 'space-x-1 px-2 py-1 rounded-sm ring-1',
+				base: 'space-x-1 px-1.5 py-1 rounded-sm ring-1',
 				icon: 'text-base',
 			},
 			md: {
 				label: 'text-sm font-medium space-x-1.5',
-				base: 'space-x-2 px-2 py-1.5 rounded-md ring-1',
-				icon: 'text-base',
+				base: 'space-x-2 px-1.5 py-1 rounded border-[2px]',
+				icon: 'text-xl',
 			},
 			lg: {
 				label: 'text-lg font-medium space-x-1.5',
@@ -54,8 +54,8 @@ const theme = tv({
 			},
 		},
 		variant: {
-			ghost: 'ring-transparent',
-			nude: '',
+			ghost: 'border-transparent',
+			nude: 'border-transparent',
 			outline: '',
 			solid: '',
 		},
@@ -122,18 +122,18 @@ const theme = tv({
 			className: {
 				base: `
 					p-0
-					text-grayscale-500 ring-transparent
-					hover:bg-grayscale-50 hover:text-grayscale-300
+					text-grayscale-800 ring-transparent
+					hover:text-grayscale-200
 					active:text-grayscale-300
 					disabled:cursor-default disabled:text-grayscale-50
-					dark:text-grayscale-500`,
+					`,
 			},
 		},
 		{
 			color: 'neutral',
 			variant: 'nude',
 			hover: true,
-			className: 'italic text-grayscale-700 dark:text-grayscale-700',
+			className: 'text-grayscale-700 dark:text-grayscale-700',
 		},
 		{
 			color: 'primary',
@@ -166,7 +166,7 @@ const theme = tv({
 			variant: 'ghost',
 			color: 'secondary',
 			hover: true,
-			className: 'ring-grayscale-200',
+			className: 'border-grayscale-800',
 		},
 		{
 			variant: 'ghost',
@@ -185,12 +185,9 @@ const theme = tv({
 			color: 'secondary',
 			variant: 'ghost',
 			className: {
-				// TODO: Add dark / disabled
 				base: `
-					text-grayscale-50
-					active:bg-grayscale-200
-					active:text-grayscale-950
-					active:ring-grayscale-200
+					active:text-grayscale-200
+					active:border-grayscale-200
 					`,
 			},
 		},

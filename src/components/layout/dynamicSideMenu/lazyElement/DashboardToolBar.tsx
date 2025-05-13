@@ -15,11 +15,11 @@ export default function DashboardToolBar() {
 	const SelectGroup: SelectionGroup<string> = {
 		options: [
 			{
-				displayValue: 'Yearly',
+				displayValue: 'Year',
 				value: 'year',
 			},
 			{
-				displayValue: 'Monthly',
+				displayValue: 'Month',
 				value: 'month',
 			},
 		],
@@ -32,14 +32,14 @@ export default function DashboardToolBar() {
 				type="single"
 				value={tab}
 				aria-label="Value display"
-				className="bg-grayscale-100 text-grayscale-700 flex items-center justify-center gap-2 rounded-md px-1.5 py-1"
+				className="bg-grayscale-100 text-grayscale-800 flex grow items-center justify-center gap-2 rounded-md p-1"
 			>
 				{SelectGroup.options.map((item) => (
 					<Toolbar.ToggleItem
 						key={item.value}
 						value={item.value}
 						aria-label={item.displayValue}
-						className="data-[state=on]:text-grayscale-800 hover:text-grayscale-400 cursor-pointer rounded px-1.5 py-1 text-xs data-[state=on]:bg-white"
+						className="data-[state=on]:text-grayscale-800 data-[state=off]:text-grayscale-300 hover:text-grayscale-400 cursor-pointer rounded px-1.5 py-1 text-xs data-[state=on]:bg-white"
 						asChild
 					>
 						<Link
@@ -59,10 +59,3 @@ export default function DashboardToolBar() {
 		</Toolbar.Root>
 	);
 }
-
-// Define
-
-// export default () => (
-
-// 	</HoverCard.Root>
-// );

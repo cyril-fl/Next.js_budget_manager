@@ -6,6 +6,7 @@ import Disclosure from '@/components/ui/Disclosure';
 import { useCtxMenu } from '@/stores/useCtxMenu';
 import { LocalItem as CalendarViewRecord } from '@utils/frequentRequest/calendar';
 import utilsDate from '@utils/utilsDate';
+import { utilsUtils } from '@utils/utilsUtils';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 // Define
@@ -13,6 +14,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 export default function IndexList() {
 	// Data
 	const { ctx } = useCtxMenu();
+	const { transformToPhraseCase } = utilsUtils();
 	const { formatMonth } = utilsDate();
 	const searchParams = useSearchParams();
 	const params = Object.fromEntries(searchParams.entries());
@@ -26,7 +28,7 @@ export default function IndexList() {
 
 	// Render
 	return (
-		<ul className="scrollbar-none h-full w-24 shrink-0 overflow-y-auto">
+		<ul className="scrollbar-none h-full shrink-0 overflow-y-auto">
 			{indexData.map((item, index) => (
 				<li key={index} className="mb-4">
 					<Disclosure
@@ -38,13 +40,19 @@ export default function IndexList() {
 					>
 						<ul>
 							{item.months.map((month, i) => (
-								<li key={i} className="px-2 py-1">
+								<li key={i}>
+									{/*	(*/}
+
+									{/*	)*/}
+									{/*TODO majusculiser le mots*/}
 									<Button
-										label={formatMonth(item.year, month, {
-											month: 'long',
-										})}
+										label={transformToPhraseCase(
+											formatMonth(item.year, month, {
+												month: 'long',
+											})
+										)}
 										to={{
-											pathname: pathname,
+											pathname,
 											query: {
 												...params,
 												year: item.year,
@@ -52,6 +60,7 @@ export default function IndexList() {
 											},
 										}}
 										variant="nude"
+										size="sm"
 									/>
 								</li>
 							))}

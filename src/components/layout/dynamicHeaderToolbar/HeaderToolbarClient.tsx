@@ -15,9 +15,9 @@ export interface HeaderToolbarClientProps<T extends object>
 const LazyTemplateToolBar = dynamic(
 	() => import('./lazyElement/TemplateToolBar')
 );
-const LazyDashboardToolBar = dynamic(
-	() => import('./lazyElement/DashboardToolBar')
-);
+// const LazyDashboardToolBar = dynamic(
+// () => import('./lazyElement/DashboardToolBar')
+// );
 
 export default function HeaderToolbarClient<T extends object>(
 	props: HeaderToolbarClientProps<T>
@@ -60,7 +60,7 @@ export default function HeaderToolbarClient<T extends object>(
 	const RightSlot = useMemo(() => {
 		const menuMap: Record<string, ReactNode> = {
 			templates: <LazyTemplateToolBar />,
-			dashboard: <LazyDashboardToolBar />,
+			// dashboard: <LazyDashboardToolBar />,
 		};
 
 		return (
